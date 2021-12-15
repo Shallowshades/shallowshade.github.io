@@ -88,7 +88,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,7 +176,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%85%88%E8%87%AA%E5%A2%9E%E5%87%8F%E5%92%8C%E5%90%8E%E8%87%AA%E5%A2%9E%E5%87%8F/">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -189,7 +189,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/14/C++%E5%85%88%E8%87%AA%E5%A2%9E%E5%87%8F%E5%92%8C%E5%90%8E%E8%87%AA%E5%A2%9E%E5%87%8F/" class="post-title-link" itemprop="url">C++先自增减和后自增减</a>
+          <a href="/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">C++学习笔记</a>
         </h2>
 
         <div class="post-meta-container">
@@ -201,7 +201,164 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-14 16:32:23 / 修改时间：16:45:15" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
+      <time title="创建时间：2021-12-14 21:09:39 / 修改时间：22:54:27" itemprop="dateCreated datePublished" datetime="2021-12-14T21:09:39+08:00">2021-12-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h2 id="4-5-共用体-（union）"><a href="#4-5-共用体-（union）" class="headerlink" title="4.5 共用体 （union）"></a>4.5 共用体 （union）</h2><p>用法和类相同 </p>
+<p>长度为最大成员的长度 共用同一块内存</p>
+<h3 id="匿名共用体"><a href="#匿名共用体" class="headerlink" title="匿名共用体"></a>匿名共用体</h3><p>类似于同一起始地址有多个成员，但同时只能有一个成员活跃</p>
+<p>常用于操作系统数据结构和硬件数据结构 节约内存</p>
+<h2 id="4-6-枚举-（enum）"><a href="#4-6-枚举-（enum）" class="headerlink" title="4.6 枚举 （enum）"></a>4.6 枚举 （enum）</h2><p>创建符号常量的方式，可代替const</p>
+<p>为了获取最大的移植性，将非enum值赋给enum变量视为error</p>
+<p>enum为整型，可自动转为int</p>
+<p>int要强制类型转换才能变成enum变量的值</p>
+<p>可选择性赋值，默认第一个为0，以后每个枚举量增加1</p>
+<p>可以创建多个相同值的枚举量</p>
+<p>取址范围 </p>
+<p>上限为 最大值所在2的幂次的上限减1，120上限为127</p>
+<p>下限为 最小值大于0，则取零；否则与上限相同，取负值，-6下限为-7</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/" class="post-title-link" itemprop="url">重载、覆盖和隐藏</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-14 17:03:02 / 修改时间：20:21:10" itemprop="dateCreated datePublished" datetime="2021-12-14T17:03:02+08:00">2021-12-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h3 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h3><p>同一个类中的不同函数</p>
+<p>&lt;1&gt; 相同的范围（在同一个类中）</p>
+<p>&lt;2&gt; 函数名相同</p>
+<p>&lt;3&gt; 参数不同</p>
+<p>&lt;4&gt; virtual关键字可有可无</p>
+<h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h3><p>派生类函数覆盖基类函数</p>
+<p>&lt;1&gt; 不同范围（基类和派生类）</p>
+<p>&lt;2&gt; 函数名相同</p>
+<p>&lt;3&gt; 参数相同</p>
+<p>&lt;4&gt; 基类函数带virtual</p>
+<h3 id="隐藏"><a href="#隐藏" class="headerlink" title="隐藏"></a>隐藏</h3><p>派生类函数屏蔽了同名的基类函数</p>
+<p>&lt;1&gt; 同名，参数不同，有无virtual基类函数都被隐藏</p>
+<p>&lt;2&gt; 同名，同参，无virtual时基类函数被隐藏</p>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E4%B8%8D%E5%AE%9A%E5%87%BD%E6%95%B0%E3%80%81%E8%87%AA%E5%A2%9E%E5%87%8F%E3%80%81%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/14/C++%E4%B8%8D%E5%AE%9A%E5%87%BD%E6%95%B0%E3%80%81%E8%87%AA%E5%A2%9E%E5%87%8F%E3%80%81%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/" class="post-title-link" itemprop="url">C++不定函数、自增减、左值和右值</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-14 16:32:23 / 修改时间：23:32:29" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
     </span>
 
   
@@ -232,6 +389,15 @@
 <p>所有的后自增减输出的是过程中的当前值</p>
 <p>所有的先自增减输出的是最终结果的值</p>
 <hr>
+<p>ok 推测完毕</p>
+<p>进入实际原理</p>
+<p>主要关乎两个点</p>
+<p>&lt;1&gt; 不定函数的传参：从右向左压栈 参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liaocheng/p/4262125.html">https://www.cnblogs.com/liaocheng/p/4262125.html</a></p>
+<p>&lt;2&gt; 左值和右值：参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/240833006">https://zhuanlan.zhihu.com/p/240833006</a></p>
+<p>x++，x–后自增减实际是函数，返回的为右值（常量） （实现过自增减的更容易理解）</p>
+<p>++x, –x先自增减也是函数，不过是引用的左值（变量）</p>
+<p>结合以上两点可知函数5的压栈顺序为 8 x 6 x</p>
+<p>则传递的参数为x 6 x 8（此时x = 8）此时的形参为 8 6 8 8</p>
 
       
     </div>

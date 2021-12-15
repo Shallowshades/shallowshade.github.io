@@ -20,26 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="大学快结束了，大学究竟是什么">
-<meta property="og:type" content="website">
-<meta property="og:title" content="未名的博客">
-<meta property="og:url" content="https://shallowshades.github.io.git/archives/2021/12/index.html">
+<meta name="description" content="4.5 共用体 （union）用法和类相同  长度为最大成员的长度 共用同一块内存 匿名共用体类似于同一起始地址有多个成员，但同时只能有一个成员活跃 常用于操作系统数据结构和硬件数据结构 节约内存 4.6 枚举 （enum）创建符号常量的方式，可代替const 为了获取最大的移植性，将非enum值赋给enum变量视为error enum为整型，可自动转为int int要强制类型转换才能变成enu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习笔记">
+<meta property="og:url" content="https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="未名的博客">
-<meta property="og:description" content="大学快结束了，大学究竟是什么">
+<meta property="og:description" content="4.5 共用体 （union）用法和类相同  长度为最大成员的长度 共用同一块内存 匿名共用体类似于同一起始地址有多个成员，但同时只能有一个成员活跃 常用于操作系统数据结构和硬件数据结构 节约内存 4.6 枚举 （enum）创建符号常量的方式，可代替const 为了获取最大的移植性，将非enum值赋给enum变量视为error enum为整型，可自动转为int int要强制类型转换才能变成enu">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-14T13:09:39.000Z">
+<meta property="article:modified_time" content="2021-12-14T14:54:27.994Z">
 <meta property="article:author" content="未名">
-<meta property="article:tag" content="博客 算法 思想">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://shallowshades.github.io.git/archives/2021/12/">
+<link rel="canonical" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2021/12/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/12/14/C++学习笔记/","title":"C++学习笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | 未名的博客</title>
+<title>C++学习笔记 | 未名的博客</title>
   
 
 
@@ -68,7 +70,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">未名的博客</h1>
+      <p class="site-title">未名的博客</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">过去链接未来</p>
@@ -108,7 +110,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -121,6 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E5%85%B1%E7%94%A8%E4%BD%93-%EF%BC%88union%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">4.5 共用体 （union）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%85%B1%E7%94%A8%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">匿名共用体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E6%9E%9A%E4%B8%BE-%EF%BC%88enum%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">4.6 枚举 （enum）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,109 +169,112 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 4 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="创建时间：2021-12-14 21:09:39 / 修改时间：22:54:27" itemprop="dateCreated datePublished" datetime="2021-12-14T21:09:39+08:00">2021-12-14</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h2 id="4-5-共用体-（union）"><a href="#4-5-共用体-（union）" class="headerlink" title="4.5 共用体 （union）"></a>4.5 共用体 （union）</h2><p>用法和类相同 </p>
+<p>长度为最大成员的长度 共用同一块内存</p>
+<h3 id="匿名共用体"><a href="#匿名共用体" class="headerlink" title="匿名共用体"></a>匿名共用体</h3><p>类似于同一起始地址有多个成员，但同时只能有一个成员活跃</p>
+<p>常用于操作系统数据结构和硬件数据结构 节约内存</p>
+<h2 id="4-6-枚举-（enum）"><a href="#4-6-枚举-（enum）" class="headerlink" title="4.6 枚举 （enum）"></a>4.6 枚举 （enum）</h2><p>创建符号常量的方式，可代替const</p>
+<p>为了获取最大的移植性，将非enum值赋给enum变量视为error</p>
+<p>enum为整型，可自动转为int</p>
+<p>int要强制类型转换才能变成enum变量的值</p>
+<p>可选择性赋值，默认第一个为0，以后每个枚举量增加1</p>
+<p>可以创建多个相同值的枚举量</p>
+<p>取址范围 </p>
+<p>上限为 最大值所在2的幂次的上限减1，120上限为127</p>
+<p>下限为 最小值大于0，则取零；否则与上限相同，取负值，-6下限为-7</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T21:09:39+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">C++学习笔记</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
 
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T17:03:02+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/" itemprop="url">
-            <span itemprop="name">重载、覆盖和隐藏</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T16:32:23+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/C++%E4%B8%8D%E5%AE%9A%E5%87%BD%E6%95%B0%E3%80%81%E8%87%AA%E5%A2%9E%E5%87%8F%E3%80%81%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/" itemprop="url">
-            <span itemprop="name">C++不定函数、自增减、左值和右值</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-13T16:00:09+08:00"
-              content="2021-12-13">
-          12-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/13/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
     </div>
   </div>
-  
-  
-  
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/" rel="prev" title="重载、覆盖和隐藏">
+                  <i class="fa fa-chevron-left"></i> 重载、覆盖和隐藏
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>
