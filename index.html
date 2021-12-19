@@ -86,7 +86,7 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
@@ -138,7 +138,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-19 17:34:12 / 修改时间：18:24:15" itemprop="dateCreated datePublished" datetime="2021-12-19T17:34:12+08:00">2021-12-19</time>
+      <time title="创建时间：2021-12-19 17:34:12 / 修改时间：19:52:16" itemprop="dateCreated datePublished" datetime="2021-12-19T17:34:12+08:00">2021-12-19</time>
     </span>
 
   
@@ -243,6 +243,26 @@
 <p>malloc、free 是 <strong>库函数</strong> 不会调用构造函数和析构函数</p>
 <p>在C中使用malloc时不需要强制类型转换，在C中void*到其他类型的指针是自动隐式转换；</p>
 <p>在C++中使用malloc时必须要强制类型转换，否则报错(所以用new)</p>
+<p>x86平台的PC机为小端存储</p>
+<p>工作站的CPU一般使用大端存储</p>
+<p>volatile关键字 (易变的)</p>
+<p>确保本条指令不会因编译器的优化而省略，且要求每次读值</p>
+<p>volatile变量可能被意想不到地改变，这样，编译器就不会去假设这个变量的值了</p>
+<p>以下例子引用自百度百科</p>
+<p>volatile变量的几个例子：</p>
+<p>1）并行设备的硬件寄存器（如：状态寄存器）</p>
+<p>2）一个中断服务子程序中会访问到的非自动变量（Non-automatic variables)</p>
+<p>3）多线程应用中被几个任务共享的变量</p>
+<p>1）一个参数既可以是const还可以是volatile吗？解释为什么。</p>
+<p>答：是的。一个例子是只读的状态寄存器。它是volatile因为它可能被意想不到地改变。它是const因为程序不应该试图去修改它。</p>
+<p>2）一个指针可以是volatile 吗？解释为什么。</p>
+<p>答：是的。尽管这并不很常见。一个例子是当一个中断服务子程序修改一个指向一个buffer的指针时。</p>
+<p>3）下面的函数被用来计算某个整数的平方，它能实现预期设计目标吗？如果不能，试回答存在什么问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((*ptr) * (*ptr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答： 这段代码的目的是用来返指针<em>ptr指向值的平方，但是，由于</em>ptr指向一个volatile型参数，编译器将产生类似下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* &amp;ptr)</span><span class="comment">//这里参数应该申明为引用，不然函数体里只会使用副本，外部没法更改</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    a = *ptr;</span><br><span class="line">    b = *ptr;</span><br><span class="line">    <span class="keyword">return</span> a*b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于*ptr的值可能在两次取值语句之间发生改变，因此a和b可能是不同的。结果，这段代码可能返回的不是你所期望的平方值！正确的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    a = *ptr;</span><br><span class="line">    <span class="keyword">return</span> a*a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
