@@ -86,9 +86,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
@@ -133,12 +133,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -176,6 +176,99 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/19/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/19/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">牛客刷题笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-19 17:34:12 / 修改时间：17:39:00" itemprop="dateCreated datePublished" datetime="2021-12-19T17:34:12+08:00">2021-12-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<p><strong>多态</strong></p>
+<p>指针和引用都可以实现多态</p>
+<p>对于单继承，如果派生类没有重写基类的函数，则使用最近祖先中的定义</p>
+<p>对于多继承，如果派生类没有重写基类的函数，会产生二义性，可以用作用域解析运算符表明使用哪一个基类</p>
+<p>int (<em>p)[N] 二维数组<br>int</em> p[N] 一维指针数组</p>
+<p>指针大小由机器字长决定</p>
+<p>#pragma pack(2) //2字节对齐，默认4字节对齐（32位），默认对齐与机器字长有关（内存读取方式也有关）</p>
+<p>enum 类型默认4字节，溢出时强转为8字节</p>
+<p>enum 也可显式表明长度 uint8_t uint16_t uint32_t uint64_t</p>
+<p><strong>类的内存大小</strong></p>
+<p>空的类是会占用内存空间的，而且大小是1，原因是C++要求每个实例在内存中都有独一无二的地址。</p>
+<p>（一）类内部的成员变量：<br>普通的变量：是要占用内存的，但是要注意对齐原则（这点和struct类型很相似）。<br>static修饰的静态变量：不占用内容，原因是编译器将其放在全局变量区。</p>
+<p>（二）类内部的成员函数：<br>普通函数：不占用内存。<br>虚函数：要占用4个字节（32位），用来指定虚函数的虚拟函数表的入口地址。所以一个类的虚函数所占用的地址是不变的，和虚函数的个数是没有关系的</p>
+<p>只有一个变量时，char 1, int 4, double 8 和变量长度一致</p>
+<p>当有多个变量时，对齐是8B（64）位</p>
+<p>&lt;1&gt; char + int 占8B  |-___—-| //-表示占据 _表示空闲</p>
+<p>&lt;2&gt; char + double 占16B |-_______| |——–| </p>
+<p><strong>静态和常量</strong></p>
+<p>参考： </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yhblog/article/details/103243581">https://blog.csdn.net/yhblog/article/details/103243581</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/haobaworenle/article/details/65944171?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~default-1.highlightwordscore&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~default-1.highlightwordscore">https://blog.csdn.net/haobaworenle/article/details/65944171?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.highlightwordscore&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.highlightwordscore</a></p>
+<p><strong>全局变量、局部变量、静态变量、常量</strong></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zcyzsy/article/details/52207085?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase">https://blog.csdn.net/zcyzsy/article/details/52207085?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase</a></p>
+<p><strong>动态分配</strong></p>
+<p>new、delete 是 <strong>运算符</strong> 调用构造函数和析构函数 sizeof也是运算符</p>
+<p>malloc、free 是 <strong>库函数</strong> 不会调用构造函数和析构函数</p>
+<p>在C中使用malloc时不需要强制类型转换，在C中void*到其他类型的指针是自动隐式转换；</p>
+<p>在C++中使用malloc时必须要强制类型转换，否则报错(所以用new)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/19/C%E9%A2%84%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -201,7 +294,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-19 16:11:31 / 修改时间：17:01:00" itemprop="dateCreated datePublished" datetime="2021-12-19T16:11:31+08:00">2021-12-19</time>
+      <time title="创建时间：2021-12-19 16:11:31 / 修改时间：17:10:02" itemprop="dateCreated datePublished" datetime="2021-12-19T16:11:31+08:00">2021-12-19</time>
     </span>
 
   
@@ -214,7 +307,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="C的预处理"><a href="#C的预处理" class="headerlink" title="C的预处理"></a>C的预处理</h1><h2 id="预处理的概念"><a href="#预处理的概念" class="headerlink" title="预处理的概念"></a>预处理的概念</h2><p>预处理主要在编译之前处理程序中的特殊行</p>
+          <h2 id="预处理的概念"><a href="#预处理的概念" class="headerlink" title="预处理的概念"></a>预处理的概念</h2><p>预处理主要在编译之前处理程序中的特殊行</p>
 <p>预处理指令包括： 宏定义、文件包含和条件编译</p>
 <p>c程序 -&gt; 预处理器 -&gt; 修改后的c程序 -&gt; 编译器 -&gt; 目标代码</p>
 <p>预处理器是一个小软件，在编译前处理c程序</p>
@@ -224,7 +317,7 @@
 <p>&lt;3&gt; 条件编译。 #if、#ifdef、#ifndef、#elif、#else和#endif指令根据测试条件来确定是否将一段程序文本包含到程序中</p>
 <p><strong>规则</strong></p>
 <p>&lt;1&gt; 以#开始</p>
-<p>&lt;2&gt; 换行符作为结尾，’&#39;可延续到下一行</p>
+<p>&lt;2&gt; 换行符作为结尾，’’&#39;可延续到下一行</p>
 <p>&lt;3&gt; 可间隔任意空格、制表符，可放在程序任意位置，一般放在文件开始位置，可与注释同行</p>
 <h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>#define 标识符 替换文本 //符号常量 </p>
 <p>#define 宏名(x1,x2,..) 替换列表 //带参数的宏定义</p>
@@ -297,7 +390,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-12-19 15:00:28" itemprop="dateModified" datetime="2021-12-19T15:00:28+08:00">2021-12-19</time>
+      <time title="修改时间：2021-12-19 17:33:37" itemprop="dateModified" datetime="2021-12-19T17:33:37+08:00">2021-12-19</time>
     </span>
 
   
@@ -310,7 +403,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <hr>
+<h2 id="内存分布"><a href="#内存分布" class="headerlink" title="内存分布"></a>内存分布</h2><p>低地址端</p>
+<p>代码段 (text/code segment): 只读存储区</p>
+<p>BSS段 (bss segment): 未初始化的全局变量</p>
+<p>数据段 (data segment): 已经初始化的全局变量</p>
+<p>堆 (heap): 动态分配管理</p>
+<p>栈 (stack): 函数调用过程中存放局部变量、函数参数、返回地址信息</p>
+<p>高地址端</p>
+<hr>
+
       
     </div>
 
