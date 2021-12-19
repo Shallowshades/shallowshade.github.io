@@ -86,9 +86,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
@@ -133,12 +133,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -167,6 +167,166 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/19/C%E9%A2%84%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/19/C%E9%A2%84%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">C预处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-19 16:11:31 / 修改时间：17:01:00" itemprop="dateCreated datePublished" datetime="2021-12-19T16:11:31+08:00">2021-12-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="C的预处理"><a href="#C的预处理" class="headerlink" title="C的预处理"></a>C的预处理</h1><h2 id="预处理的概念"><a href="#预处理的概念" class="headerlink" title="预处理的概念"></a>预处理的概念</h2><p>预处理主要在编译之前处理程序中的特殊行</p>
+<p>预处理指令包括： 宏定义、文件包含和条件编译</p>
+<p>c程序 -&gt; 预处理器 -&gt; 修改后的c程序 -&gt; 编译器 -&gt; 目标代码</p>
+<p>预处理器是一个小软件，在编译前处理c程序</p>
+<p><strong>预处理操作</strong></p>
+<p>&lt;1&gt; 宏定义。 #define指令定义一个宏， #undef指令删除一个宏</p>
+<p>&lt;2&gt; 文件包含。 #include指令将一个指定文件内容包含到程序中</p>
+<p>&lt;3&gt; 条件编译。 #if、#ifdef、#ifndef、#elif、#else和#endif指令根据测试条件来确定是否将一段程序文本包含到程序中</p>
+<p><strong>规则</strong></p>
+<p>&lt;1&gt; 以#开始</p>
+<p>&lt;2&gt; 换行符作为结尾，’&#39;可延续到下一行</p>
+<p>&lt;3&gt; 可间隔任意空格、制表符，可放在程序任意位置，一般放在文件开始位置，可与注释同行</p>
+<h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>#define 标识符 替换文本 //符号常量 </p>
+<p>#define 宏名(x1,x2,..) 替换列表 //带参数的宏定义</p>
+<p>参数带上括号程序更安全</p>
+<p><strong>带参数的宏定义不是函数</strong></p>
+<p>宏定义没有类型检查</p>
+<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>格式1：#include “文件名” 优先查找工作目录，其次查找预先指定的编译器和系统目录。</p>
+<p>格式2：#include &lt;文件名&gt; 在预先指定的编译器和系统目录查找</p>
+<p>编译多文件时，无需编译.h文件，因为编译.c文件时会自动编译头文件的内容</p>
+<p>编译生成一个包含目标代码的文件，称为目标文件，windows系统中扩展名为.obj</p>
+<p>链接器把目标文件和库函数代码结合在一起生成可执行程序</p>
+<p>链接器可以解决外部引用问题(extern 外部函数)</p>
+<h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>条件编译可以用来保护头文件(文件嵌套无意间包含一个头文件多次)</p>
+<p>源文件包含函数定义和函数调用</p>
+<p>头文件包含类型定义、函数原型声明等</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/18/C++%E5%86%85%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/18/C++%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">C++内存</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-18 19:51:45" itemprop="dateCreated datePublished" datetime="2021-12-18T19:51:45+08:00">2021-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-12-19 15:00:28" itemprop="dateModified" datetime="2021-12-19T15:00:28+08:00">2021-12-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -277,9 +437,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-12-14 17:03:02 / 修改时间：20:21:10" itemprop="dateCreated datePublished" datetime="2021-12-14T17:03:02+08:00">2021-12-14</time>
+      <time title="创建时间：2021-12-14 17:03:02" itemprop="dateCreated datePublished" datetime="2021-12-14T17:03:02+08:00">2021-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-12-18 20:10:22" itemprop="dateModified" datetime="2021-12-18T20:10:22+08:00">2021-12-18</time>
     </span>
 
   
@@ -297,7 +463,6 @@
 <p>&lt;1&gt; 相同的范围（在同一个类中）</p>
 <p>&lt;2&gt; 函数名相同</p>
 <p>&lt;3&gt; 参数不同</p>
-<p>&lt;4&gt; virtual关键字可有可无</p>
 <h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h3><p>派生类函数覆盖基类函数</p>
 <p>&lt;1&gt; 不同范围（基类和派生类）</p>
 <p>&lt;2&gt; 函数名相同</p>
@@ -356,9 +521,107 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-14 16:32:23" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-12-18 20:09:22" itemprop="dateModified" datetime="2021-12-18T20:09:22+08:00">2021-12-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<p>依以下程序为例</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,++x, ++x); &#125; <span class="comment">//10 10</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>,++x, ++x, --x); &#125; <span class="comment">//9 9 9</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, ++x, --x, x++); &#125; <span class="comment">//10 10 10 8</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func4</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, ++x, x--, x++); &#125; <span class="comment">//10 10 9 8</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func5</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, x++, --x, x--); &#125; <span class="comment">//8 6 8 8</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">func1</span>();<span class="built_in">func2</span>();<span class="built_in">func3</span>();<span class="built_in">func4</span>();<span class="built_in">func5</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Tip：<strong>从右向左</strong>看所有的输出变量</p>
+<p>&lt;1&gt; 从函数1、2可以看出，x的值都是按照<strong>所有</strong>的<strong>先自增减</strong>计算得到的<strong>最终结果的值</strong>输出的</p>
+<p>&lt;2&gt; 从函数3、4可以看出，<strong>后</strong>自增减是立即输出<strong>当前</strong>x的值，也就是<strong>过程中的值</strong></p>
+<p>函数3、4也可验证&lt;1&gt;的猜测</p>
+<p>&lt;3&gt; 函数5中所有类型交叉出现 （从右向左）</p>
+<p>x– 输出8</p>
+<p>–x 输出8 此处应该就是最迷惑的地方了 就像x–和–x都未计算一样</p>
+<p>x++ 输出6 说明此时x–和–x都已经计算过了</p>
+<p>++x 输出8 说明此时x++和++x也已经计算过了</p>
+<p>以&lt;1&gt;&lt;2&gt;为基础，&lt;3&gt;作为例子推测</p>
+<p>所有的后自增减输出的是过程中的当前值</p>
+<p>所有的先自增减输出的是最终结果的值</p>
+<p>那么为什么这样</p>
+<hr>
+<p>ok 推测完毕</p>
+<p>进入实际原理</p>
+<p>主要关乎两个点</p>
+<p>&lt;1&gt; 不定函数的传参：从右向左压栈 参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liaocheng/p/4262125.html">https://www.cnblogs.com/liaocheng/p/4262125.html</a></p>
+<p>&lt;2&gt; 左值和右值：参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/240833006">https://zhuanlan.zhihu.com/p/240833006</a></p>
+<p>如果自己实现过自增或自减，更好理解</p>
+<p>x++，x–后自增减实际是函数，返回的为右值（常量 或 临时变量）</p>
+<p>++x, –x先自增减也是函数，不过是引用的左值（变量）</p>
+<p>结合以上两点可知函数5的压栈顺序为 8 x 6 x</p>
+<p>则出栈传递的参数为x 6 x 8（此时x = 8）此时的形参为 8 6 8 8</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%85%88%E8%87%AA%E5%A2%9E%E5%87%8F%E5%92%8C%E5%90%8E%E8%87%AA%E5%A2%9E%E5%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/14/C++%E5%85%88%E8%87%AA%E5%A2%9E%E5%87%8F%E5%92%8C%E5%90%8E%E8%87%AA%E5%A2%9E%E5%87%8F/" class="post-title-link" itemprop="url">C++不定函数、自增减、左值和右值</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-14 16:32:23 / 修改时间：23:32:29" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
+      <time title="创建时间：2021-12-14 16:32:23 / 修改时间：23:41:43" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
     </span>
 
   
@@ -394,7 +657,7 @@
 <p>主要关乎两个点</p>
 <p>&lt;1&gt; 不定函数的传参：从右向左压栈 参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liaocheng/p/4262125.html">https://www.cnblogs.com/liaocheng/p/4262125.html</a></p>
 <p>&lt;2&gt; 左值和右值：参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/240833006">https://zhuanlan.zhihu.com/p/240833006</a></p>
-<p>x++，x–后自增减实际是函数，返回的为右值（常量） （实现过自增减的更容易理解）</p>
+<p>x++，x–后自增减实际是函数，返回的为右值（常量或临时对象） （实现过自增减的更容易理解）</p>
 <p>++x, –x先自增减也是函数，不过是引用的左值（变量）</p>
 <p>结合以上两点可知函数5的压栈顺序为 8 x 6 x</p>
 <p>则传递的参数为x 6 x 8（此时x = 8）此时的形参为 8 6 8 8</p>
