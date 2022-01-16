@@ -88,7 +88,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,6 +176,223 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/01/16/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/16/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A12/" class="post-title-link" itemprop="url">类和对象2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-16 19:02:25 / 修改时间：19:03:34" itemprop="dateCreated datePublished" datetime="2022-01-16T19:02:25+08:00">2022-01-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p> C++</p>
+<h2 id="拷贝函数的深拷贝和浅拷贝"><a href="#拷贝函数的深拷贝和浅拷贝" class="headerlink" title="拷贝函数的深拷贝和浅拷贝"></a>拷贝函数的深拷贝和浅拷贝</h2><p>编译器提供的默认拷贝函数是浅拷贝，就是做简单的赋值操作<br>自己实现拷贝构造函数，解决浅拷贝带来的问题（指针），在堆区申请新的内存为深拷贝</p>
+<p><strong>浅拷贝可能带来的问题</strong><br>堆区内存的重复释放</p>
+<h2 id="构造函数的初始化列表"><a href="#构造函数的初始化列表" class="headerlink" title="构造函数的初始化列表"></a>构造函数的初始化列表</h2><p>传统赋值初始化相当于，先声明类再赋值<br>初始化列表相当于，直接声明了一个带初始值的对象，省略了赋值操作<br>在大型项目中，class类中成员变量极多的情况下，初始化列表效率更高</p>
+<h2 id="类对象作为类成员"><a href="#类对象作为类成员" class="headerlink" title="类对象作为类成员"></a>类对象作为类成员</h2><p>当其他类对象作为类成员时，先构造其他类，再构造本类（砖 -&gt; 房）<br><strong>析构的顺序与构造相反，因为栈区是先进后出FILO</strong></p>
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p><strong>静态成员变量</strong><br>所有对象共享一份数据<br>在编译阶段分配内存(全局区)<br>类内声明，类外初始化<br>两种访问方式：1、通过对象进行访问；2、通过类名进行访问</p>
+<p><strong>静态成员函数</strong><br>所有对象共享一个函数<br>静态成员函数只能访问静态成员变量，不可以访问非静态成员变量(无法区分非静态成员变量属于哪一个对象)<br>两种访问方式：1、通过对象进行访问；2、通过类名进行访问</p>
+<h2 id="类的内存分配"><a href="#类的内存分配" class="headerlink" title="类的内存分配"></a>类的内存分配</h2><p>空对象占用的内存空间为：1B<br>C++编译器会给每个空对象分配一个字节空间，是为了区分空对象占内存的位置<br>每个空对象也应该有一个自己的独一无二的内存空间</p>
+<p>在C++中成员变量和成员函数是分开存储的<br>1.非静态成员变量，属于类的对象上<br>2.静态成员变量，不属于类的对象上<br>3.非静态成员函数，不属于类的对象上<br>4.静态成员函数，不属于类的对象上</p>
+<h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><p>每一个非静态成员函数只会诞生一份函数实例， 也就是说多个同类型的对象会共用一块代码<br>那么问题是 : 这一块代码是如何区分那个对象调用自己的呢?<br>C++通过提供特殊的对象指针，this指针， 解决上述问题。</p>
+<p>this指针指向被调用的成员函数所属的对象<br>this指针是隐含在每一个非静态成员函数内的一种指针<br>this指针不需要定义，直接使用即可<br>this指针的本质是一个指针常量，指针的指向是不可以修改的</p>
+<p><strong>this指针的用途</strong><br>当形参和成员变量同名时，可用this指针来区分<br>在类的非静态成员函数中返回对象本身，可使用return * this;</p>
+<p>链式编程思想：引用返回可以连续调用。As：cout &lt;&lt; “ “ &lt;&lt; “ “ &lt;&lt; endl;<br>空指针调用成员函数<br>C++中空指针也是可以调用成员函数的，但是也要注意有没有用到this指针<br>如果用到this指针，需要加以判断保证代码的健壮性</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>const修饰成员函数:<br>成员函数后加const后我们称为这个函数为常函数 <strong>const修饰的是this指针</strong> 相当于 const this*<br>常函数内不可以修改成员属性<br>成员属性声明时加关键字mutable后，在常函数中依然可以修改，在常对象中也可也修改<br>const修饰对象:<br>声明对象前加const称该对象为常对象<br>常对象只能调用常函数<br>常对象可以修改静态变量</p>
+<h2 id="friend-友元"><a href="#friend-友元" class="headerlink" title="friend 友元"></a>friend 友元</h2><p>在程序里，有些私有属性也想让类外特殊的一些函数或者类进行访问, 就需要用到友元的技术<br>友元的目的就是让一个函数或者类访问另一个类中私有成员</p>
+<p><strong>友元的三种实现</strong><br>全局函数做友元<br>类做友元<br>成员函数做友元</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/01/16/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/16/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A11/" class="post-title-link" itemprop="url">类和对象1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-16 16:44:29 / 修改时间：19:04:37" itemprop="dateCreated datePublished" datetime="2022-01-16T16:44:29+08:00">2022-01-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="构造函数的分类"><a href="#构造函数的分类" class="headerlink" title="构造函数的分类"></a>构造函数的分类</h2><p>按照参数：有参 无参 （无参又称为默认构造函数）<br>按照类型：普通 拷贝</p>
+<h2 id="c-中拷贝构造函数调用时机通常有三种情况"><a href="#c-中拷贝构造函数调用时机通常有三种情况" class="headerlink" title="c++中拷贝构造函数调用时机通常有三种情况"></a>c++中拷贝构造函数调用时机通常有三种情况</h2><p>使用一个已经创建完毕的对象来初始化一个新对象<br>值传递的方式给函数参数传值<br>以值方式返回局部对象 (值返回：先拷贝一个新对象，再析构局部对象，再将接受者关联到新对象)</p>
+<h2 id="类默认函数"><a href="#类默认函数" class="headerlink" title="类默认函数"></a>类默认函数</h2><p>默认情况下，c++编译器至少给一个类添加3个函数<br>1.默认构造函数(无参，函数体为空)<br>2.默认析构函数(无参，函数体为空)<br>3.默认拷贝构造函数, 对属性进行值拷贝<br>构造函数调用规则如下 :<br>如果用户定义有参构造函数，c++不在提供默认无参构造，但是会提供默认拷贝构造<br>如果用户定义拷贝构造函数，c++不会再提供其他构造函数</p>
+<p>调用默认构造函数,不加()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span>;</span></span><br><span class="line"></span><br><span class="line">ostream&amp; <span class="keyword">operator</span> &lt;&lt; (ostream&amp; os, <span class="keyword">const</span> person&amp; p);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">person</span>() &#123; cout &lt;&lt; <span class="string">&quot;无参构造函数\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">person</span>(<span class="keyword">const</span> <span class="keyword">int</span>&amp; age) :_age(age) &#123; cout &lt;&lt; <span class="string">&quot;有参构造函数\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">person</span>(<span class="keyword">const</span> person&amp; p) : _age(p._age) &#123; cout &lt;&lt; <span class="string">&quot;拷贝构造函数\n&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">	~<span class="built_in">person</span>() &#123; cout &lt;&lt; <span class="string">&quot;析构函数\n&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _age;</span><br><span class="line">	<span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span> &lt;&lt; (ostream&amp; os, <span class="keyword">const</span> person&amp; p);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> ostream&amp; <span class="keyword">operator</span> &lt;&lt; (ostream&amp; os, <span class="keyword">const</span> person&amp; p) &#123; <span class="keyword">return</span> os &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; p._age; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function">person <span class="title">test</span><span class="params">(<span class="keyword">const</span> person p)</span> </span>&#123; <span class="keyword">return</span> p; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//person p1(); //编译器会认为是一个函数声明</span></span><br><span class="line">	person p1; <span class="comment">//调用默认构造函数</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">person</span>(<span class="number">20</span>); <span class="comment">//匿名对象，此行结束，编译器会回收此对象</span></span><br><span class="line">	<span class="comment">//person(p4); //不要利用拷贝构造函数初始化匿名函数，编译器会编译成 person p4，造成重复定义</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//括号法构造函数调用</span></span><br><span class="line">	<span class="function">person <span class="title">p3</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">person <span class="title">p4</span><span class="params">(p3)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//显示构造函数调用</span></span><br><span class="line">	person p5 = <span class="built_in">person</span>(<span class="number">20</span>);</span><br><span class="line">	person p6 = <span class="built_in">person</span>(p5);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//隐式构造函数调用</span></span><br><span class="line">	person p7 = <span class="number">30</span>;  <span class="comment">//preson p7 = person(30);</span></span><br><span class="line">	person p8 = p7;  <span class="comment">//person p8 = person(p7);</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/01/13/%E5%AE%9E%E5%8F%82%E5%92%8C%E5%BD%A2%E5%8F%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/13/%E5%AE%9E%E5%8F%82%E5%92%8C%E5%BD%A2%E5%8F%82/" class="post-title-link" itemprop="url">实参和形参</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-13 19:48:31 / 修改时间：19:49:27" itemprop="dateCreated datePublished" datetime="2022-01-13T19:48:31+08:00">2022-01-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>形参：是定义函数时在括号里定义的变量，它只是申明用的，是没有值的；</p>
+<p>实参：是调用函数时传给形参的值，是有值的。实参是形参被具体赋值之后的值，参加实际的运算，有实际作用</p>
+<p>形参变量只有在被调用时才分配内存单元,在调用结束时,即刻释放所分配的内存单元。实参可以是常量、变量、表达式、函数等,无论实参是何种类型的量,在进行函数调用时,它们都必须具有确定的值,以便把这些值传送给形参。函数的形参和实参具有以下特点:</p>
+<p>1.形参变量只有在被调用时才分配内存单元,在调用结束时,即刻释放所分配的内存单元。因此,形参只有在函数内部有效。函数调用结束返回主调函数后则不能再使用该形参变量。</p>
+<p>2.实参可以是常量、变量、表达式、函数等,无论实参是何种类型的量,在进行函数调用时,它们都必须具有确定的值,以便把这些值传送给形参。因此应预先用赋值,输入等办法使实参获得确定值</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/01/10/time%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -201,7 +418,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-01-10 19:53:34 / 修改时间：19:55:02" itemprop="dateCreated datePublished" datetime="2022-01-10T19:53:34+08:00">2022-01-10</time>
+      <time title="创建时间：2022-01-10 19:53:34 / 修改时间：20:11:59" itemprop="dateCreated datePublished" datetime="2022-01-10T19:53:34+08:00">2022-01-10</time>
     </span>
 
   
@@ -214,7 +431,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> BST = (+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> CCT = (+<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///四种变量</span></span><br><span class="line">    tm *Time_Struct; <span class="comment">//保存时间和日期的结构</span></span><br><span class="line">    <span class="keyword">time_t</span> Time_Now; <span class="comment">//适合存储日历时间类型 _int64</span></span><br><span class="line">    <span class="keyword">clock_t</span> Time_Colck_Start, Time_Colck_End; <span class="comment">//适合存储处理器时间的类型</span></span><br><span class="line">    <span class="keyword">size_t</span> Time_Size; <span class="comment">//无符号整数类型</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///函数返回自程序启动起，处理器时钟所使用的时间。如果失败，则返回-1值</span></span><br><span class="line">    Time_Colck_Start = <span class="built_in">clock</span>();<span class="comment">//处理器启动时间</span></span><br><span class="line">    cout &lt;&lt;Time_Colck_Start &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt;<span class="number">1.0</span> * Time_Colck_Start / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">//除以每秒的时钟数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///获取系统日期和时间，并把它编码成 time_t 格式</span></span><br><span class="line">    <span class="built_in">time</span>(&amp;Time_Now); <span class="comment">//以秒为单位</span></span><br><span class="line">    cout &lt;&lt; Time_Now &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///time_t的值被分解为 tm 结构，并用本地时区表示。</span></span><br><span class="line">    Time_Struct = <span class="built_in">localtime</span>(&amp;Time_Now); </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;year =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_year &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;month =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_mon &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;day =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_mday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hour =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_hour &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;minute =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_min &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;second =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_sec &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;weekday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_wday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;yearday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_yday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;summerday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_isdst &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> Time_Str[<span class="number">60</span>]; <span class="comment">//时间接受字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///asctime将tm结构体转换成可读格式</span></span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str, <span class="built_in">asctime</span>(Time_Struct)); </span><br><span class="line">    cout &lt;&lt; Time_Str;</span><br><span class="line"></span><br><span class="line">    Time_Colck_End = <span class="built_in">clock</span>(); <span class="comment">//处理器结束时间</span></span><br><span class="line">    cout &lt;&lt;Time_Colck_End &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt;<span class="number">1.0</span> * Time_Colck_End / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">//除以每秒的时钟数</span></span><br><span class="line">    cout &lt;&lt;(<span class="number">1.0</span> * Time_Colck_End - Time_Colck_Start) / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;s\n&quot;</span>; <span class="comment">//时间差</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回以双精度浮点型 double 值表示的两个时间之间相差的秒数 (time1 - time2)</span></span><br><span class="line">    <span class="keyword">time_t</span> Time_Now2;</span><br><span class="line">    <span class="built_in">Sleep</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">time</span>(&amp;Time_Now2);</span><br><span class="line">    <span class="keyword">double</span> Time_Diff = <span class="built_in">difftime</span>(Time_Now2,Time_Now);</span><br><span class="line">    cout &lt;&lt; Time_Diff &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回指向 tm 结构的指针,协调世界时（UTC）,格林尼治标准时间（GMT）表示</span></span><br><span class="line">    Time_Struct = <span class="built_in">gmtime</span>(&amp;Time_Now2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">///函数返回一个 C 字符串，该字符串包含了可读格式的日期和时间信息</span></span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str, <span class="string">&quot;Hello, world&quot;</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str,<span class="built_in">ctime</span>(&amp;Time_Now2));</span><br><span class="line">    cout &lt;&lt; Time_Str;</span><br><span class="line"></span><br><span class="line">    cout.<span class="built_in">fill</span>(<span class="number">0</span>);</span><br><span class="line">    cout.<span class="built_in">setf</span>(ios_base::adjustfield,ios::right);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;当前世界时钟&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;伦敦时间 &quot;</span> ;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_hour + BST % <span class="number">24</span> &lt;&lt;<span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_min % <span class="number">60</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_sec % <span class="number">60</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;中国时间 &quot;</span> ;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_hour + CCT % <span class="number">24</span> &lt;&lt;<span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_min % <span class="number">60</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_sec % <span class="number">60</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回自1970年1月1日以来持续时间的秒数。如果发生错误，则返回-1值</span></span><br><span class="line">    Time_Struct-&gt;tm_hour += CCT;</span><br><span class="line">    Time_Now = <span class="built_in">mktime</span>(Time_Struct);</span><br><span class="line">    cout &lt;&lt; Time_Now &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///格式化结构体tm表示的时间，并把它存储在str中</span></span><br><span class="line">    <span class="built_in">strftime</span>(Time_Str,<span class="number">30</span>,<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, Time_Struct);</span><br><span class="line">    cout &lt;&lt; Time_Str &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> BST = (+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> CCT = (+<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///四种变量</span></span><br><span class="line">    tm* Time_Struct; <span class="comment">//保存时间和日期的结构</span></span><br><span class="line">    <span class="keyword">time_t</span> Time_Now; <span class="comment">//适合存储日历时间类型 _int64</span></span><br><span class="line">    <span class="keyword">clock_t</span> Time_Colck_Start, Time_Colck_End; <span class="comment">//适合存储处理器时间的类型</span></span><br><span class="line">    <span class="keyword">size_t</span> Time_Size; <span class="comment">//无符号整数类型</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///函数返回自程序启动起，处理器时钟所使用的时间。如果失败，则返回-1值</span></span><br><span class="line">    Time_Colck_Start = <span class="built_in">clock</span>();<span class="comment">//处理器启动时间</span></span><br><span class="line">    cout &lt;&lt; Time_Colck_Start &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="number">1.0</span> * Time_Colck_Start / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">//除以每秒的时钟数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///获取系统日期和时间，并把它编码成 time_t 格式</span></span><br><span class="line">    <span class="built_in">time</span>(&amp;Time_Now); <span class="comment">//以秒为单位</span></span><br><span class="line">    cout &lt;&lt; Time_Now &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///time_t的值被分解为 tm 结构，并用本地时区表示。</span></span><br><span class="line">    Time_Struct = <span class="built_in">localtime</span>(&amp;Time_Now);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;year =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_year &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;month =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_mon &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;day =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_mday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hour =\t\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_hour &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;minute =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_min &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;second =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_sec &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;weekday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_wday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;yearday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_yday &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;summerday =\t&quot;</span> &lt;&lt; Time_Struct-&gt;tm_isdst &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> Time_Str[<span class="number">60</span>]; <span class="comment">//时间接受字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///asctime将tm结构体转换成可读格式</span></span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str, <span class="built_in">asctime</span>(Time_Struct));</span><br><span class="line">    cout &lt;&lt; Time_Str;</span><br><span class="line"></span><br><span class="line">    Time_Colck_End = <span class="built_in">clock</span>(); <span class="comment">//处理器结束时间</span></span><br><span class="line">    cout &lt;&lt; Time_Colck_End &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="number">1.0</span> * Time_Colck_End / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">//除以每秒的时钟数</span></span><br><span class="line">    cout &lt;&lt; (<span class="number">1.0</span> * Time_Colck_End - Time_Colck_Start) / CLOCKS_PER_SEC &lt;&lt; <span class="string">&quot;s\n&quot;</span>; <span class="comment">//时间差</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回以双精度浮点型 double 值表示的两个时间之间相差的秒数 (time1 - time2)</span></span><br><span class="line">    <span class="keyword">time_t</span> Time_Now2;</span><br><span class="line">    <span class="built_in">Sleep</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">time</span>(&amp;Time_Now2);</span><br><span class="line">    <span class="keyword">double</span> Time_Diff = <span class="built_in">difftime</span>(Time_Now2, Time_Now);</span><br><span class="line">    cout &lt;&lt; Time_Diff &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回指向 tm 结构的指针,协调世界时（UTC）,格林尼治标准时间（GMT）表示</span></span><br><span class="line">    Time_Struct = <span class="built_in">gmtime</span>(&amp;Time_Now2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">///函数返回一个 C 字符串，该字符串包含了可读格式的日期和时间信息</span></span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str, <span class="string">&quot;Hello, world&quot;</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(Time_Str, <span class="built_in">ctime</span>(&amp;Time_Now2));</span><br><span class="line">    cout &lt;&lt; Time_Str;</span><br><span class="line"></span><br><span class="line">    cout.<span class="built_in">fill</span>(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;当前世界时钟&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;伦敦时间 &quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_hour + BST % <span class="number">24</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_min % <span class="number">60</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_sec % <span class="number">60</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;中国时间 &quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_hour + CCT % <span class="number">24</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_min % <span class="number">60</span> &lt;&lt; <span class="string">&quot;:&quot;</span>;</span><br><span class="line">    cout.<span class="built_in">width</span>(<span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; Time_Struct-&gt;tm_sec % <span class="number">60</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回自1970年1月1日以来持续时间的秒数。如果发生错误，则返回-1值</span></span><br><span class="line">    Time_Struct-&gt;tm_hour += CCT;</span><br><span class="line">    Time_Now = <span class="built_in">mktime</span>(Time_Struct);</span><br><span class="line">    cout &lt;&lt; Time_Now &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///格式化结构体tm表示的时间，并把它存储在str中</span></span><br><span class="line">    <span class="built_in">strftime</span>(Time_Str, <span class="number">30</span>, <span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, Time_Struct);</span><br><span class="line">    cout &lt;&lt; Time_Str &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -787,265 +1004,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/14/%E9%87%8D%E8%BD%BD%E3%80%81%E8%A6%86%E7%9B%96%E5%92%8C%E9%9A%90%E8%97%8F/" class="post-title-link" itemprop="url">重载、覆盖和隐藏</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-12-14 17:03:02" itemprop="dateCreated datePublished" datetime="2021-12-14T17:03:02+08:00">2021-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-12-18 20:10:22" itemprop="dateModified" datetime="2021-12-18T20:10:22+08:00">2021-12-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h3 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h3><p>同一个类中的不同函数</p>
-<p>&lt;1&gt; 相同的范围（在同一个类中）</p>
-<p>&lt;2&gt; 函数名相同</p>
-<p>&lt;3&gt; 参数不同</p>
-<h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h3><p>派生类函数覆盖基类函数</p>
-<p>&lt;1&gt; 不同范围（基类和派生类）</p>
-<p>&lt;2&gt; 函数名相同</p>
-<p>&lt;3&gt; 参数相同</p>
-<p>&lt;4&gt; 基类函数带virtual</p>
-<h3 id="隐藏"><a href="#隐藏" class="headerlink" title="隐藏"></a>隐藏</h3><p>派生类函数屏蔽了同名的基类函数</p>
-<p>&lt;1&gt; 同名，参数不同，有无virtual基类函数都被隐藏</p>
-<p>&lt;2&gt; 同名，同参，无virtual时基类函数被隐藏</p>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E4%B8%8D%E5%AE%9A%E5%87%BD%E6%95%B0%E3%80%81%E8%87%AA%E5%A2%9E%E5%87%8F%E3%80%81%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/14/C++%E4%B8%8D%E5%AE%9A%E5%87%BD%E6%95%B0%E3%80%81%E8%87%AA%E5%A2%9E%E5%87%8F%E3%80%81%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/" class="post-title-link" itemprop="url">C++不定函数、自增减、左值和右值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-12-14 16:32:23" itemprop="dateCreated datePublished" datetime="2021-12-14T16:32:23+08:00">2021-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-12-18 20:09:22" itemprop="dateModified" datetime="2021-12-18T20:09:22+08:00">2021-12-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<p>依以下程序为例</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,++x, ++x); &#125; <span class="comment">//10 10</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>,++x, ++x, --x); &#125; <span class="comment">//9 9 9</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, ++x, --x, x++); &#125; <span class="comment">//10 10 10 8</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func4</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, ++x, x--, x++); &#125; <span class="comment">//10 10 9 8</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func5</span><span class="params">(<span class="keyword">int</span> x = <span class="number">8</span>)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,++x, x++, --x, x--); &#125; <span class="comment">//8 6 8 8</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">func1</span>();<span class="built_in">func2</span>();<span class="built_in">func3</span>();<span class="built_in">func4</span>();<span class="built_in">func5</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Tip：<strong>从右向左</strong>看所有的输出变量</p>
-<p>&lt;1&gt; 从函数1、2可以看出，x的值都是按照<strong>所有</strong>的<strong>先自增减</strong>计算得到的<strong>最终结果的值</strong>输出的</p>
-<p>&lt;2&gt; 从函数3、4可以看出，<strong>后</strong>自增减是立即输出<strong>当前</strong>x的值，也就是<strong>过程中的值</strong></p>
-<p>函数3、4也可验证&lt;1&gt;的猜测</p>
-<p>&lt;3&gt; 函数5中所有类型交叉出现 （从右向左）</p>
-<p>x– 输出8</p>
-<p>–x 输出8 此处应该就是最迷惑的地方了 就像x–和–x都未计算一样</p>
-<p>x++ 输出6 说明此时x–和–x都已经计算过了</p>
-<p>++x 输出8 说明此时x++和++x也已经计算过了</p>
-<p>以&lt;1&gt;&lt;2&gt;为基础，&lt;3&gt;作为例子推测</p>
-<p>所有的后自增减输出的是过程中的当前值</p>
-<p>所有的先自增减输出的是最终结果的值</p>
-<p>那么为什么这样</p>
-<hr>
-<p>ok 推测完毕</p>
-<p>进入实际原理</p>
-<p>主要关乎两个点</p>
-<p>&lt;1&gt; 不定函数的传参：从右向左压栈 参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liaocheng/p/4262125.html">https://www.cnblogs.com/liaocheng/p/4262125.html</a></p>
-<p>&lt;2&gt; 左值和右值：参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/240833006">https://zhuanlan.zhihu.com/p/240833006</a></p>
-<p>如果自己实现过自增或自减，更好理解</p>
-<p>x++，x–后自增减实际是函数，返回的为右值（常量 或 临时变量）</p>
-<p>++x, –x先自增减也是函数，不过是引用的左值（变量）</p>
-<p>结合以上两点可知函数5的压栈顺序为 8 x 6 x</p>
-<p>则出栈传递的参数为x 6 x 8（此时x = 8）此时的形参为 8 6 8 8</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/13/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/13/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-12-13 16:00:09 / 修改时间：12:32:51" itemprop="dateCreated datePublished" datetime="2021-12-13T16:00:09+08:00">2021-12-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 </div>
   </main>
