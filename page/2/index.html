@@ -88,7 +88,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,451 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/21/C++%E5%B8%B8%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/21/C++%E5%B8%B8%E9%87%8F/" class="post-title-link" itemprop="url">C++常量</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-21 14:15:56 / 修改时间：18:13:23" itemprop="dateCreated datePublished" datetime="2021-12-21T14:15:56+08:00">2021-12-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>关键字const叫做限定符，它限定了声明的含义</p>
+<p>编译器不允许再修改该常量的值，g++会提示程序试图给一个只读变量赋值</p>
+<p>const比define更好，原因：</p>
+<p>&lt;1&gt; 明确指明类型</p>
+<p>&lt;2&gt; C++的作用域规则将该定义限制在特定的函数或文件中</p>
+<p>被const指定了的函数返回值表示为常量，不能再当作变量被赋值（也就是不能充当左值）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> T&amp; <span class="title">function</span><span class="params">()</span></span>&#123;<span class="comment">//返回值不为“左值”</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function">T&amp; <span class="title">function</span><span class="params">()</span></span>&#123;<span class="comment">//返回值为左值</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>C++不允const T* 转换为 T*，除非使用const_cast显示转除const限定符</p>
+<p>&lt;1&gt; 有const修饰的成员函数(const放在函数参数列表后面)，只能读取数据成员，不能修改数据成员；没有const修饰的成员函数，对数据成员是可读可写的</p>
+<p>&lt;2&gt; 常量对象（即const对象）可以调用const成员函数，而不能调用非const修饰的成员函数</p>
+<p>&lt;3&gt; 非常量对象既可以调用常量成员函数，也可以调用非常量成员函数</p>
+<p>文字常量在data区</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>C++常量分为6种</p>
+<p>整型常量 实型常量 字符型常量 字符串常量 符号常量 逻辑型常量</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/19/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/19/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">牛客刷题笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-19 17:34:12 / 修改时间：19:53:39" itemprop="dateCreated datePublished" datetime="2021-12-19T17:34:12+08:00">2021-12-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<p><strong>多态</strong></p>
+<p>指针和引用都可以实现多态</p>
+<p>对于单继承，如果派生类没有重写基类的函数，则使用最近祖先中的定义</p>
+<p>对于多继承，如果派生类没有重写基类的函数，会产生二义性，可以用作用域解析运算符表明使用哪一个基类</p>
+<p>int (<em>p)[N] 二维数组<br>int</em> p[N] 一维指针数组</p>
+<p>指针大小由机器字长决定</p>
+<p>#pragma pack(2) //2字节对齐，默认4字节对齐（32位），默认对齐与机器字长有关（内存读取方式也有关）</p>
+<p>enum 类型默认4字节，溢出时强转为8字节</p>
+<p>enum 也可显式表明长度 uint8_t uint16_t uint32_t uint64_t</p>
+<p><strong>类的内存大小</strong></p>
+<p>空的类是会占用内存空间的，而且大小是1，原因是C++要求每个实例在内存中都有独一无二的地址。</p>
+<p>（一）类内部的成员变量：<br>普通的变量：是要占用内存的，但是要注意对齐原则（这点和struct类型很相似）。<br>static修饰的静态变量：不占用内容，原因是编译器将其放在全局变量区。</p>
+<p>（二）类内部的成员函数：<br>普通函数：不占用内存。<br>虚函数：要占用4个字节（32位），用来指定虚函数的虚拟函数表的入口地址。所以一个类的虚函数所占用的地址是不变的，和虚函数的个数是没有关系的</p>
+<p>只有一个变量时，char 1, int 4, double 8 和变量长度一致</p>
+<p>当有多个变量时，对齐是8B（64）位</p>
+<p>&lt;1&gt; char + int 占8B  |-___—-| //-表示占据 _表示空闲</p>
+<p>&lt;2&gt; char + double 占16B |-_______| |——–| </p>
+<p><strong>静态和常量</strong></p>
+<p>参考： </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yhblog/article/details/103243581">https://blog.csdn.net/yhblog/article/details/103243581</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/haobaworenle/article/details/65944171?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~default-1.highlightwordscore&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~default-1.highlightwordscore">https://blog.csdn.net/haobaworenle/article/details/65944171?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.highlightwordscore&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.highlightwordscore</a></p>
+<p><strong>全局变量、局部变量、静态变量、常量</strong></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zcyzsy/article/details/52207085?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase">https://blog.csdn.net/zcyzsy/article/details/52207085?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase</a></p>
+<p><strong>动态分配</strong></p>
+<p>new、delete 是 <strong>运算符</strong> 调用构造函数和析构函数 sizeof也是运算符</p>
+<p>malloc、free 是 <strong>库函数</strong> 不会调用构造函数和析构函数</p>
+<p>在C中使用malloc时不需要强制类型转换，在C中void*到其他类型的指针是自动隐式转换；</p>
+<p>在C++中使用malloc时必须要强制类型转换，否则报错(所以用new)</p>
+<p>x86平台的PC机为小端存储</p>
+<p>工作站的CPU一般使用大端存储</p>
+<p>volatile关键字 (易变的)</p>
+<p>确保本条指令不会因编译器的优化而省略，且要求每次读值</p>
+<p>volatile变量可能被意想不到地改变，这样，编译器就不会去假设这个变量的值了</p>
+<p>以下例子引用自百度百科</p>
+<p>volatile变量的几个例子：</p>
+<p>1）并行设备的硬件寄存器（如：状态寄存器）</p>
+<p>2）一个中断服务子程序中会访问到的非自动变量（Non-automatic variables)</p>
+<p>3）多线程应用中被几个任务共享的变量</p>
+<p>1）一个参数既可以是const还可以是volatile吗？解释为什么。</p>
+<p>答：是的。一个例子是只读的状态寄存器。它是volatile因为它可能被意想不到地改变。它是const因为程序不应该试图去修改它。</p>
+<p>2）一个指针可以是volatile 吗？解释为什么。</p>
+<p>答：是的。尽管这并不很常见。一个例子是当一个中断服务子程序修改一个指向一个buffer的指针时。</p>
+<p>3）下面的函数被用来计算某个整数的平方，它能实现预期设计目标吗？如果不能，试回答存在什么问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((*ptr) * (*ptr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答： 这段代码的目的是用来返指针<em>ptr指向值的平方，但是，由于</em>ptr指向一个volatile型参数，编译器将产生类似下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* &amp;ptr)</span><span class="comment">//这里参数应该申明为引用，不然函数体里只会使用副本，外部没法更改</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    a = *ptr;</span><br><span class="line">    b = *ptr;</span><br><span class="line">    <span class="keyword">return</span> a*b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于*ptr的值可能在两次取值语句之间发生改变，因此a和b可能是不同的。结果，这段代码可能返回的不是你所期望的平方值！正确的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    a = *ptr;</span><br><span class="line">    <span class="keyword">return</span> a*a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/19/C%E9%A2%84%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/19/C%E9%A2%84%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">C预处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-19 16:11:31" itemprop="dateCreated datePublished" datetime="2021-12-19T16:11:31+08:00">2021-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-12-21 14:14:04" itemprop="dateModified" datetime="2021-12-21T14:14:04+08:00">2021-12-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="预处理的概念"><a href="#预处理的概念" class="headerlink" title="预处理的概念"></a>预处理的概念</h2><p>预处理主要在编译之前处理程序中的特殊行</p>
+<p>预处理指令包括： 宏定义、文件包含和条件编译</p>
+<p>c程序 -&gt; 预处理器 -&gt; 修改后的c程序 -&gt; 编译器 -&gt; 目标代码</p>
+<p>预处理器是一个小软件，在编译前处理c程序</p>
+<p><strong>预处理操作</strong></p>
+<p>&lt;1&gt; 宏定义。 #define指令定义一个宏， #undef指令删除一个宏</p>
+<p>&lt;2&gt; 文件包含。 #include指令将一个指定文件内容包含到程序中</p>
+<p>&lt;3&gt; 条件编译。 #if、#ifdef、#ifndef、#elif、#else和#endif指令根据测试条件来确定是否将一段程序文本包含到程序中</p>
+<p><strong>规则</strong></p>
+<p>&lt;1&gt; 以#开始</p>
+<p>&lt;2&gt; 换行符作为结尾，’&#39;可延续到下一行 (编译器会忽略行尾的换行符，起到续行作用)</p>
+<p>&lt;3&gt; 可间隔任意空格、制表符，可放在程序任意位置，一般放在文件开始位置，可与注释同行</p>
+<h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>#define 标识符 替换文本 //符号常量 </p>
+<p>#define 宏名(x1,x2,..) 替换列表 //带参数的宏定义</p>
+<p>参数带上括号程序更安全</p>
+<p><strong>带参数的宏定义不是函数</strong></p>
+<p>宏定义没有类型检查</p>
+<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>格式1：#include “文件名” 优先查找工作目录，其次查找预先指定的编译器和系统目录。</p>
+<p>格式2：#include &lt;文件名&gt; 在预先指定的编译器和系统目录查找</p>
+<p>编译多文件时，无需编译.h文件，因为编译.c文件时会自动编译头文件的内容</p>
+<p>编译生成一个包含目标代码的文件，称为目标文件，windows系统中扩展名为.obj</p>
+<p>链接器把目标文件和库函数代码结合在一起生成可执行程序</p>
+<p>链接器可以解决外部引用问题(extern 外部函数)</p>
+<h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>条件编译可以用来保护头文件(文件嵌套无意间包含一个头文件多次)</p>
+<p>源文件包含函数定义和函数调用</p>
+<p>头文件包含类型定义、函数原型声明等</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/18/C++%E5%86%85%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/18/C++%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">C++内存</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-18 19:51:45" itemprop="dateCreated datePublished" datetime="2021-12-18T19:51:45+08:00">2021-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-12-19 17:33:37" itemprop="dateModified" datetime="2021-12-19T17:33:37+08:00">2021-12-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h2 id="内存分布"><a href="#内存分布" class="headerlink" title="内存分布"></a>内存分布</h2><p>低地址端</p>
+<p>代码段 (text/code segment): 只读存储区</p>
+<p>BSS段 (bss segment): 未初始化的全局变量</p>
+<p>数据段 (data segment): 已经初始化的全局变量</p>
+<p>堆 (heap): 动态分配管理</p>
+<p>栈 (stack): 函数调用过程中存放局部变量、函数参数、返回地址信息</p>
+<p>高地址端</p>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/14/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">C++学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-14 21:09:39 / 修改时间：22:54:27" itemprop="dateCreated datePublished" datetime="2021-12-14T21:09:39+08:00">2021-12-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h2 id="4-5-共用体-（union）"><a href="#4-5-共用体-（union）" class="headerlink" title="4.5 共用体 （union）"></a>4.5 共用体 （union）</h2><p>用法和类相同 </p>
+<p>长度为最大成员的长度 共用同一块内存</p>
+<h3 id="匿名共用体"><a href="#匿名共用体" class="headerlink" title="匿名共用体"></a>匿名共用体</h3><p>类似于同一起始地址有多个成员，但同时只能有一个成员活跃</p>
+<p>常用于操作系统数据结构和硬件数据结构 节约内存</p>
+<h2 id="4-6-枚举-（enum）"><a href="#4-6-枚举-（enum）" class="headerlink" title="4.6 枚举 （enum）"></a>4.6 枚举 （enum）</h2><p>创建符号常量的方式，可代替const</p>
+<p>为了获取最大的移植性，将非enum值赋给enum变量视为error</p>
+<p>enum为整型，可自动转为int</p>
+<p>int要强制类型转换才能变成enum变量的值</p>
+<p>可选择性赋值，默认第一个为0，以后每个枚举量增加1</p>
+<p>可以创建多个相同值的枚举量</p>
+<p>取址范围 </p>
+<p>上限为 最大值所在2的幂次的上限减1，120上限为127</p>
+<p>下限为 最小值大于0，则取零；否则与上限相同，取负值，-6下限为-7</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

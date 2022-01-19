@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="纯虚函数和抽象类在多态中，通常父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容因此可以将虚函数改为纯虚函数纯虚函数语法: virtual 返回值类型 函数名(参数列表) &#x3D; 0;当类中有了纯虚函数，这个类也称为抽象类 抽象类特点无法实例化对象子类必须重写抽象类中的纯虚函数，否则也属于抽象类 多态实例123456789101112131415161718192021222324252627">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类和对象6">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/01/19/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A16/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="纯虚函数和抽象类在多态中，通常父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容因此可以将虚函数改为纯虚函数纯虚函数语法: virtual 返回值类型 函数名(参数列表) &#x3D; 0;当类中有了纯虚函数，这个类也称为抽象类 抽象类特点无法实例化对象子类必须重写抽象类中的纯虚函数，否则也属于抽象类 多态实例123456789101112131415161718192021222324252627">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-19T09:26:27.000Z">
+<meta property="article:modified_time" content="2022-01-19T11:37:53.582Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/01/19/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A16/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/01/19/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A16/","path":"2022/01/19/类和对象6/","title":"类和对象6"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>类和对象6 | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">纯虚函数和抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">抽象类特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">多态实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%92%8C%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">虚析构和纯虚析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%92%8C%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84%E5%85%B1%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">虚析构和纯虚析构共性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%92%8C%E7%BA%AF%E8%99%9A%E6%9E%90%E6%9E%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.</span> <span class="nav-text">虚析构和纯虚析构区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">7.</span> <span class="nav-text">多态实例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/01/19/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          类和对象6
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-19 17:26:27 / 修改时间：19:37:53" itemprop="dateCreated datePublished" datetime="2022-01-19T17:26:27+08:00">2022-01-19</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h2><p>在多态中，通常父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容<br>因此可以将虚函数改为纯虚函数<br>纯虚函数语法: virtual 返回值类型 函数名(参数列表) = 0;<br>当类中有了纯虚函数，这个类也称为抽象类</p>
+<h2 id="抽象类特点"><a href="#抽象类特点" class="headerlink" title="抽象类特点"></a>抽象类特点</h2><p>无法实例化对象<br>子类必须重写抽象类中的纯虚函数，否则也属于抽象类</p>
+<h2 id="多态实例"><a href="#多态实例" class="headerlink" title="多态实例"></a>多态实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">drinking</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">boil</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>; <span class="comment">//烧水</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">brew</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>; <span class="comment">//沏泡</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">pour</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>; <span class="comment">//倒入</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">cond</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>; <span class="comment">//辅料</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">makedrinking</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="built_in">boil</span>(); <span class="built_in">brew</span>(); <span class="built_in">pour</span>(); <span class="built_in">cond</span>(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coffee</span> :</span> <span class="keyword">public</span> drinking&#123;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">boil</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;煮水\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">brew</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;冲泡咖啡\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">pour</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;倒入杯中\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">cond</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;加入糖和牛奶\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">tea</span> :</span> <span class="keyword">public</span> drinking &#123;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">boil</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;煮水\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">brew</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;冲泡茶叶\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">pour</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;倒入杯中\n&quot;</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">cond</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;加入柠檬\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">makedrinking</span><span class="params">(drinking* d)</span> </span>&#123; d-&gt;<span class="built_in">makedrinking</span>(); <span class="keyword">delete</span> d; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">makedrinking</span>(<span class="keyword">new</span> tea);</span><br><span class="line">    <span class="built_in">makedrinking</span>(<span class="keyword">new</span> coffee);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="虚析构和纯虚析构"><a href="#虚析构和纯虚析构" class="headerlink" title="虚析构和纯虚析构"></a>虚析构和纯虚析构</h2><p>多态使用时，如果子类中有属性开辟到堆区，那么父类指针在释放时无法调用到子类的析构代码<br>解决方式:将父类中的析构函数改为虚析构或者纯虚析构 </p>
+<h2 id="虚析构和纯虚析构共性"><a href="#虚析构和纯虚析构共性" class="headerlink" title="虚析构和纯虚析构共性"></a>虚析构和纯虚析构共性</h2><p>可以解决父类指针释放子类对象<br>都需要有具体的函数实现</p>
+<h2 id="虚析构和纯虚析构区别"><a href="#虚析构和纯虚析构区别" class="headerlink" title="虚析构和纯虚析构区别"></a>虚析构和纯虚析构区别</h2><p>如果是纯虚析构，该类属于抽象类，无法实例化对象</p>
+<p>虚析构语法:<br>virtual ~类名(){}<br>纯虚析构语法:<br>virtual ~类名() = 0</p>
+<p>虚析构函数只需要声明，父类不需要实现，子类重写<br>纯虚析构函数需要声明，父类也需要实现，子类重写是属于子类的</p>
+<p><strong>总结</strong><br>1.虚析构或纯虚析构就是用来解决通过父类指针释放子类对象<br>2.如果子类中没有堆区数据，可以不写为虚析构或纯虚析构<br>3.拥有纯虚析构函数的类也属于抽象类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//利用虚析构可以解决父类指针释放子类对象时不干净的问题</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">animal</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">animal</span>() &#123; cout &lt;&lt; <span class="string">&quot;animal构造函数\n&quot;</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">virtual</span> ~<span class="built_in">animal</span>() &#123; cout &lt;&lt; <span class="string">&quot;animal析构函数\n&quot;</span>; &#125; <span class="comment">//虚析构函数</span></span><br><span class="line">	<span class="comment">//virtual ~animal() = 0; //纯虚析构函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//animal::~animal() &#123; cout &lt;&lt; &quot;animal纯虚析构函数\n&quot;; &#125; //实现</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cat</span> :</span> <span class="keyword">public</span> animal &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">cat</span>(<span class="keyword">const</span> string&amp; name) : _name(<span class="keyword">new</span> <span class="built_in">string</span>(name)) &#123; cout &lt;&lt; <span class="string">&quot;cat的构造函数\n&quot;</span>; &#125;</span><br><span class="line">	~<span class="built_in">cat</span>() &#123;</span><br><span class="line">		<span class="keyword">if</span> (_name != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;cat的析构函数\n&quot;</span>;</span><br><span class="line">			<span class="keyword">delete</span> _name;</span><br><span class="line">			_name = <span class="literal">nullptr</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; *_name &lt;&lt; <span class="string">&quot;cat speak : miaomiaomiao\n&quot;</span>; &#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	string* _name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">(<span class="keyword">const</span> animal* a)</span> </span>&#123; a-&gt;<span class="built_in">speak</span>(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	animal* c = <span class="keyword">new</span> <span class="built_in">cat</span>(<span class="string">&quot;Tom&quot;</span>); <span class="comment">//采用父类指针调用</span></span><br><span class="line">	<span class="built_in">speak</span>(c);</span><br><span class="line">	<span class="keyword">delete</span> c; <span class="comment">//清理堆区内存时方可调用子类析构函数</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="多态实例-1"><a href="#多态实例-1" class="headerlink" title="多态实例"></a>多态实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//案例描述: </span></span><br><span class="line"><span class="comment">//电脑主要组成部件为CPU(用于计算)，显卡(用于显示)，内存条(用于存储)</span></span><br><span class="line"><span class="comment">//将每个零件封装出抽象基类，并且提供不同的厂商生产不同的零件，例如Intel厂 商和Lenovo厂商</span></span><br><span class="line"><span class="comment">//创建电脑类提供让电脑工作的函数，并且调用每个零件工作的接口</span></span><br><span class="line"><span class="comment">//测试时组装三台不同的电脑进行工作</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cpu</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gpu</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mem</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">computer</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">inter</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">amd</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//抽象出不同零件的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cpu</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">calculate</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gpu</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mem</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//电脑类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">computer</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//computer(cpu* const c, gpu* const g, mem* const m) : _cpu(new cpu(c)), _gpu(new gpu(g)), _mem(new mem(m)) &#123;&#125;;</span></span><br><span class="line">	<span class="built_in">computer</span>(cpu* <span class="keyword">const</span> c, gpu* <span class="keyword">const</span> g, mem* <span class="keyword">const</span> m) : _cpu(c), _gpu(g), _mem(m) &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123; _cpu-&gt;<span class="built_in">calculate</span>(); _gpu-&gt;<span class="built_in">display</span>(); _mem-&gt;<span class="built_in">store</span>(); &#125;</span><br><span class="line"></span><br><span class="line">	~<span class="built_in">computer</span>() &#123;</span><br><span class="line">		<span class="keyword">if</span> (_cpu != <span class="literal">nullptr</span>) &#123; <span class="keyword">delete</span> _cpu; _cpu = <span class="literal">nullptr</span>; &#125;</span><br><span class="line">		<span class="keyword">if</span> (_gpu != <span class="literal">nullptr</span>) &#123; <span class="keyword">delete</span> _gpu; _gpu = <span class="literal">nullptr</span>; &#125;</span><br><span class="line">		<span class="keyword">if</span> (_mem != <span class="literal">nullptr</span>) &#123; <span class="keyword">delete</span> _mem; _mem = <span class="literal">nullptr</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	cpu* _cpu;</span><br><span class="line">	gpu* _gpu;</span><br><span class="line">	mem* _mem;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">intercpu</span> :</span> <span class="keyword">public</span> cpu &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">calculate</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;inter cpu begin calculate!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">intergpu</span> :</span> <span class="keyword">public</span> gpu &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;inter gpu begin display!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">intermem</span> :</span> <span class="keyword">public</span> mem &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;inter mem begin store!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">amdcpu</span> :</span> <span class="keyword">public</span> cpu &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">calculate</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;amd cpu begin calculate!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">amdgpu</span> :</span> <span class="keyword">public</span> gpu &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;amd gpu begin display!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">amdmem</span> :</span> <span class="keyword">public</span> mem &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;amd mem begin store!\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cpu* cpu1 = <span class="keyword">new</span> intercpu;</span><br><span class="line">	gpu* gpu1 = <span class="keyword">new</span> intergpu;</span><br><span class="line">	mem* mem1 = <span class="keyword">new</span> intermem;</span><br><span class="line">	computer* computer1 = <span class="keyword">new</span> <span class="built_in">computer</span>(cpu1, gpu1, mem1);</span><br><span class="line">	computer1-&gt;<span class="built_in">work</span>();</span><br><span class="line"></span><br><span class="line">	cpu* cpu2 = <span class="keyword">new</span> amdcpu;</span><br><span class="line">	gpu* gpu2 = <span class="keyword">new</span> amdgpu;</span><br><span class="line">	mem* mem2 = <span class="keyword">new</span> amdmem;</span><br><span class="line">	computer* computer2 = <span class="keyword">new</span> <span class="built_in">computer</span>(cpu2, gpu2, mem2);</span><br><span class="line">	computer2-&gt;<span class="built_in">work</span>();</span><br><span class="line"></span><br><span class="line">	computer* computer3 = <span class="keyword">new</span> <span class="built_in">computer</span>(cpu1, gpu2, mem1);</span><br><span class="line">	computer3-&gt;<span class="built_in">work</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">delete</span> computer1;</span><br><span class="line">	<span class="keyword">delete</span> computer2;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/18/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A15/" rel="prev" title="类和对象5">
+                  <i class="fa fa-chevron-left"></i> 类和对象5
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/19/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" rel="next" title="文件操作">
+                  文件操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
