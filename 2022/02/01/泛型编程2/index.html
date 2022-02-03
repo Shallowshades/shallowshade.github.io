@@ -19,11 +19,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshade.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="类模板建立一个通用类,类中的成员数据类型可以不具体制定，用一个虚拟的类型来代表。 类模板可以使用类型默认参数函数模板不可以使用类型默认参数 类模板中成员函数和普通类中成员函数创建时机是有区别的:1、普通类中的成员函数一开始就可以创建2、类模板中的成员函数在调用时才创建 类模板对象做函数参数类模板实例化出的对象，向函数传参的方式共有三种传入方式:1.指定传入的类型– 直接显示对象的数据类型2.参数模">
 <meta property="og:type" content="article">
 <meta property="og:title" content="泛型编程2">
-<meta property="og:url" content="https://shallowshade.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/index.html">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/index.html">
 <meta property="og:site_name" content="未名的博客">
 <meta property="og:description" content="类模板建立一个通用类,类中的成员数据类型可以不具体制定，用一个虚拟的类型来代表。 类模板可以使用类型默认参数函数模板不可以使用类型默认参数 类模板中成员函数和普通类中成员函数创建时机是有区别的:1、普通类中的成员函数一开始就可以创建2、类模板中的成员函数在调用时才创建 类模板对象做函数参数类模板实例化出的对象，向函数传参的方式共有三种传入方式:1.指定传入的类型– 直接显示对象的数据类型2.参数模">
 <meta property="og:locale" content="zh_CN">
@@ -34,11 +34,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://shallowshade.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/">
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshade.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/","path":"2022/02/01/泛型编程2/","title":"泛型编程2"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/","path":"2022/02/01/泛型编程2/","title":"泛型编程2"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>泛型编程2 | 未名的博客</title>
@@ -180,7 +180,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shallowshade.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/02/01/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
