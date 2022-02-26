@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="引用左值引用 &amp;传统C++引用现在称为左值引用，使得标识符关联到左值左值是一个表示数据的表达式(如变量名或解除引用的指针)，程序可获取其地址；最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明不能给其赋值但可以获取其地址的标识符 右值引用 &amp;&amp;C++11新增右值引用，使标识符可关联到右值右值包括字面常量(C风格字符串除外，它表示地址)，诸如表达式x+y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="右值引用和移动语义">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="引用左值引用 &amp;传统C++引用现在称为左值引用，使得标识符关联到左值左值是一个表示数据的表达式(如变量名或解除引用的指针)，程序可获取其地址；最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明不能给其赋值但可以获取其地址的标识符 右值引用 &amp;&amp;C++11新增右值引用，使标识符可关联到右值右值包括字面常量(C风格字符串除外，它表示地址)，诸如表达式x+y">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-05T15:49:52.000Z">
+<meta property="article:modified_time" content="2022-02-06T14:45:54.796Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/","path":"2022/02/05/右值引用和移动语义/","title":"右值引用和移动语义"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>右值引用和移动语义 | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8-amp"><span class="nav-number">1.1.</span> <span class="nav-text">左值引用 &amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8-amp-amp"><span class="nav-number">1.2.</span> <span class="nav-text">右值引用 &amp;&amp;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">右值引用测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">移动语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">移动语义概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">移动语义的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">拷贝构造函数和移动构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E7%A4%BA%E4%BE%8B-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">移动语义示例 移动构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.2.</span> <span class="nav-text">示例总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">赋值函数和移动赋值函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.4.1.</span> <span class="nav-text">强制移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%A7%BB%E5%8A%A8%E7%A4%BA%E4%BE%8B-%E7%A7%BB%E5%8A%A8%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.2.</span> <span class="nav-text">强制移动示例 移动赋值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.4.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          右值引用和移动语义
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-05 23:49:52" itemprop="dateCreated datePublished" datetime="2022-02-05T23:49:52+08:00">2022-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-06 22:45:54" itemprop="dateModified" datetime="2022-02-06T22:45:54+08:00">2022-02-06</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="左值引用-amp"><a href="#左值引用-amp" class="headerlink" title="左值引用 &amp;"></a>左值引用 &amp;</h2><p>传统C++引用现在称为左值引用，使得标识符关联到左值<br>左值是一个表示数据的表达式(如<strong>变量名</strong>或<strong>解除引用的指针</strong>)，<strong>程序可获取其地址</strong>；<br>最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明<strong>不能给其赋值但可以获取其地址</strong>的标识符</p>
+<h2 id="右值引用-amp-amp"><a href="#右值引用-amp-amp" class="headerlink" title="右值引用 &amp;&amp;"></a>右值引用 &amp;&amp;</h2><p>C++11新增右值引用，使标识符可关联到右值<br>右值包括<strong>字面常量</strong>(C风格字符串除外，它表示地址)，诸如<strong>表达式x+y以及函数的返回值(返回的不是左值引用</strong>，程序不可以获取其地址<br>右值出现在表达式的右边</p>
+<p><strong>将右值关联到右值引用导致该右值被储存到特定位置，且可以获取该位置的地址</strong><br>通过将数据与特定的地址关联，使得可以通过右值引用来访问该数据</p>
+<hr>
+<h3 id="右值引用测试"><a href="#右值引用测试" class="headerlink" title="右值引用测试"></a>右值引用测试</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span> <span class="title">func</span><span class="params">(<span class="keyword">double</span> f)</span> </span>&#123; <span class="keyword">return</span> <span class="number">20</span> * (f - <span class="number">3.0</span>) / <span class="number">2.0</span>; &#125; <span class="comment">//返回的是一个右值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> f1 = <span class="number">1.2</span>; <span class="comment">//左值，程序可获取其地址</span></span><br><span class="line">	<span class="comment">//double&amp; f2 = 7.07; //7.07是一个常量，无法寻址，不可以左值引用</span></span><br><span class="line">	<span class="keyword">double</span>&amp;&amp; f3 = <span class="number">7.07</span>; <span class="comment">//7.07是一个常量，可以右值引用</span></span><br><span class="line">	<span class="keyword">double</span>&amp;&amp; f4 = <span class="number">1.8</span> * f1 + <span class="number">2.0</span>; <span class="comment">//表达式计算得到的值是一个临时值，无法寻址，右值引用</span></span><br><span class="line">	<span class="keyword">double</span>&amp;&amp; f5 = <span class="built_in">func</span>(f4); <span class="comment">//函数的返回值是一个临时值，无法寻址，右值引用</span></span><br><span class="line"></span><br><span class="line">	f5 = <span class="number">0.2</span>;<span class="comment">//关联func(f4)的返回值(右值)，但是可以赋值，说明当前的f5有自己的内存空间</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;f1 的值和地址为：&quot;</span> &lt;&lt; f1 &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; &amp;f1 &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;f3 的值和地址为：&quot;</span> &lt;&lt; f3 &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; &amp;f3 &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;f4 的值和地址为：&quot;</span> &lt;&lt; f4 &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; &amp;f4 &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;f5 的值和地址为：&quot;</span> &lt;&lt; f5 &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; &amp;f5 &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br>f1 的值和地址为：1.2    00B7FCC0<br>f3 的值和地址为：7.07   00B7FCA4<br>f4 的值和地址为：4.16   00B7FC88<br>f5 的值和地址为：11.6   00B7FC6C</p>
+<hr>
+<p><strong>引入右值引用的主要目的之一是实现移动语义</strong></p>
+<h1 id="移动语义"><a href="#移动语义" class="headerlink" title="移动语义"></a>移动语义</h1><h2 id="移动语义概念"><a href="#移动语义概念" class="headerlink" title="移动语义概念"></a>移动语义概念</h2><p>在赋值时，首先要构造一个临时对象，然后再将对象赋值给新对象<br>在这期间，需要构造临时对象，对临时对象赋值，构造新对象，然后用临时对象对新对象赋值，且临时对象用过之后便销毁<br>若是能直接将新对象关联到临时对象，便省去大量时间和空间<br>移动语义便是：<strong>避免了原始数据的移动，只修改记录</strong>(悖论)</p>
+<hr>
+<p><strong>Tips:愚蠢的编译器</strong><br>函数返回临时变量赋值时，有些愚蠢的编译器甚至可能将函数内创建的临时变量复制给一个临时返回变量，然后删除临时变量，再删除临时返回变量</p>
+<hr>
+<h2 id="移动语义的实现"><a href="#移动语义的实现" class="headerlink" title="移动语义的实现"></a>移动语义的实现</h2><p>需要采用某种方式让编译器知道什么时候复制，什么时候不需要，此时便是右值引用发挥作用的时候了</p>
+<h2 id="拷贝构造函数和移动构造函数"><a href="#拷贝构造函数和移动构造函数" class="headerlink" title="拷贝构造函数和移动构造函数"></a>拷贝构造函数和移动构造函数</h2><table>
+<thead>
+<tr>
+<th>拷贝构造函数</th>
+<th>移动构造函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可执行深拷贝</td>
+<td>只负责调整记录</td>
+</tr>
+<tr>
+<td>const左值引用</td>
+<td>右值引用</td>
+</tr>
+<tr>
+<td>不会修改实参，用const修饰</td>
+<td>在将所有权转移给新对象的过程中，移动构造函数可能修改实参，所以不能用const修饰</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="移动语义示例-移动构造函数"><a href="#移动语义示例-移动构造函数" class="headerlink" title="移动语义示例 移动构造函数"></a>移动语义示例 移动构造函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">useless</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">useless</span>();							<span class="comment">//default ctor</span></span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">useless</span><span class="params">(<span class="keyword">int</span> k)</span></span>;	</span><br><span class="line">	<span class="built_in">useless</span>(<span class="keyword">int</span> k, <span class="keyword">char</span> ch);</span><br><span class="line">	<span class="built_in">useless</span>(<span class="keyword">const</span> useless&amp; u);			<span class="comment">//copy ctor</span></span><br><span class="line">	<span class="built_in">useless</span>(useless&amp;&amp; u);				<span class="comment">//move ctor</span></span><br><span class="line">	~<span class="built_in">useless</span>();							<span class="comment">//default dtor</span></span><br><span class="line">	useless <span class="keyword">operator</span> + (<span class="keyword">const</span> useless&amp; u) <span class="keyword">const</span>;</span><br><span class="line">	<span class="comment">//need operator = () in copy and move versions</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowData</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> n;						<span class="comment">//number of element</span></span><br><span class="line">	<span class="keyword">char</span>* pc;					<span class="comment">//pointer to data</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> ct;				<span class="comment">//number of object</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowObject</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//implementation</span></span><br><span class="line"><span class="keyword">int</span> useless::ct = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>() &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	n = <span class="number">0</span>;</span><br><span class="line">	pc = <span class="literal">nullptr</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;default ctor called; number of objects: &quot;</span> &lt;&lt; ct &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">int</span> k) : <span class="built_in">n</span>(k) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;int ctor called; number of objects: &quot;</span> &lt;&lt; ct &lt;&lt; endl;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">int</span> k, <span class="keyword">char</span> ch) :<span class="built_in">n</span>(k) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;int, char ctor called; number of objects: &quot;</span> &lt;&lt; ct &lt;&lt; endl;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) pc[i] = ch;</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">const</span> useless&amp; u) :<span class="built_in">n</span>(u.n) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;copy const called; number of objects: &quot;</span> &lt;&lt; ct &lt;&lt; endl;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) pc[i] = u.pc[i];</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//让pc指向现有数据，以获取这些数据的所有权</span></span><br><span class="line"><span class="comment">//将旧对象的指针设为nullptr，避免重复delete[]</span></span><br><span class="line"><span class="comment">//对nullptr delete[] 不会产生任何问题</span></span><br><span class="line"><span class="comment">//这种夺取所有权的方式被称为“窃取”(pilfering)</span></span><br><span class="line"><span class="comment">//由于修改了实参，所以参数不能声明为const</span></span><br><span class="line">useless::<span class="built_in">useless</span>(useless&amp;&amp; u) : <span class="built_in">n</span>(u.n) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;move ctor called; number of objects: &quot;</span> &lt;&lt; ct &lt;&lt; endl;</span><br><span class="line">	pc = u.pc;			<span class="comment">//steal address</span></span><br><span class="line">	u.pc = <span class="literal">nullptr</span>;		<span class="comment">//give old object nothing in return</span></span><br><span class="line">	u.n = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::~<span class="built_in">useless</span>()&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;dtor called; objects left: &quot;</span> &lt;&lt; --ct &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;deleted object:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">ShowObject</span>();</span><br><span class="line">	<span class="keyword">delete</span>[] pc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless useless::<span class="keyword">operator</span> + (<span class="keyword">const</span> useless&amp; u) <span class="keyword">const</span> &#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Entering operator + ()\n&quot;</span>;</span><br><span class="line">	useless temp = <span class="built_in">useless</span>(n + u.n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) temp.pc[i] = pc[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &lt; temp.n; ++i) temp.pc[i] = u.pc[i - n];</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;temp object:\n&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Leaving operator + ()\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useless::ShowData</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!n) cout &lt;&lt; <span class="string">&quot;(object empty)&quot;</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cout &lt;&lt; pc[i];</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useless::ShowObject</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Number of elements: &quot;</span> &lt;&lt; n;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot; Data address: &quot;</span> &lt;&lt; (<span class="keyword">void</span>*)pc &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//application</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">useless <span class="title">one</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;x&#x27;</span>)</span></span>;</span><br><span class="line">		useless two = one;			<span class="comment">//calls copy ctor</span></span><br><span class="line">		<span class="function">useless <span class="title">three</span><span class="params">(<span class="number">20</span>, <span class="string">&#x27;o&#x27;</span>)</span></span>;</span><br><span class="line">		<span class="function">useless <span class="title">four</span><span class="params">(one + three)</span></span>;	<span class="comment">//calls operator+(), move ctor</span></span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object one: &quot;</span>;</span><br><span class="line">		one.<span class="built_in">ShowData</span>();</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object two: &quot;</span>;</span><br><span class="line">		two.<span class="built_in">ShowData</span>();</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object three: &quot;</span>;</span><br><span class="line">		three.<span class="built_in">ShowData</span>();</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object four: &quot;</span>;</span><br><span class="line">		four.<span class="built_in">ShowData</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例输出：<br><strong>microsoft vs2019 msvc14.2</strong><br>int, char ctor called; number of objects: 1<br>Number of elements: 10 Data address: 006D22D8<br>copy const called; number of objects: 2<br>Number of elements: 10 Data address: 006D2268<br>int, char ctor called; number of objects: 3<br>Number of elements: 20 Data address: 006D10D8<br>Entering operator + ()<br>int ctor called; number of objects: 4<br>Number of elements: 30 Data address: 006CCF68<br>temp object:<br>Leaving operator + ()<br>move ctor called; number of objects: 5<br>Number of elements: 30 Data address: 006CCF68<br>dtor called; objects left: 4<br>deleted object:<br>Number of elements: 0 Data address: 00000000<br>object one: xxxxxxxxxx<br>object two: xxxxxxxxxx<br>object three: oooooooooooooooooooo<br>object four: xxxxxxxxxxoooooooooooooooooooo<br>dtor called; objects left: 3<br>deleted object:<br>Number of elements: 30 Data address: 006CCF68<br>dtor called; objects left: 2<br>deleted object:<br>Number of elements: 20 Data address: 006D10D8<br>dtor called; objects left: 1<br>deleted object:<br>Number of elements: 10 Data address: 006D2268<br>dtor called; objects left: 0<br>deleted object:<br>Number of elements: 10 Data address: 006D22D8</p>
+<p><strong>vscode mingw64 g++ -std=c++11</strong><br>int, char ctor called; number of objects: 1<br>Number of elements: 10 Data address: 0xf53e30<br>copy const called; number of objects: 2<br>Number of elements: 10 Data address: 0xf53e70<br>int, char ctor called; number of objects: 3<br>Number of elements: 20 Data address: 0xf53eb0<br>Entering operator + ()<br>int ctor called; number of objects: 4<br>Number of elements: 30 Data address: 0xf53f00<br>temp object:<br>Leaving operator + ()<br>object one: xxxxxxxxxx<br>object two: xxxxxxxxxx<br>object three: oooooooooooooooooooo<br>object four: xxxxxxxxxxoooooooooooooooooooo<br>dtor called; objects left: 3<br>deleted object:<br>Number of elements: 30 Data address: 0xf53f00<br>dtor called; objects left: 2<br>deleted object:<br>Number of elements: 20 Data address: 0xf53eb0<br>dtor called; objects left: 1<br>deleted object:<br>Number of elements: 10 Data address: 0xf53e70<br>dtor called; objects left: 0<br>deleted object:<br>Number of elements: 10 Data address: 0xf53e30</p>
+<hr>
+<h3 id="示例总结"><a href="#示例总结" class="headerlink" title="示例总结"></a>示例总结</h3><p>msvc版本中可以看出调用了移动构造函数<br>mingw64 g++中没有调用移动构造函数(甚至在对象four创建时未调用任何构造函数)，它推断出operator+得到的结果的受益者是four，便将operator+创建的对象转移到four的名下</p>
+<p><strong>一般而言，编译器完全可以进行优化，只要结果与未优化时相同</strong><br><strong>即使省略了程序中的移动构造函数，使用g++进行编译，结果也相同</strong></p>
+<hr>
+<p><strong>Tips:聪明的编译器</strong><br>g++看起来很聪明，那这些聪明会不会产生一些问题？2022/2/6</p>
+<hr>
+<h2 id="赋值函数和移动赋值函数"><a href="#赋值函数和移动赋值函数" class="headerlink" title="赋值函数和移动赋值函数"></a>赋值函数和移动赋值函数</h2><h3 id="强制移动"><a href="#强制移动" class="headerlink" title="强制移动"></a>强制移动</h3><p>如何像使用右值引用一样使用一个左值<br>1、运算符static_cast&lt;&gt;将对象的类型强制转换为右值引用<br>2、C++11头文件utility中声明的函数std::move()</p>
+<h3 id="强制移动示例-移动赋值函数"><a href="#强制移动示例-移动赋值函数" class="headerlink" title="强制移动示例 移动赋值函数"></a>强制移动示例 移动赋值函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//强制移动</span></span><br><span class="line"><span class="comment">//1、运算符static_cast&lt;&gt;将对象的类型强制转换为右值引用</span></span><br><span class="line"><span class="comment">//2、C++11头文件utility中声明的函数std::move()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">useless</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">useless</span>();									<span class="comment">//default ctor</span></span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">useless</span><span class="params">(<span class="keyword">int</span> k)</span></span>;	</span><br><span class="line">	<span class="built_in">useless</span>(<span class="keyword">int</span> k, <span class="keyword">char</span> ch);</span><br><span class="line">	<span class="built_in">useless</span>(<span class="keyword">const</span> useless&amp; u);					<span class="comment">//copy ctor</span></span><br><span class="line">	<span class="built_in">useless</span>(useless&amp;&amp; u);						<span class="comment">//move ctor</span></span><br><span class="line">	~<span class="built_in">useless</span>();									<span class="comment">//default dtor</span></span><br><span class="line">	useless <span class="keyword">operator</span> + (<span class="keyword">const</span> useless&amp; u) <span class="keyword">const</span>;</span><br><span class="line">	useless <span class="keyword">operator</span> = (<span class="keyword">const</span> useless&amp; u);		<span class="comment">//copy assignment</span></span><br><span class="line">	useless <span class="keyword">operator</span> = (useless&amp;&amp; u);			<span class="comment">//move assignment</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowData</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> n;						<span class="comment">//number of element</span></span><br><span class="line">	<span class="keyword">char</span>* pc;					<span class="comment">//pointer to data</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> ct;				<span class="comment">//number of object</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowObject</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//implementation</span></span><br><span class="line"><span class="keyword">int</span> useless::ct = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>() &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	n = <span class="number">0</span>;</span><br><span class="line">	pc = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">int</span> k) : <span class="built_in">n</span>(k) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">int</span> k, <span class="keyword">char</span> ch) :<span class="built_in">n</span>(k) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) pc[i] = ch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(<span class="keyword">const</span> useless&amp; u) :<span class="built_in">n</span>(u.n) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) pc[i] = u.pc[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::<span class="built_in">useless</span>(useless&amp;&amp; u) : <span class="built_in">n</span>(u.n) &#123;</span><br><span class="line">	++ct;</span><br><span class="line">	pc = u.pc;			<span class="comment">//steal address</span></span><br><span class="line">	u.pc = <span class="literal">nullptr</span>;		<span class="comment">//give old object nothing in return</span></span><br><span class="line">	u.n = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless::~<span class="built_in">useless</span>()&#123;</span><br><span class="line">	<span class="keyword">delete</span>[] pc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless useless::<span class="keyword">operator</span> + (<span class="keyword">const</span> useless&amp; u) <span class="keyword">const</span> &#123;</span><br><span class="line">	useless temp = <span class="built_in">useless</span>(n + u.n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) temp.pc[i] = pc[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &lt; temp.n; ++i) temp.pc[i] = u.pc[i - n];</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless useless::<span class="keyword">operator</span>=(<span class="keyword">const</span> useless&amp; u) &#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;copy assignment operator called:\n&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;u) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	<span class="keyword">delete</span>[] pc;</span><br><span class="line">	n = u.n;</span><br><span class="line">	pc = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) pc[i] = u.pc[i];</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">useless useless::<span class="keyword">operator</span> = (useless&amp;&amp; u) &#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;move assignment operator called:\n&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;u) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	<span class="keyword">delete</span>[] pc;</span><br><span class="line">	n = u.n;</span><br><span class="line">	pc = u.pc;</span><br><span class="line">	u.n = <span class="number">0</span>;</span><br><span class="line">	u.pc = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useless::ShowData</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!n) cout &lt;&lt; <span class="string">&quot;(object empty)&quot;</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cout &lt;&lt; pc[i];</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useless::ShowObject</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Number of elements: &quot;</span> &lt;&lt; n;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot; Data address: &quot;</span> &lt;&lt; (<span class="keyword">void</span>*)pc &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//application</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">useless <span class="title">one</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;x&#x27;</span>)</span></span>;</span><br><span class="line">		useless two = one + one;			<span class="comment">//calls move ctor</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object one: &quot;</span>;</span><br><span class="line">		one.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;object two: &quot;</span>;</span><br><span class="line">		two.<span class="built_in">ShowData</span>();</span><br><span class="line"></span><br><span class="line">		useless three, four;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;three = one\n&quot;</span>;</span><br><span class="line">		three = one;						<span class="comment">//automatic copy assignment</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;now object three = &quot;</span>;</span><br><span class="line">		three.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;and object one = &quot;</span>;</span><br><span class="line">		one.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;four = one + two\n&quot;</span>;</span><br><span class="line">		four = one + two;					<span class="comment">//automatic move assignment</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;now object four = &quot;</span>;</span><br><span class="line">		four.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;four = move(one)\n&quot;</span>;</span><br><span class="line">		four = <span class="built_in">move</span>(one);					<span class="comment">//forced move assignment</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;now object four = &quot;</span>;</span><br><span class="line">		four.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;and object one = &quot;</span>;</span><br><span class="line">		one.<span class="built_in">ShowData</span>();</span><br><span class="line">		</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;\n---------------------\n&quot;</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;four = static_cast&lt;useless&amp;&amp;&gt;(two)\n&quot;</span>;</span><br><span class="line">		four = <span class="keyword">static_cast</span>&lt;useless&amp;&amp;&gt;(two);	<span class="comment">//forced move assignment</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;now object four = &quot;</span>;</span><br><span class="line">		four.<span class="built_in">ShowData</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;and object two = &quot;</span>;</span><br><span class="line">		two.<span class="built_in">ShowData</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下：<br>object one: xxxxxxxxxx<br>object two: xxxxxxxxxxxxxxxxxxxx<br>three = one<br>copy assignment operator called:<br>now object three = xxxxxxxxxx<br>and object one = xxxxxxxxxx<br>four = one + two<br>move assignment operator called:<br>now object four = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>four = move(one)<br>move assignment operator called:<br>now object four = xxxxxxxxxx<br>and object one = (object empty)</p>
+<hr>
+<p>four = static_cast&lt;useless&amp;&amp;&gt;(two)<br>move assignment operator called:<br>now object four = xxxxxxxxxxxxxxxxxxxx<br>and object two = (object empty)</p>
+<hr>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>std::move()并非一定会导致移动操作<br>如果没有定义移动赋值运算符，编译器将使用复制赋值运算符<br>如果都没有定义，该操作不会被允许(自定义类型)</p>
+<p><strong>目的：能够使用利用右值引用实现移动语义的库代码，Such as：STL</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/04/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B4/" rel="prev" title="泛型编程4-string">
+                  <i class="fa fa-chevron-left"></i> 泛型编程4-string
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/07/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B5-vector/" rel="next" title="泛型编程5-vector">
+                  泛型编程5-vector <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

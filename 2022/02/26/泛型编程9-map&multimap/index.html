@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="mapmap基本概念map中所有元素都是pairpair中第一个元素为key（键值），起到索引作用，第二个元素为value（实值）所有元素都会根据元素的键值自动排序map&#x2F;multimap属于关联式容器，底层结构是用二叉树实现可以根据key值快速找到value值map中所有元素都是成对出现，插入数据时候要使用对组 map和multimap区别map不允许容器中有重复key值元素(只检测key，不检">
+<meta property="og:type" content="article">
+<meta property="og:title" content="泛型编程9-map&amp;multimap">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/02/26/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B9-map&multimap/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="mapmap基本概念map中所有元素都是pairpair中第一个元素为key（键值），起到索引作用，第二个元素为value（实值）所有元素都会根据元素的键值自动排序map&#x2F;multimap属于关联式容器，底层结构是用二叉树实现可以根据key值快速找到value值map中所有元素都是成对出现，插入数据时候要使用对组 map和multimap区别map不允许容器中有重复key值元素(只检测key，不检">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-26T08:31:34.000Z">
+<meta property="article:modified_time" content="2022-02-26T09:54:33.138Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/02/26/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B9-map&multimap/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/02/26/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B9-map&multimap/","path":"2022/02/26/泛型编程9-map&multimap/","title":"泛型编程9-map&multimap"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>泛型编程9-map&multimap | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#map"><span class="nav-number">1.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#map%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">map基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map%E5%92%8Cmultimap%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">map和multimap区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">map 常用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map%E5%AE%B9%E5%99%A8%E6%8E%92%E5%BA%8F"><span class="nav-number">1.4.</span> <span class="nav-text">map容器排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/02/26/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B9-map&multimap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          泛型编程9-map&multimap
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-02-26 16:31:34 / 修改时间：17:54:33" itemprop="dateCreated datePublished" datetime="2022-02-26T16:31:34+08:00">2022-02-26</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="map基本概念"><a href="#map基本概念" class="headerlink" title="map基本概念"></a>map基本概念</h2><p>map中所有元素都是pair<br>pair中第一个元素为key（键值），起到索引作用，第二个元素为value（实值）<br>所有元素都会根据元素的键值自动排序<br><strong>map/multimap属于关联式容器，底层结构是用二叉树实现</strong><br>可以根据key值快速找到value值<br><strong>map中所有元素都是成对出现，插入数据时候要使用对组</strong></p>
+<h2 id="map和multimap区别"><a href="#map和multimap区别" class="headerlink" title="map和multimap区别"></a>map和multimap区别</h2><p>map不允许容器中有重复key值元素(只检测key，不检测value，即使value不一样)<br>multimap允许容器中有重复key值元素</p>
+<h2 id="map-常用函数"><a href="#map-常用函数" class="headerlink" title="map 常用函数"></a>map 常用函数</h2><table>
+<thead>
+<tr>
+<th>函数原型</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>map&lt;T1, T2&gt; mp;</td>
+<td>map默认构造函数</td>
+</tr>
+<tr>
+<td>map(const map &amp;mp);</td>
+<td>拷贝构造函数</td>
+</tr>
+<tr>
+<td>map&amp; operator=(const map &amp;mp);</td>
+<td>重载等号操作符</td>
+</tr>
+<tr>
+<td>size();</td>
+<td>返回容器中元素的数目</td>
+</tr>
+<tr>
+<td>empty();</td>
+<td>判断容器是否为空</td>
+</tr>
+<tr>
+<td>swap(st);</td>
+<td>交换两个集合容器</td>
+</tr>
+<tr>
+<td>insert(elem);</td>
+<td>在容器中插入元素</td>
+</tr>
+<tr>
+<td>clear();</td>
+<td>清除所有元素</td>
+</tr>
+<tr>
+<td>erase(pos);</td>
+<td>删除pos迭代器所指的元素，返回下一个元素的迭代器</td>
+</tr>
+<tr>
+<td>erase(beg, end);</td>
+<td>删除区间[beg,end)的所有元素 ，返回下一个元素的迭代器</td>
+</tr>
+<tr>
+<td>erase(key);</td>
+<td>删除容器中值为key的元素</td>
+</tr>
+<tr>
+<td>find(key);</td>
+<td>查找key是否存在,若存在，返回该键的元素的迭代器；否则map.end();</td>
+</tr>
+<tr>
+<td>count(key);</td>
+<td>统计key的元素个数;map要么为1要么为0;multimap正常</td>
+</tr>
+</tbody></table>
+<h2 id="map容器排序"><a href="#map容器排序" class="headerlink" title="map容器排序"></a>map容器排序</h2><p>map容器默认排序规则为 按照key值进行 从小到大排序，掌握如何改变排序规则<br>利用仿函数，可以改变排序规则<br><strong>自定义类型都要指定排序规则（仿函数）</strong></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">person</span>(<span class="keyword">const</span> string&amp; name, <span class="keyword">const</span> <span class="keyword">int</span>&amp; age) :_name(name), _age(age) &#123; &#125;</span><br><span class="line">	<span class="built_in">person</span>() :_name(<span class="string">&quot;unnamed&quot;</span>), _age(<span class="number">-1</span>) &#123; &#125;</span><br><span class="line">	~<span class="built_in">person</span>() &#123; &#125;</span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span> &gt; (<span class="keyword">const</span> person&amp; p1, <span class="keyword">const</span> person&amp; p2);</span><br><span class="line">	<span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span> &lt;&lt; (ostream &amp; os, <span class="keyword">const</span> person &amp; p);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	string _name;</span><br><span class="line">	<span class="keyword">int</span> _age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> &gt; (<span class="keyword">const</span> person&amp; p1, <span class="keyword">const</span> person&amp; p2) &#123;</span><br><span class="line">	<span class="keyword">if</span> (p1._age == p2._age) <span class="keyword">return</span> p1._name.<span class="built_in">size</span>() &lt; p2._name.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> p1._age &lt; p2._age;</span><br><span class="line">&#125;</span><br><span class="line">ostream&amp; <span class="keyword">operator</span> &lt;&lt; (ostream&amp; os, <span class="keyword">const</span> person&amp; p) &#123; <span class="keyword">return</span> os &lt;&lt; p._name &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; p._age; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//仿函数</span></span><br><span class="line"><span class="comment">//类 函数</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">compare</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span> <span class="params">()</span> <span class="params">(<span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> T&amp; y)</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> x &gt; y; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">person <span class="title">make_person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string s; <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="built_in">rand</span>() % <span class="number">6</span>) + <span class="number">1</span>; ++i) s += <span class="built_in"><span class="keyword">char</span></span>(<span class="string">&#x27;a&#x27;</span> + <span class="built_in">rand</span>() % <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">person</span>(s, <span class="built_in">rand</span>() % <span class="number">8</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">pair&lt;<span class="keyword">int</span>, string&gt; <span class="title">Make_Pair</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">make_pair</span>(<span class="built_in">rand</span>() % <span class="number">6</span>, <span class="built_in">string</span>(<span class="string">&quot;xtz&quot;</span>)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">srand</span>((<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="built_in">time</span>(<span class="number">0</span>));<span class="comment">//rand seed</span></span><br><span class="line">	multimap&lt;<span class="keyword">int</span>, string&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) m.<span class="built_in">insert</span>(<span class="built_in">Make_Pair</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (multimap&lt;<span class="keyword">int</span>, string&gt;::iterator it = m.<span class="built_in">begin</span>(); it != m.<span class="built_in">end</span>(); ++it) cout &lt;&lt; it-&gt;first &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; boolalpha &lt;&lt; (m.<span class="built_in">find</span>(<span class="number">2</span>) != m.<span class="built_in">end</span>()) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; m.<span class="built_in">count</span>(<span class="number">2</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;-------------\n&quot;</span>;</span><br><span class="line">	map&lt;person, string, compare&lt;person&gt; &gt; mp;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) mp.<span class="built_in">insert</span>(&#123; <span class="built_in">make_person</span>(),<span class="string">&quot;xxxx&quot;</span> &#125;);</span><br><span class="line">	<span class="keyword">for</span> (map&lt;person, string, compare&lt;person&gt; &gt; ::iterator it = mp.<span class="built_in">begin</span>(); it != mp.<span class="built_in">end</span>(); ++it)</span><br><span class="line">		cout &lt;&lt; it-&gt;first &lt;&lt; <span class="string">&quot;\t&quot;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br>0       xtz<br>1       xtz<br>1       xtz<br>3       xtz<br>3       xtz<br>3       xtz<br>3       xtz<br>4       xtz<br>4       xtz<br>4       xtz<br>false<br>0<br>di      0       xxxx<br>dhef    0       xxxx<br>bgg     1       xxxx<br>jb      2       xxxx<br>cedg    2       xxxx<br>gef     3       xxxx<br>ddjc    4       xxxx<br>hh      5       xxxx<br>hea     5       xxxx</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/21/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B8-set&multiset/" rel="prev" title="泛型编程8-set&multiset">
+                  <i class="fa fa-chevron-left"></i> 泛型编程8-set&multiset
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
