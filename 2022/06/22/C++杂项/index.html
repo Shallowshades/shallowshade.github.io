@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="重载 重写(覆盖) 隐藏 重载(overload): 定义： 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。 特点： ①同一个类中（相同作用域） ②函数名称必须相同 ③函数参数必须不同 ④函数返回类型可同可不同，不重要  重写(override):定义：也称为覆盖，是指子类重新定义父类中有相同函数名，参数列表，返回类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++杂项">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="重载 重写(覆盖) 隐藏 重载(overload): 定义： 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。 特点： ①同一个类中（相同作用域） ②函数名称必须相同 ③函数参数必须不同 ④函数返回类型可同可不同，不重要  重写(override):定义：也称为覆盖，是指子类重新定义父类中有相同函数名，参数列表，返回类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/f42613dfc5c54d8a8787f0a8df22f185.png">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/without_forward.jpg">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/without_forward2.jpg">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/without_forward2_error_msg.jpg">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/with_forward.jpg">
+<meta property="article:published_time" content="2022-06-22T03:41:05.000Z">
+<meta property="article:modified_time" content="2022-07-16T13:31:48.999Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/C++%E6%9D%82%E9%A1%B9.assets/f42613dfc5c54d8a8787f0a8df22f185.png">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/","path":"2022/06/22/C++杂项/","title":"C++杂项"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++杂项 | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-%E9%87%8D%E5%86%99-%E8%A6%86%E7%9B%96-%E9%9A%90%E8%97%8F"><span class="nav-number">1.</span> <span class="nav-text">重载 重写(覆盖) 隐藏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98-%E6%8A%97%E5%8F%98-%E4%B8%8D%E5%8F%98"><span class="nav-number">2.</span> <span class="nav-text">协变 抗变 不变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%85%A5%E6%A0%88"><span class="nav-number">3.</span> <span class="nav-text">函数入栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C%E5%92%8CC-%E4%B8%ADstatic%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">C和C++中static的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c%E4%B8%8Ec-%E4%B8%AD%E7%9A%84extern"><span class="nav-number">5.</span> <span class="nav-text">c与c++中的extern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">C++对象构造和析构的顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">面向对象设计的六大原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super"><span class="nav-number">8.</span> <span class="nav-text">__super</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.</span> <span class="nav-text">四种强制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">10.</span> <span class="nav-text">四种智能指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86CPU-%E7%89%A9%E7%90%86CPU%E5%86%85%E6%A0%B8-%E9%80%BB%E8%BE%91%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">11.</span> <span class="nav-text">物理CPU 物理CPU内核 逻辑处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">进程和线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">13.</span> <span class="nav-text">字节对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8PC"><span class="nav-number">14.</span> <span class="nav-text">程序计数器PC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%87%BD%E6%95%B0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%92%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">15.</span> <span class="nav-text">C++函数编译原理和成员函数的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">16.</span> <span class="nav-text">函数调用约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%89%E4%BA%94%E6%B3%95%E5%88%99"><span class="nav-number">17.</span> <span class="nav-text">C++三五法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E4%B8%BA%E7%A7%81%E6%9C%89"><span class="nav-number">18.</span> <span class="nav-text">析构函数设置为私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">19.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">20.</span> <span class="nav-text">保留类型信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-forward"><span class="nav-number">21.</span> <span class="nav-text">std::forward</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8CAVL%E6%A0%91"><span class="nav-number">22.</span> <span class="nav-text">红黑树和AVL树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#emplace-back-%E5%92%8C-push-back"><span class="nav-number">23.</span> <span class="nav-text">emplace_back 和 push_back</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/C++%E6%9D%82%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++杂项
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-22 11:41:05" itemprop="dateCreated datePublished" datetime="2022-06-22T11:41:05+08:00">2022-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 21:31:48" itemprop="dateModified" datetime="2022-07-16T21:31:48+08:00">2022-07-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="重载-重写-覆盖-隐藏"><a href="#重载-重写-覆盖-隐藏" class="headerlink" title="重载 重写(覆盖) 隐藏"></a>重载 重写(覆盖) 隐藏</h2><ol>
+<li><p>重载(overload):<br> 定义：<br> 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。<br> 特点：<br> ①同一个类中（相同作用域）<br> ②函数名称必须相同<br> ③函数参数必须不同<br> ④函数返回类型可同可不同，不重要</p>
+</li>
+<li><p>重写(override):<br>定义：<br>也称为覆盖，是指子类重新定义父类中有相同函数名，参数列表，返回类型的虚函数。子类对象使用这个方法时，将调用子类中的定义，父类中的定义如同被“屏蔽”了，属于运行时多态。<br>特点：<br>①函数名、参数列表、返回类型必须完全与被重写方法的相同；<br>②访问权限不能比父类中被重写的方法的访问权限更低<br>③重写函数和被重写函数都是virtual函数（派生类函数可以不带virtual关键字）<br>④声明为final的方法不能被重写。<br>⑤声明为static的方法不能被重写，但是能够被再次声明。<br>⑥构造函数不能被重写</p>
+</li>
+<li><p>隐藏(hide):<br>定义：<br>也叫重定义，指的是派生类类型的对象、指针、引用访问基类和派生类都有的同名函数时，访问的是派生类的函数，即隐藏了基类的同名函数。</p>
+</li>
+</ol>
+<p>隐藏规则：<br>（1）如果派生类的函数与基类的函数同名，参数不同。此时，不论有无virtual关键字，基类的函数将被隐藏。<br>（2）如果派生类的函数与基类的函数同名，参数相同，但基类函数没有virtual关键字时，基类的函数被隐藏。</p>
+<p>二. 重载、重写、隐藏区别</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>作用域</th>
+<th>有无virtual</th>
+<th>函数名</th>
+<th>参数列表</th>
+<th>返回类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重载</td>
+<td>相同</td>
+<td>可有可无</td>
+<td>相同</td>
+<td>不同</td>
+<td>可同可不同</td>
+</tr>
+<tr>
+<td>重写</td>
+<td>不同</td>
+<td>有</td>
+<td>相同</td>
+<td>相同</td>
+<td>相同(协变)</td>
+</tr>
+<tr>
+<td>隐藏</td>
+<td>不同</td>
+<td>可有可无</td>
+<td>相同</td>
+<td>可同可不同</td>
+<td>可同可不同</td>
+</tr>
+</tbody></table>
+<p>注：重写在协变时返回类型可不同。<br>协变：C++中只要原来的返回类型是指向基类的指针或引用，新的返回类型是指向派生类的指针或引用，重写可以改变返回类型。这样的类型称为协变返回类型(Covariant returns type)。</p>
+<h2 id="协变-抗变-不变"><a href="#协变-抗变-不变" class="headerlink" title="协变 抗变 不变"></a>协变 抗变 不变</h2><p>协变、抗变英文分别是  Covariance 、Contravariance</p>
+<p>这是数学和物理学术语，在OO领域中也有应用。<br>“共变”、“逆变”是一种译法，另外一种译法是“协变”、“抗变”。特别在OO领域，基本上都是用后面这组。此外还有“不变（Nonvariance）”。 </p>
+<p>在OO中，协变是指按照继承链正向改变，抗变是指逆向改变。</p>
+<p>在C++标准的虚函数中，返回值协变，参数不变。</p>
+<h2 id="函数入栈"><a href="#函数入栈" class="headerlink" title="函数入栈"></a>函数入栈</h2><p>将函数参数压入栈中，可以发现参数的压栈顺序是从右向左的。<br>将call指令后面一条指令的地址压入栈中，函数返回后会跳转到该地址。将调用方栈底地址压入栈中。<br>将EBX，ESI，EDI压入栈中，这也就是常说的函数中断前的“保护现场”，EBX，ESI，EDI分别为基址寄存器，源变址寄存器，目的变址寄存器。<br>通过call指令跳转到函数的起始地址，将函数内部的变量去堆栈上开辟空间，执行函数功能。<br>函数执行完成后，取出保存在栈中的寄存器数值并将寄存器的值也恢复到了函数调用之前，并取回函数返回地址，函数返回。</p>
+<h2 id="C和C-中static的区别"><a href="#C和C-中static的区别" class="headerlink" title="C和C++中static的区别"></a>C和C++中static的区别</h2><p>static在C语言中的作用（C++通用）<br>1、修饰变量<br> a、修饰全局变量（全局变量与静态全局变量的对比）</p>
+<p>修饰全局变量：作用域仅限于变量被定义的文件中，其他文件即使用extern声明也无法直接使用此变量。（可以间接访问，即通过本文件的非static函数返回static变量的值，类似于C++类中的private变量外界没有权限访问，但是可以通过public函数返回private变量的值）。<br>对比：全局变量本身就是静态存储方式， 静态全局变量当然也是静态存储方式。 这两者在存储方式上并无不同，且都只初始化一次，但静态全局变量对其他文件不可见，全局变量是可见的。<br>总结：把全局变量改变为静态变量后是改变了它的作用域，限制了它的使用范围。<br>b、修饰局部变量</p>
+<p>修饰局部变量：在函数内定义的局部变量被修饰，可以延长变生命周期，但是作用域不变，只初始化一次。<br>对比：普通局部变量定义后，出了作用域就会被释放，静态局部变量生命周期到程序结束才结束。<br>总结：把局部变量改变为静态变量后是改变了它的存储方式，让静态局部变量出了作用域依然存在，到程序结束，生命周期才结束。<br>2、修饰函数<br>和全局变量一样，函数的定义和声明默认情况下是extern的，但静态函数只是在声明它的文件当中可见，不能被其他文件所用。</p>
+<p>三、static在C++中的作用<br>C+ +重用了这个关键字，并赋予它与前面不同的含义：表示属于一个类而不是属于此类的任何特定对象的变量和函数。</p>
+<p>1、静态数据成员.<br>静态数据成员是属于整个类的，而不是属于某个对象。即不管实例多少个对象，它们都公用一个静态数据成员（如：使用静态数据成员统计类已经实例化了多少对象）。</p>
+<p>在c++中，普通数据成员在构造函数的函数体或初始化表中初始化；常量数据成员(const int a )必须在构造函数的初始化表中初始化（const对象或引用只能初始化但是不能赋值。构造函数的函数体内只能做赋值而不是初始化）；而静态数据成员(static int b )则必须在类外初始化（int 类名::b=100），这是因为静态数据成员不属于任何一个对象，而是属于整个类的。</p>
+<p>2、静态成员函数<br>静态成员函数是属于整个类的，而不是属于某个对象。静态成员函数可以被该类的所有对象直接访问；静态成员函数本身只能访问静态成员，不可以访问非静态成员。</p>
+<p>常见面试题–<strong>为什么static变量值只初始化一次</strong><br>对于所有的对象（不仅仅是静态对象），初始化都只有一次，而由于静态变量具有“记忆”功能，初始化后，一直都没有被销毁，都会保存在内存区域中，所以不会再次初始化。存放在静态区的变量的生命周期一般比较长，它与整个程序“同生死、共存亡”，所以它只需初始化一次。而auto变量，即自动变量，由于它存放在栈区，一旦函数调用结束，就会立刻被销毁。</p>
+<h2 id="c与c-中的extern"><a href="#c与c-中的extern" class="headerlink" title="c与c++中的extern"></a>c与c++中的extern</h2><p><strong>声明不分配内存，能在代码中出现多次；定义分配内存，在代码中只出现一次</strong></p>
+<p>在c和c++中，extern被用来修改标识符（变量和函数）的链接属性。被extern修饰的声明，表示该修饰符对其他模块（源文件）可见，同时也表示该修饰符可以从其他模块找到定义。这种对标识符链接属性的修饰是双向的，既可以被其它模块看见，也可以看见其它模块。</p>
+<p>在默认情况下，函数外的标识符的链接属性是extern的。如果想让对标识符进行隔离，即不能在模块间链接标识符，则需要在标识符的前面添加static。</p>
+<p>对于变量的声明，比函数要复杂一些。没有显式extern的变量声明时，变量进行默认的初始化（分配内存），<strong>变量的定义和声明是同时完成的；</strong>当进行显式的extern声明时，变量不能默认初始化。</p>
+<p>extern除了改变标识符的链接属性之外，在c++中，还有特殊的用法。<strong>extern “C” 能够使c++中使用c语言的代码</strong>。</p>
+<p>总结一下：</p>
+<ol>
+<li> 声明不分配内存，能重复；定义分配内存，不能重复</li>
+<li> extern改变了标识符链接属性</li>
+<li> 变量声明没有显式extern时，自动初始化</li>
+<li> c++中的extern “C”</li>
+</ol>
+<h2 id="C-对象构造和析构的顺序"><a href="#C-对象构造和析构的顺序" class="headerlink" title="C++对象构造和析构的顺序"></a>C++对象构造和析构的顺序</h2><p><strong>先构造后析构</strong></p>
+<p><strong>构造子类对象时，先父类，再构造子类，析构则相反</strong>(<strong>父类名称构造子类对象时，父类析构函数要设置为虚函数，不然会内存泄露(子类未析构)</strong>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">base</span>() &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;base default ctor\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">base</span>() &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;base default dtor\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">drived</span> :</span> <span class="keyword">public</span> base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">drived</span>() &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;drived default ctor\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">drived</span>() &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;drived default dtor\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        drived d1;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;---------------------\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        base* b1 = <span class="keyword">new</span> drived;</span><br><span class="line">        <span class="keyword">delete</span> b1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;end...\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">base <span class="keyword">default</span> ctor</span><br><span class="line">drived <span class="keyword">default</span> ctor</span><br><span class="line">drived <span class="keyword">default</span> dtor</span><br><span class="line">base <span class="keyword">default</span> dtor</span><br><span class="line">---------------------</span><br><span class="line">base <span class="keyword">default</span> ctor</span><br><span class="line">drived <span class="keyword">default</span> ctor</span><br><span class="line">drived <span class="keyword">default</span> dtor</span><br><span class="line">base <span class="keyword">default</span> dtor</span><br><span class="line">end...</span><br></pre></td></tr></table></figure>
+
+<h2 id="面向对象设计的六大原则"><a href="#面向对象设计的六大原则" class="headerlink" title="面向对象设计的六大原则"></a>面向对象设计的六大原则</h2><p>1、<strong>开闭原则</strong>（Open Close Principle）</p>
+<p>Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.</p>
+<p>开闭原则的意思是：对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。简言之，是为了使程序的扩展性好，易于维护和升级。<br>符合开闭原则的开发过程应该是使用抽象、接口来搭建程序框架，使用具体的实现来完成扩展细节</p>
+<p>通过接口的方式实现了程序框架，通过类来实现对既定功能的实现和扩展，完美的解决了需要反复添加修改和冗余错误的问题。</p>
+<p>2、<strong>里氏代换原则</strong>（Liskov Substitution Principle）</p>
+<p>里氏代换原则是面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
+<p>3、<strong>依赖倒转原则</strong>（Dependence Inversion Principle）</p>
+<p>这个原则是开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。</p>
+<p>4、<strong>接口隔离原则</strong>（Interface Segregation Principle）</p>
+<p>这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</p>
+<p>5、<strong>迪米特法则</strong>，又称最少知道原则（Demeter Principle）</p>
+<p>最少知道原则是指：一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
+<p>6、<strong>合成复用原则</strong>（Composite Reuse Principle）</p>
+<p>合成复用原则是指：尽量使用合成/聚合的方式，而不是使用继承。</p>
+<h2 id="super"><a href="#super" class="headerlink" title="__super"></a>__super</h2><p>类内使用，指向父类的指针visual C++</p>
+<h2 id="四种强制转换"><a href="#四种强制转换" class="headerlink" title="四种强制转换"></a>四种强制转换</h2><p>1、<strong>static_cast</strong>（静态类型转换）<br>a:用于类层次结构中基类和派生类指针或引用的转换：</p>
+<p>上行转换：派生类转换为基类 ；（安全的）</p>
+<p>下行转换：基类转换为派生类；（是不安全的，没有动态类型检查）</p>
+<p>b:用于基本数据类型之间的转换</p>
+<p>c:空类型指针与其他类型的指针进行转换<br>这种使用场景容易出错，因为有可能出现未知的转换结果，要保证转换的正确性就必须保证转换后所得的类型就是指针原先的类型</p>
+<p>2、<strong>dynamic_cast</strong>（动态类型转换）<br>用于类层次间上行和下行的转换，在进行下行转换时会进行动态类型转换是安全的。</p>
+<p>除非特殊情况，一般使用动态转换，要不然将上下文变得更确定，更安全而使用静态</p>
+<p>3、 <strong>const_cast</strong>（常量转换）<br>用来修饰类型的const属性：把常量指针或常量引用转换为非常量指针或非常量引用，并仍然指向原来的对象；把非常量指针或非常量引用转换为常量指针或常量引用，并仍然指向原来的对象；</p>
+<p>注意：不能直接对非常量指针或非常量引用的变量使用const_cast操作符。</p>
+<p>4、<strong>reinterpret_cast</strong>（重新解释转换）<br>万能转换，可以把指针转换成常量（万物皆可转）。</p>
+<h2 id="四种智能指针"><a href="#四种智能指针" class="headerlink" title="四种智能指针"></a>四种智能指针</h2><ol>
+<li><p> C++中的智能指针有4种，分别为：<strong>shared_ptr、unique_ptr、weak_ptr、auto_ptr</strong>，其中auto_ptr被C++11弃用。</p>
+</li>
+<li><p>使用智能指针的原因</p>
+<p>   申请的空间（即new出来的空间），在使用结束时，需要delete掉，否则会形成内存碎片。在程序运行期间，new出来的对象，在析构函数中delete掉，但是这种方法不能解决所有问题，因为有时候new发生在某个全局函数里面，该方法会给程序员造成精神负担。<strong>此时，智能指针就派上了用场。</strong>使用智能指针可以很大程度上避免这个问题，因为智能指针就是一个类，当超出了类的作用域时，类会自动调用析构函数，析构函数会自动释放资源。所以，智能指针的作用原理就是在函数结束时自动释放内存空间，避免了手动释放内存空间。</p>
+</li>
+<li><p>四种指针分别解决的问题以及各自特性如下：</p>
+<p> （1）<strong>auto_ptr</strong>（C++98的方案，<strong>C++11已经弃用</strong>）</p>
+<p>   采用<strong>所有权模式</strong>。</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">auto_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;I reigned loney as a cloud.&quot;</span>))</span></span>;</span><br><span class="line">auto_ptr&lt;string&gt; p2;</span><br><span class="line">p2=p1; <span class="comment">//auto_ptr不会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>   此时不会报错，p2剥夺了p1的所有权，但是当程序运行时访问p1将会报错。所以auto_ptr的缺点是：存在潜在的内存崩溃问题。</p>
+<p> （2）<strong>unique_ptr</strong>（替换auto_ptr，<strong>独占式</strong>）</p>
+<p> unique_ptr实现独占式拥有或严格拥有概念，保证同一时间内只有一个智能指针可以指向该对象。它对于避免资源泄露，例如，以  new创建对象后因为发生异常而忘记调用delete时的情形特别有用。</p>
+<p>   采用所有权模式，和上面例子一样。</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"><span class="comment">//unique_ptr&lt;string&gt; p2 = p1;//编译时报错，</span></span><br><span class="line"><span class="comment">//p2 = p1;// 因为拷贝构造和拷贝赋值函数已经被删除</span></span><br><span class="line">cout &lt;&lt; *p1 &lt;&lt; endl; </span><br><span class="line"><span class="comment">//cout &lt;&lt; *p2 &lt;&lt; endl;</span></span><br></pre></td></tr></table></figure>
+
+<p> 编译器认为P2=P1非法，避免了p1不再指向有效数据的问题。因此，unique_ptr比auto_ptr更安全。 另外unique_ptr还有更聪明的地方：<strong>当程序试图将一个 unique_ptr 赋值给另一个时，如果源 unique_ptr 是个临时右值，编译器允许这么做</strong>；<strong>如果源 unique_ptr 将存在一段时间，编译器将禁止这么做</strong>，比如：</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"><span class="comment">//p2 = p1;							//#1编译器不允许</span></span><br><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p3</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">p3 = unique_ptr&lt;string&gt;(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;joker&quot;</span>)); <span class="comment">//编译器允许</span></span><br></pre></td></tr></table></figure>
+
+<p> 其中#1留下悬挂的unique_ptr(pu1)，这可能导致危害。而#2不会留下悬挂的unique_ptr，因为它调用 unique_ptr 的构造函数，该构造函数创建的临时对象在其所有权让给 pu3 后就会被销毁。这种随情况而已的行为表明，unique_ptr 优于允许两种赋值的auto_ptr 。</p>
+<p>   <strong>注意：</strong>如果确实想执行类似与#1的操作，要安全的重用这种指针，可给它赋新值。C++有一个标准库函数std::move()，让你能够将一个unique_ptr赋给另一个。例如：</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line"><span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">p2 = <span class="built_in">move</span>(p1);</span><br><span class="line"><span class="keyword">if</span> (p1) &#123;</span><br><span class="line">    cout &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;p1 is nullptr\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p1 = unique_ptr&lt;string&gt;(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;joker&quot;</span>));</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;*p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; <span class="string">&quot;\n*p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p> （3）<strong>shared_ptr</strong>（<strong>共享</strong>）</p>
+<p> shared_ptr实现共享式拥有概念。多个智能指针可以指向相同对象，该对象和其相关资源会在“最后一个引用被销毁”时候释放。从名字share就可以看出了资源可以被多个指针共享，它使用计数机制来表明资源被几个指针共享。可以通过成员函数use_count()来查看资源的所有者个数。除了可以通过new来构造，还可以通过传入auto_ptr, unique_ptr,weak_ptr来构造。当调用release()时，当前指针会释放资源所有权，计数减一。当计数等于0时，资源会被释放。</p>
+<p>  shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr 是独占的), 在使用引用计数的机制上提供了可以共享所有权的智能指针。</p>
+<p> <strong>成员函数：</strong></p>
+<p> <strong>use_count</strong>  返回引用计数的个数</p>
+<p> <strong>unique</strong>  返回是否是独占所有权( use_count 为 1)</p>
+<p> <strong>swap</strong>  交换两个 shared_ptr 对象(即交换所拥有的对象)</p>
+<p> <strong>reset</strong>  放弃内部对象的所有权或拥有对象的变更, 会引起原有对象的引用计数的减少</p>
+<p> <strong>get</strong>  返回内部对象(指针), 由于已经重载了()方法, 因此和直接使用对象是一样的.如 shared_ptr<int> sp(new int(1)); sp 与 sp.get()是等价的</p>
+<p> （4）<strong>weak_ptr</strong></p>
+<p> weak_ptr 是一种不控制对象生命周期的智能指针, 它指向一个 shared_ptr 管理的对象。进行该对象的内存管理的是那个强引用的 shared_ptr。weak_ptr只是提供了对管理对象的一个访问手段。weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来<strong>协助 shared_ptr 工作</strong>，它<strong>只可以从一个 shared_ptr 或另一个 weak_ptr 对象构造</strong>, 它的构造和析构不会引起引用记数的增加或减少。weak_ptr是用来解决shared_ptr相互引用时的死锁问题，如果说两个shared_ptr相互引用，那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。它是对对象的一种<strong>弱引用</strong>，不会增加对象的引用计数，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    shared_ptr&lt;B&gt; pb_;</span><br><span class="line">    ~<span class="built_in">A</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;A delete\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    shared_ptr&lt;A&gt; pa_;</span><br><span class="line">    ~<span class="built_in">B</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;B delete\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">shared_ptr&lt;B&gt; <span class="title">pb</span><span class="params">(<span class="keyword">new</span> B())</span></span>;</span><br><span class="line">    <span class="function">shared_ptr&lt;A&gt; <span class="title">pa</span><span class="params">(<span class="keyword">new</span> A())</span></span>;</span><br><span class="line">    pb-&gt;pa_ = pa;</span><br><span class="line">    pa-&gt;pb_ = pb;</span><br><span class="line">    cout&lt;&lt;pb.<span class="built_in">use_count</span>()&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;pa.<span class="built_in">use_count</span>()&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fun</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到fun函数中pa ，pb之间互相引用，两个资源的引用计数为2，当要跳出函数时，智能指针pa，pb析构时两个资源引用计数会减一，但是两者引用计数还是为1，导致跳出函数时资源没有被释放（A B的析构函数没有被调用），如果把其中一个改为weak_ptr就可以了，把类A里面的shared_ptr pb_; 改为weak_ptr pb; 运行结果如下，这样的话，资源B的引用开始就只有1，当pb析构时，B的计数变为0，B得到释放，B释放的同时也会使A的计数减一，同时pa析构时使A的计数减一，那么A的计数为0，A得到释放。</p>
+<p>   <strong>注意</strong>：不能通过weak_ptr直接访问对象的方法，比如B对象中有一个方法print(),不能这样访问，pa-&gt;pb*-&gt;print(); 英文pb*是一个weak_ptr，应该先把它转化为shared_ptr，如：shared_ptr p = pa-&gt;pb_.lock(); p-&gt;print(); </p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//shared_ptr&lt;B&gt; pb_;</span></span><br><span class="line">	weak_ptr&lt;B&gt; pb_;</span><br><span class="line">	~<span class="built_in">A</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;A delete\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//shared_ptr&lt;A&gt; pa_;</span></span><br><span class="line">	weak_ptr&lt;A&gt; pa_;</span><br><span class="line">	~<span class="built_in">B</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;B delete\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;B print()\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function">shared_ptr&lt;B&gt; <span class="title">pb</span><span class="params">(<span class="keyword">new</span> B())</span></span>;</span><br><span class="line">	<span class="function">shared_ptr&lt;A&gt; <span class="title">pa</span><span class="params">(<span class="keyword">new</span> A())</span></span>;</span><br><span class="line">	pb-&gt;pa_ = pa;</span><br><span class="line">	pa-&gt;pb_ = pb;</span><br><span class="line">	cout &lt;&lt; pb.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; pa.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	pa.<span class="built_in">reset</span>();</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; pb.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; pa.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; pb-&gt;pa_.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">smartPoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//auto_ptr C++11已弃用</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">auto_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello,world&quot;</span>))</span></span>;</span><br><span class="line">		auto_ptr&lt;string&gt; p2 = p1;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; *p1 &lt;&lt; endl; //使用p1会报错</span></span><br><span class="line">		cout &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//unique独占</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">		<span class="comment">//unique_ptr&lt;string&gt; p2 = p1;//编译时报错，</span></span><br><span class="line">		<span class="comment">//p2 = p1;// 因为拷贝构造和拷贝赋值函数已经被删除</span></span><br><span class="line">		cout &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; *p2 &lt;&lt; endl;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//unique可窃取临时对象</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">		<span class="comment">//p2 = p1;							//编译器不允许</span></span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p3</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">		p3 = unique_ptr&lt;string&gt;(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;joker&quot;</span>)); <span class="comment">//编译器允许</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//使用move函数可以</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;move-----------\n&quot;</span>;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello, world&quot;</span>))</span></span>;</span><br><span class="line">		<span class="function">unique_ptr&lt;string&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">		p2 = <span class="built_in">move</span>(p1);</span><br><span class="line">		<span class="keyword">if</span> (p1) &#123;</span><br><span class="line">			cout &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;p1 is nullptr\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		p1 = unique_ptr&lt;string&gt;(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;joker&quot;</span>));</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;*p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; <span class="string">&quot;\n*p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//共享</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;shared_ptr----------------\n&quot;</span>;</span><br><span class="line">		<span class="function">shared_ptr&lt;string&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;hello,world&quot;</span>))</span></span>;</span><br><span class="line">		shared_ptr&lt;string&gt; p2 = p1;</span><br><span class="line">		<span class="function">shared_ptr&lt;string&gt; <span class="title">p3</span><span class="params">(<span class="keyword">new</span> string(<span class="string">&quot;joker&quot;</span>))</span></span>;</span><br><span class="line">		cout &lt;&lt; <span class="built_in"><span class="keyword">typeid</span></span>(shared_ptr&lt;string&gt;::element_type).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;*p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;*p3 = &quot;</span> &lt;&lt; *p3 &lt;&lt; endl;</span><br><span class="line">		p1.<span class="built_in">swap</span>(p3);</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;*p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;*p3 = &quot;</span> &lt;&lt; *p3 &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; p2.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">		p3.<span class="built_in">reset</span>();</span><br><span class="line">		cout &lt;&lt; p2.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">if</span> (p3 == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;p3 reset\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; boolalpha &lt;&lt; p2.<span class="built_in">unique</span>() &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//weak_ptr</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;weak_ptr----------\n&quot;</span>;</span><br><span class="line">		<span class="built_in">fun</span>();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//不能通过weak_ptr直接访问对象的方法</span></span><br><span class="line">		<span class="function">shared_ptr&lt;B&gt; <span class="title">pb</span><span class="params">(<span class="keyword">new</span> B())</span></span>;</span><br><span class="line">		<span class="function">shared_ptr&lt;A&gt; <span class="title">pa</span><span class="params">(<span class="keyword">new</span> A())</span></span>;</span><br><span class="line">		pb-&gt;pa_ = pa;</span><br><span class="line">		pa-&gt;pb_ = pb;</span><br><span class="line">		<span class="comment">//pa-&gt;pb-&gt;print();//无法使用</span></span><br><span class="line">		shared_ptr&lt;B&gt; p = pa-&gt;pb_.<span class="built_in">lock</span>();</span><br><span class="line">		cout &lt;&lt; p.<span class="built_in">use_count</span>() &lt;&lt; endl;</span><br><span class="line">		p-&gt;<span class="built_in">print</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="物理CPU-物理CPU内核-逻辑处理器"><a href="#物理CPU-物理CPU内核-逻辑处理器" class="headerlink" title="物理CPU 物理CPU内核 逻辑处理器"></a>物理CPU 物理CPU内核 逻辑处理器</h2><p>1.说明<br>CPU(Central Processing Unit)是中央处理单元，<br>本文介绍物理CPU，物理CPU内核，逻辑CPU，<br>以及他们三者之间的关系，<br>一个物理CPU可以有1个或者多个物理内核，<br>一个物理内核可以作为1个或者2个逻辑CPU。</p>
+<p>2.物理CPU<br>物理CPU就是计算机上实际安装的CPU，<br>物理CPU数就是主板上实际插入的CPU数量。<br>在Linux上查看/proc/cpuinfo，<br>其中的physical id就是每个物理CPU的id，<br>有几个不同的physical id就有几个物理CPU。</p>
+<p>3.物理CPU内核<br>每颗物理CPU可以有1个或者多个物理内核，<br>通常每颗物理CPU的内核数都是固定的，<br>单核CPU就是有1个物理内核，<br>双核CPU就是有2个物理内核。<br>在Linux上查看/proc/cpuinfo，<br>其中的core id就是每颗物理CPU的物理内核id，<br>有几个不同的core id就有几个物理内核。<br>总的CPU物理内核数 = 物理CPU数 * 每颗物理CPU的内核数</p>
+<p>4.逻辑CPU<br>操作系统可以使用逻辑CPU来模拟真实CPU。<br>在没有多核处理器的时候，<br>一个物理CPU只能有一个物理内核，<br>而现在有了<strong>多核技术</strong>，<br>一个物理CPU可以有多个物理内核，<br>可以把一个CPU当作多个CPU使用，<br>也就是所谓的逻辑CPU。<br>没有开启<strong>超线程</strong>时，逻辑CPU的个数就是总的CPU物理内核数。<br>然而开启超线程后，逻辑CPU的个数就是总的CPU物理内核数的两倍。<br>在Linux上查看/proc/cpuinfo，<br>其中的processor就是逻辑CPU，<br>有几个processor就有几个逻辑CPU。<br>总的逻辑CPU数 = 物理CPU个数 * 每颗物理CPU的核数 * 超线程数<br>总的逻辑CPU数 = 总的CPU物理内核数 * 超线程数</p>
+<p>5.几核几线程<br>基于上面的基本概念，<br>理解一下常说的几核几线程。<br>如果计算机有一个物理CPU，<br>是双核的，支持超线程。<br>那么这台计算机就是双核四线程。<br>实际上几核几线程中的线程数就是逻辑CPU数。<br>对于两路四核超线程计算机，<br>两路指计算机有2个物理CPU，<br>每颗CPU中有4个物理内核，<br>CPU支持超线程，<br>就有242=16个逻辑CPU，<br>这就是通常所谓的16核计算机。</p>
+<p><img src="C++%E6%9D%82%E9%A1%B9.assets/f42613dfc5c54d8a8787f0a8df22f185.png" alt="img"></p>
+<p>左图：多个物理CPU，CPU通过总线进行通信，效率比较低。</p>
+<p>右图：多核CPU，不同的核通过L2 cache进行通信，存储和外设通过总线与CPU通信</p>
+<p>进程是程序的一次执行过程，是一个动态概念，是程序在执行过程中分配和管理资源的基本单位，</p>
+<p>线程是CPU调度和分派的基本单位，它可与同属一个进程的其他的线程共享进程所拥有的全部资源。</p>
+<p><strong>联系：</strong>线程是进程的一部分，一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程；</p>
+<p>根本区别：进程是操作系统资源分配的基本单位，而线程是任务调度和执行的基本单位</p>
+<p><strong>多时候是和线程打交道，一个程序是一整个进程，程序中可以有多个线程，用来并行进行不同的事情。</strong></p>
+<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p><strong>根本</strong>区别：进程是操作系统资源分配的基本单位，而线程是任务调度和执行的基本单位</p>
+<p>在<strong>开销</strong>方面：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
+<p>所处<strong>环境</strong>：在操作系统中能同时运行多个进程（程序）；而在同一个进程（程序）中有多个线程同时执行（通过CPU调度，在每个时间片中只有一个线程执行）</p>
+<p><strong>内存分配</strong>方面：系统在运行的时候会为每个进程分配不同的内存空间；而对线程而言，除了CPU外，系统不会为线程分配内存（线程所使用的资源来自其所属进程的资源），线程组之间只能共享资源。</p>
+<p>包含<strong>关系</strong>：没有线程的进程可以看做是单线程的，如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
+<p><strong>线程与进程的区别和联系? 线程是否具有相同的堆栈? dll是否有独立的堆栈?</strong></p>
+<p>进程是死的，只是一些资源的集合，真正的程序执行都是线程来完成的，程序启动的时候操作系统就帮你创建了一个主线程。</p>
+<p>每个线程有自己的堆栈。</p>
+<p>动态链接库DLL中有没有独立的堆栈，这个问题不好回答。因为DLL中的代码是被某些线程所执行，只有线程拥有堆栈，如果DLL中的代码是EXE中的线程所调用，那么这个时候是不是说这个DLL没有自己独立的堆栈？如果DLL中的代码是由DLL自己创建的线程所执行，那么是不是说DLL有独立的堆栈？</p>
+<p>以上讲的是堆栈，如果对于堆来说，每个DLL有自己的堆，所以如果是从DLL中动态分配的内存，最好是从DLL中删除，如果你从DLL中分配内存，然后在EXE中，或者另外一个DLL中删除，很有可能导致程序崩溃</p>
+<h2 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h2><p>sizeof用法总结<br>sizeof有着许多的用法，而且很容易引起一些错误。下面根据sizeof后面的参数对sizeof的用法做个总结。</p>
+<p>A．参数为数据类型或者为一般变量。例如sizeof(int),sizeof(long)等等。这种情况要注意的是不同系统系统或者不同编译器得到的结果可能是不同的。例如int类型在16位系统中占2个字节，在32位系统中占4个字节。</p>
+<p>B．参数为数组或指针。下面举例说明</p>
+<p>int a[50]; //sizeof(a)=4*50=200;sizeof(a)求数组所占的空间大小</p>
+<p>int *a=new int[50];// sizeof(a)=4; a为一个指针，sizeof(a)是求指针的大小,在32位系统中，当然是占4个字节。<br>C．参数为结构或类。sizeof应用在类和结构的处理情况是相同的。</p>
+<p>但有两点需要注意:</p>
+<p>第一、结构或者类中的静态成员不对结构或者类的大小产生影响，因为静态变量的存储位置与结构或者类的实例地址无关。</p>
+<p>第二、没有成员变量的结构或类的大小为1，因为必须保证结构或类的每一个实例在内存中都有唯一的地址。</p>
+<p>第三、包含虚函数或纯虚函数的类的大小，在32位系统为4，类的内部有一个虚表指针，大小为4。在64位系统为8.</p>
+<p>第四、在一个空类中，添加构造函数和析构函数，sizeof的结果还是1。调用构造函数和析构函数只需</p>
+<h2 id="程序计数器PC"><a href="#程序计数器PC" class="headerlink" title="程序计数器PC"></a>程序计数器PC</h2><p>pc指向下一条指令的<strong>地址</strong></p>
+<p>pc的长度取决于内存大小和指令长度 len = 内存/指令长度</p>
+<h2 id="C-函数编译原理和成员函数的实现"><a href="#C-函数编译原理和成员函数的实现" class="headerlink" title="C++函数编译原理和成员函数的实现"></a>C++函数编译原理和成员函数的实现</h2><p><strong>编译器通过指针来访问成员变量，指针指向哪个对象就使用哪个对象的数据；</strong></p>
+<p><strong>编译器通过指针的类型来访问成员函数，指针属于哪个类的类型就使用哪个类的函数</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MSVC</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">char</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">double</span> y, <span class="keyword">char</span> z)</span></span>;</span><br><span class="line"><span class="comment">//void func(int x);//无法重载仅按返回值区分的函数</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">func</span>();</span><br><span class="line">	<span class="built_in">func</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">func</span>(<span class="number">2.5</span>, <span class="string">&#x27;k&#x27;</span>);</span><br><span class="line">	<span class="built_in">func</span>(<span class="number">2</span>, <span class="number">3.14</span>, <span class="string">&#x27;d&#x27;</span>);</span><br><span class="line"></span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">	a.<span class="built_in">func</span>();</span><br><span class="line">	a.<span class="built_in">func</span>(<span class="number">1</span>);</span><br><span class="line">	b.<span class="built_in">func</span>();</span><br><span class="line">	b.<span class="built_in">func</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//&quot;int __cdecl func(void)&quot; (? func@@YAHXZ)</span></span><br><span class="line">	<span class="comment">//&quot;int __cdecl func(int)&quot; (? func@@YAHH@Z)</span></span><br><span class="line">	<span class="comment">//&quot;int __cdecl func(double,char)&quot; (? func@@YAHND@Z)</span></span><br><span class="line">	<span class="comment">//&quot;int __cdecl func(int,double,char)&quot; (? func@@YAHHND@Z)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//&quot;public: void __thiscall A::func(void)&quot; (? func@A@@QAEXXZ)</span></span><br><span class="line">	<span class="comment">//&quot;public: virtual void __thiscall A::func(int)&quot; (? func@A@@UAEXH@Z)</span></span><br><span class="line">	<span class="comment">//&quot;public: void __thiscall B::func(void)&quot; (? func@B@@QAEXXZ)</span></span><br><span class="line">	<span class="comment">//&quot;public: virtual void __thiscall B::func(int)&quot; (? func@B@@UAEXH@Z)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数调用约定"><a href="#函数调用约定" class="headerlink" title="函数调用约定"></a>函数调用约定</h2><p>函数调用约定的几种类型有：__stdcall, __cdecl, __fastcall, __thiscall, __nakedcall, __pascal</p>
+<p>下面介绍几种常见的函数调用约定（以MSVC编译器为例）：</p>
+<p>（1） __cdecl调用约定</p>
+<ol>
+<li><p>参数从右向左传递，放在栈中</p>
+</li>
+<li><p>栈平衡由调用函数来执行</p>
+</li>
+<li><p>不定参数的函数可以使用</p>
+</li>
+</ol>
+<p>（2）__stdcall调用约定</p>
+<ol>
+<li><p>参数从右向左传递，放在栈中</p>
+</li>
+<li><p>栈平衡操作由被调用函数执行</p>
+</li>
+<li><p>不定参数的函数无法使用</p>
+</li>
+</ol>
+<p>（3）__fastcall调用约定</p>
+<ol>
+<li><p>最左边的两个不大于4字节的参数分别放在ecx和edx寄存器，其余参数仍然从右到左压入栈</p>
+</li>
+<li><p>被调用方平衡栈</p>
+</li>
+<li><p>不定参数无法使用</p>
+</li>
+</ol>
+<p>4） __thiscall调用约定<br>thiscall仅仅用于c++成员函数。this指针存放于ecx寄存器中，参数从右到左压栈，被调用方平衡栈。thiscall不是关键词不能被程序员指定。</p>
+<h2 id="C-三五法则"><a href="#C-三五法则" class="headerlink" title="C++三五法则"></a>C++三五法则</h2><p>当定义一个类时，显式或隐式地定义了此类型的对象在拷贝、赋值和销毁时做什么？</p>
+<p>一个类通过定义三种特殊成员成员函数来控制这些操作：拷贝构造函数、拷贝赋值函数、析构函数。</p>
+<p><strong>C++三法则</strong>：如果需要析构函数，则一定需要拷贝构造函数和拷贝赋值操作符。</p>
+<p>如何理解这句话，通常，若一个类需要析构函数，则代表其合成的析构函数不足以释放类所拥有的资源，其中最典型的就是指针成员。</p>
+<p>所以需要自己写析构函数来释放给指针所分配的内存来防止内存泄露。</p>
+<p>那么为什么说“一定需要拷贝构造函数和赋值操作符”呢？</p>
+<p>原因还是这样：类中出现了指针类型的成员。有指针类型的成员，必须防止浅拷贝问题，所以，一定需要拷贝构造函数和赋值操作符，这两个函数是防止浅拷贝问题所必须的。</p>
+<p><strong>五法则</strong></p>
+<p>在较新的 C++11 标准中，为了支持移动语义，又增加了移动构造函数和移动赋值运算符，这样共有五个特殊的成员函数，所以又称为“C++五法则”；</p>
+<p>也就是说，“三法则”是针对较旧的 C++89 标准说的，“五法则”是针对较新的 C++11 标准说的；为了统一称呼，后来人们干把它叫做“C++ 三/五法则”；</p>
+<p>与三之法则不同的是，不提供移动构造函数和移动赋值运算符通常不是错误，但会导致失去优化机会。</p>
+<h2 id="析构函数设置为私有"><a href="#析构函数设置为私有" class="headerlink" title="析构函数设置为私有"></a>析构函数设置为私有</h2><p>1.创建私有析构函数不会导致编译器错误。</p>
+<p>2.在栈上创建对象会导致编译错误，编译器知道析构不可访问</p>
+<p>3.在堆上创建对象不会导致编译错误，编译器觉得程序员会自己搞定</p>
+<p>4.<strong>new出的对象使用友元来释放</strong></p>
+<h2 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h2><p>在调用函数的时候，会把实参传递给函数，有时候传给函数的是左值，有时候给的是右值，有时候还可能给的是 const 类型。在这些情况下，要求函数接收参数后，依然能保持这些类型，这时候就需要用转发了。看下面这个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">middle1</span><span class="params">(F f, T1 t1, T2 t2)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">f</span>(t1, t2);</span><br><span class="line">&#125;</span><br><span class="line">Copy</span><br></pre></td></tr></table></figure>
+
+<p>上面这个模板函数有三个参数，第一个 f 是一个函数，t1 和 t2 是传给 f 的参数。这个模板函数当然没啥作用，只是为了演示而已。可以直接调用 f，也可以通过模板函数 middle1 来调用 f，下面这段代码演示了两者的区别。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> v1, <span class="keyword">int</span>&amp; v2)</span> </span>&#123;  <span class="comment">// v2 是一个引用</span></span><br><span class="line">  ++v1;</span><br><span class="line">  ++v2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">f</span>(<span class="number">42</span>, i);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;After call the f directly: &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">  <span class="built_in">middle1</span>(f, <span class="number">42</span>, i);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Call f through middle1: &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<p><a target="_blank" rel="noopener" href="https://www.guodong.plus/2020/0314-132811/without_forward.jpg"><img src="C++%E6%9D%82%E9%A1%B9.assets/without_forward.jpg" alt="img"></a></p>
+<p>注意函数 f 的参数 v2 是一个引用，在函数内部将 v1 和 v2 自增 1，预期应该是每次调用 f ，被 v2 引用的变量都可以加一。可以看到，在主函数中定义了一个变量 i，其初值为 0，直接调用 f 后，i 顺利的被加一，可是再次通过 middle1 调用 f 时，i 并没有加一。问题就出在 middle 上，虽然说 f 接收的参数是一个引用，但 middle 的参数却不是。当将 i 绑定到 middle 的参数 t2 上后，传给 f 的是 t2，而 t2 只是一个普通的、非引用的类型 int，而不是对 i 的引用。所以 i 的值并没有改变。</p>
+<h2 id="保留类型信息"><a href="#保留类型信息" class="headerlink" title="保留类型信息"></a>保留类型信息</h2><p>再来看第二个版本的 middle，将 t1 和 t2 都定义为右值引用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">middle2</span><span class="params">(F f, T1&amp;&amp; t1, T2&amp;&amp; t2)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">f</span>(t1, t2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在刚刚的主函数中调用 middle2 而非 middle1，运行结果如下：</p>
+<p><a target="_blank" rel="noopener" href="https://www.guodong.plus/2020/0314-132811/without_forward2.jpg"><img src="C++%E6%9D%82%E9%A1%B9.assets/without_forward2.jpg" alt="img"></a></p>
+<p>可以看到，i 被顺利的自增了两次，也就是说，在 middle2 中，实参的“左值性“得到了保留。这就要归功于 <strong>引用折叠</strong> 了，简单说一下引用折叠：</p>
+<ul>
+<li>  <code>X&amp; &amp;</code>、<code>X&amp; &amp;&amp;</code> 和 <code>X&amp;&amp; &amp;</code> 都会折叠成类型 <code>X&amp;</code></li>
+<li>  类型 <code>X&amp;&amp; &amp;&amp;</code> 折叠成 <code>X&amp;&amp;</code></li>
+</ul>
+<p>注意：引用折叠只能应用于间接创建的引用的引用，如类型别名或模板参数。就是说你不能这样直接用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>&amp; i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span>&amp;&amp; j = i; <span class="comment">// 很显然错了</span></span><br></pre></td></tr></table></figure>
+
+<p>解释一下，可以看到上面两点中，&amp; 符号之间，有的有空格，有的没有，空格后面的部分可以认为是函数参数（形参）一开始的类型，而空格前面的是传递给函数的参数（实参）的类型。在我们的例子当中，middle2 的两个参数都是 &amp;&amp;（右值引用）类型的，而我们在 main 中调用 middle2 时，传给 t1 的是一个字面值 42，也就是右值，此时 t1 的类型为 <code>int&amp;&amp;</code> （其中 <code>int</code> 来自 T1），完全没问题，T1 被推导为 <code>int</code>。而传给 t2 的是一个引用类型 <code>int&amp;</code> （这里说的不清楚，有点错误，请看评论区），这时候，t2 的类型就变成了 <code>int&amp; &amp;&amp;</code>，按照引用折叠的规则，t2 就变成了 <code>int&amp;</code> 类型，而此时的模板参数 T2 将会被推导为 <code>int&amp;</code> 类型，这样，模板函数参数（形参）的完整类型就变成了 <code>int&amp; &amp;&amp;</code> （其中，<code>int&amp;</code> 来自 T2，<code>&amp;&amp;</code> 本来就存在），进而折叠为 <code>int&amp;</code> （与实参类型相匹配了）。</p>
+<p>所以，通过将函数参数定义为一个指向模板类型参数的右值引用，就可以保持其对应实参的所有类型信息。而使用引用的情况下（无论左值还是右值），const 的属性都是可以保留的，因为 const 是类型的一部分，比如传给 middle2 的参数 t1 的是 const int，那么 T1 本身就会变成 const int，后面的 &amp;&amp; 才是附加的部分。</p>
+<p>然而现实是残酷的，这个版本的 middle 只解决了一部分问题，考虑如下函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span> &amp;&amp;v1, <span class="keyword">int</span>&amp; v2)</span> </span>&#123;</span><br><span class="line">  ++v1;</span><br><span class="line">  ++v2;</span><br><span class="line">&#125;</span><br><span class="line">Copy</span><br></pre></td></tr></table></figure>
+
+<p>其中，i 是右值引用，我们在 main 函数中通过 middle2 调用 g：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">middle2</span>(g, <span class="number">42</span>, i);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Call g through middle2: &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">Copy</span><br></pre></td></tr></table></figure>
+
+<p>编译器报如下错误：</p>
+<p><a target="_blank" rel="noopener" href="https://www.guodong.plus/2020/0314-132811/without_forward2_error_msg.jpg"><img src="C++%E6%9D%82%E9%A1%B9.assets/without_forward2_error_msg.jpg" alt="img"></a></p>
+<p>无法将一个右值引用绑定到左值上。为什么会出现这个错误？我们在将 42 绑定给 t1 后，又将 t1 传递给了 g，本来我们应该期望没问题的，因为 g 的参数 v1 是右值引用，将 42 给右值引用完全没问题，但问题就出在，虽然 42 是右值，但 t1 却不是，上一篇博客说过了，变量都是左值，即使是右值引用，但也是变量，所以还是左值，而左值是无法与右值引用绑定的！</p>
+<h2 id="std-forward"><a href="#std-forward" class="headerlink" title="std::forward"></a>std::forward</h2><p>那到底该怎么办呢，我们可以使用 forward 这个新标准库来传递 middle2 的参数，它能够保持原始实参的类型，forward 和 move 一起，都定义在 utility 头文件中。move 可以直接调用：<code>std::move(i)</code> ，但 foward 要明确给出模板参数：<code>std::foward&lt;int&gt;(i)</code> 才能使用。forward 会模板参数类型的右值引用，也就是：<code>int&amp;&amp;</code> 。注意，如果我们这样使用：<code>std::forward&lt;int&amp;&gt;(i)</code> 返回的就是 <code>int&amp; &amp;&amp;</code> ，进而折叠为 <code>int&amp;</code> 。</p>
+<p>一般来说，模板函数中的参数类型为右值引用的时候，就需要搭配 forward 来使用，通过 forward 和引用折叠，就可以完美的保留参数类型了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">middle3</span><span class="params">(F f, T1&amp;&amp; t1, T2&amp;&amp; t2)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">f</span>(std::forward&lt;T1&gt;(t1), std::forward&lt;T2&gt;(t2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span>&amp;&amp; i, <span class="keyword">int</span>&amp; j)</span> </span>&#123;</span><br><span class="line">  ++i;</span><br><span class="line">  ++j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">middle3</span>(g, <span class="number">42</span>, i);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Call g through middle3: &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<p><a target="_blank" rel="noopener" href="https://www.guodong.plus/2020/0314-132811/with_forward.jpg"><img src="C++%E6%9D%82%E9%A1%B9.assets/with_forward.jpg" alt="img"></a></p>
+<p>可以看到，没有问题。分析一下：42 传递给 middle3 后，绑定到 t1 上，此时 t1 的类型为 <code>int&amp;&amp;</code> (其中，T1 被推导为 int)，然后我们通过 forward：<code>std::forward&lt;int&gt;(t1)</code>（T1 是 int 而不是 int&amp;&amp;） ，将返回 <code>int&amp;&amp;</code>，也就是说现在传给 g 的是一个右值引用了，可能你会有疑问：这不还是 <code>int&amp;&amp;</code> 吗？没变啊，为什么现在就可以和 g 中的右值引用绑定了，之前不也是 <code>int&amp;&amp;</code> 类型吗？注意：之前的右值引用叫“named rvalue“，也就是说，之前的右值引用是有名字的，叫 t1，而 t1 是一个变量！现在我们是返回一个右值引用，是没有名字的，所以是真正的右值。</p>
+<p>对于左值引用 i，我们将 i 传递给 middle3 后，t2 的类型将变成 <code>int&amp; &amp;&amp;</code> ，经过引用折叠，变成了 <code>int&amp;</code> ，此时，如前所述，T2 将被推导为 <code>int&amp;</code> 类型。然后通过 <code>std::forward&lt;T2&gt;(t2)</code> =&gt; <code>std::forward&lt;int&amp;&gt;(t2)</code> ，将会返回一个 <code>int&amp; &amp;&amp;</code> ，折叠后变成 <code>int&amp;</code>，可以看到，左值引用也得到了保留！</p>
+<h2 id="红黑树和AVL树"><a href="#红黑树和AVL树" class="headerlink" title="红黑树和AVL树"></a>红黑树和AVL树</h2><p><strong>AVL删除</strong>时不平衡会有向上传递的特性</p>
+<p><strong>红黑树任何不平衡都会在三次旋转之内解决</strong></p>
+<p><strong>一，AVL树（平衡二叉树）</strong><br><strong>（1）简介</strong><br>AVL树是带有平衡条件的二叉查找树，一般是用平衡因子差值判断是否平衡并通过旋转来实现平衡，<strong>左右子树的高度差不超过1</strong>，和红黑树相比，<strong>AVL树是严格的平衡二叉树</strong>，平衡条件必须满足（所有节点的左右子树高度差的绝对值不超过1）。<strong>不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡</strong>，而旋转是非常耗时的，由此我们可以知道<strong>AVL树适合用于插入与删除次数比较少，但查找多的情况。</strong><br><strong>（2）局限性</strong><br>由于维护这种高度平衡所付出的代价比从中获得的效率收益还大，故而实际的应用不多，更多的地方是用追求局部而不是非常严格整体平衡的红黑树。当然，<strong>如果应用场景中对插入删除不频繁，只是对查找要求较高，那么AVL还是较优于红黑树</strong>。<br><strong>（3）应用</strong><br>1.Windows NT内核中广泛存在;</p>
+<p><strong>二、红黑树</strong><br><strong>（1）简介</strong><br>一种二叉查找树，但在每个节点增加一个存储位表示节点的颜色，可以是红或黑（非红即黑）。通过对任何一条从根到叶子的路径上各个节点着色的方式的限制，<strong>红黑树确保没有一条路径会比其它路径长出两倍（即同一父节点出发到叶子节点，所有路径上的黑色节点数目一样）</strong>，因此，<strong>红黑树是一种弱平衡二叉树，在相同的节点情况下，AVL树的高度低于红黑树</strong>，<strong>相对于要求严格的AVL树来说，它的旋转次数少，所以对于插入，删除操作较多的情况下，我们就用红黑树</strong>。<br><strong>（2）性质</strong></p>
+<ol>
+<li><p> 每个节点非红即黑</p>
+</li>
+<li><p> 如果一个节点是红的，那么它的两儿子都是黑的;</p>
+</li>
+<li><p> 根节点和叶节点（叶节点即树尾端NULL指针或NULL节点）都是黑的;</p>
+</li>
+<li><p>对于任意节点而言，其到叶节点NULL指针的每条路径都包含相同数目的黑节点;</p>
+<p> 左根右，根叶黑，不红红，黑路同</p>
+<p> <strong>（3）应用</strong></p>
+</li>
+<li><p> 广泛用于C ++的STL中，地图和集都是用红黑树实现的;</p>
+</li>
+<li><p> Linux的进程调度完全公平调度程序，用红黑树管理进程控制块，进程的虚拟内存区域都存储在一颗红黑树上，每个虚拟地址区域都对应红黑树的一个节点，左指针指向相邻的地址虚拟存储区域，右指针指向相邻的高地址虚拟地址空间;</p>
+</li>
+<li><p> IO多路复用的epoll的实现采用红黑树组织管理的的的sockfd，以支持快速的增删改查;</p>
+</li>
+<li><p> Nginx的的的中用红黑树管理定时器，因为红黑树是有序的，可以很快的得到距离当前最小的定时器;</p>
+</li>
+<li><p> Java的的的中TreeMap中的中的实现;</p>
+</li>
+</ol>
+<p><strong>三、红黑树与AVL树区别</strong><br><strong>1、调整平衡的实现机制不同</strong></p>
+<p>红黑树根据节点颜色(<strong>同一父节点出发到叶子节点，所有路径上的黑色节点数目一样</strong>)，一些约定和旋转实现；</p>
+<p>AVL根据树的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%B9%B3%E8%A1%A1%E5%9B%A0%E5%AD%90&spm=1001.2101.3001.7020">平衡因子</a>(<strong>所有节点的左右子树高度差的绝对值不超过1</strong>)和旋转决定</p>
+<p><strong>2、红黑树的插入效率更高</strong></p>
+<p>红黑树是用非严格的平衡来换取增删节点时候旋转次数的降低，任何不平衡都会在三次旋转之内解决，红黑树并不追求“完全平衡”，它只要求部分地达到平衡要求，降低了对旋转的要求，从而提高了性能</p>
+<p>而AVL是严格平衡树(高度平衡的二叉搜索树)，因此在增加或者删除节点的时候，根据不同情况，旋转的次数比红黑树要多。所以红黑树的插入效率更高</p>
+<p><strong>3、红黑树统计性能比AVL树更高</strong></p>
+<p>红黑树能够以<strong>O(log n)</strong> 的时间复杂度进行查询、插入、删除操作。</p>
+<p>AVL树查找、插入和删除在平均和最坏情况下都是**O(log n)**。</p>
+<p>红黑树的算法时间复杂度和AVL相同，<strong>但统计性能比AVL树更高</strong>，典型的用途是实现关联数组。</p>
+<p><strong>4、适用性：AVL查找效率高</strong></p>
+<p><strong>如果你的应用中，查询的次数远远大于插入和删除，那么选择AVL树，如果查询和插入删除次数几乎差不多，应选择红黑树</strong>。即，有时仅为了排序（建立-遍历-删除），不查找或查找次数很少，R-B树合算一些。</p>
+<h2 id="emplace-back-和-push-back"><a href="#emplace-back-和-push-back" class="headerlink" title="emplace_back 和 push_back"></a>emplace_back 和 push_back</h2><p>emplace_back()是c++11的新特性。<br>和push_back()的区别在于<br>push_back()方法要调用构造函数和复制构造函数，这也就代表着要先构造一个临时对象，然后把临时的copy构造函数拷贝或者移动到容器最后面。<br>而emplace_back()在实现时，则是直接在容器的尾部创建这个元素，省去了拷贝或移动元素的过程。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/22/Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="Linux高并发服务器">
+                  <i class="fa fa-chevron-left"></i> Linux高并发服务器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/" rel="next" title="网络">
+                  网络 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

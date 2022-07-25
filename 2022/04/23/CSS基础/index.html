@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="CSS基础CSS基础语法CSS选择器   选择器 例子 例子描述    .class .intro 选取所有 class&#x3D;”intro” 的元素。   #id #firstname 选取 id&#x3D;”firstname” 的那个元素。   * * 选取所有元素。   element p 选取所有  元素。  …   element,element,.. div, p 选取所有  元素和所有  元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS基础">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="CSS基础CSS基础语法CSS选择器   选择器 例子 例子描述    .class .intro 选取所有 class&#x3D;”intro” 的元素。   #id #firstname 选取 id&#x3D;”firstname” 的那个元素。   * * 选取所有元素。   element p 选取所有  元素。  …   element,element,.. div, p 选取所有  元素和所有  元素。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/CSS%E5%9F%BA%E7%A1%80.assets/boxmodel.gif">
+<meta property="article:published_time" content="2022-04-23T02:17:42.000Z">
+<meta property="article:modified_time" content="2022-04-25T02:53:46.626Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/CSS%E5%9F%BA%E7%A1%80.assets/boxmodel.gif">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/","path":"2022/04/23/CSS基础/","title":"CSS基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS基础 | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">CSS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">CSS基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">CSS选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">CSS引入方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.3.</span> <span class="nav-text">CSS 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E9%A2%9C%E8%89%B2"><span class="nav-number">1.1.4.</span> <span class="nav-text">CSS颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.5.</span> <span class="nav-text">CSS背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E8%BE%B9%E6%A1%86"><span class="nav-number">1.1.6.</span> <span class="nav-text">CSS 边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%A4%96%E8%BE%B9%E8%B7%9D"><span class="nav-number">1.1.7.</span> <span class="nav-text">CSS 外边距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%86%85%E8%BE%B9%E8%B7%9D"><span class="nav-number">1.1.8.</span> <span class="nav-text">CSS 内边距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%B0%BA%E5%AF%B8"><span class="nav-number">1.1.9.</span> <span class="nav-text">CSS 尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E6%A1%86%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.10.</span> <span class="nav-text">CSS 框模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E8%BD%AE%E5%BB%93"><span class="nav-number">1.1.11.</span> <span class="nav-text">CSS 轮廓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E6%96%87%E6%9C%AC"><span class="nav-number">1.1.12.</span> <span class="nav-text">CSS 文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%AD%97%E4%BD%93"><span class="nav-number">1.1.13.</span> <span class="nav-text">CSS 字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.14.</span> <span class="nav-text">CSS链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.15.</span> <span class="nav-text">CSS 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.1.16.</span> <span class="nav-text">CSS 表格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E7%89%B9%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">CSS特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%B8%83%E5%B1%80"><span class="nav-number">1.2.1.</span> <span class="nav-text">CSS 布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.2.2.</span> <span class="nav-text">CSS 定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-Overflow"><span class="nav-number">1.2.3.</span> <span class="nav-text">CSS Overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E6%B5%AE%E5%8A%A8"><span class="nav-number">1.2.4.</span> <span class="nav-text">CSS 浮动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.2.5.</span> <span class="nav-text">CSS 组合选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E4%BC%AA%E7%B1%BB"><span class="nav-number">1.2.6.</span> <span class="nav-text">CSS 伪类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.7.</span> <span class="nav-text">CSS 伪元素</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/04/23/CSS%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-23 10:17:42" itemprop="dateCreated datePublished" datetime="2022-04-23T10:17:42+08:00">2022-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-25 10:53:46" itemprop="dateModified" datetime="2022-04-25T10:53:46+08:00">2022-04-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="CSS基础"><a href="#CSS基础" class="headerlink" title="CSS基础"></a>CSS基础</h1><h2 id="CSS基础语法"><a href="#CSS基础语法" class="headerlink" title="CSS基础语法"></a>CSS基础语法</h2><h3 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a>CSS选择器</h3><table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>例子</th>
+<th>例子描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css_selectors.asp">.<em>class</em></a></td>
+<td>.intro</td>
+<td>选取所有 class=”intro” 的元素。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css_selectors.asp">#<em>id</em></a></td>
+<td>#firstname</td>
+<td>选取 id=”firstname” 的那个元素。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css_selectors.asp">*</a></td>
+<td>*</td>
+<td>选取所有元素。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css_selectors.asp"><em>element</em></a></td>
+<td>p</td>
+<td>选取所有 <p> 元素。<span> <div> <body>…</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css_selectors.asp"><em>element</em>,<em>element</em>,..</a></td>
+<td>div, p</td>
+<td>选取所有 <div> 元素和所有 <p> 元素。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS引入方式"><a href="#CSS引入方式" class="headerlink" title="CSS引入方式"></a>CSS引入方式</h3><ul>
+<li>  外部 CSS    <link rel="stylesheet" type="text/css" href="xxx.css"></li>
+<li>  内部 CSS     一般放在<head> </head>中</li>
+<li>  行内 CSS     行内样式/内联样式可为单个元素应用唯一的样式。将 style 属性添加到相关元素。style 属性可包含任何 CSS 属性。</li>
+</ul>
+<p>优先级：</p>
+<ol>
+<li> 行内样式（在 HTML 元素中）</li>
+<li> 外部和内部样式表（在 head 部分）</li>
+<li> 浏览器默认样式</li>
+</ol>
+<h3 id="CSS-注释"><a href="#CSS-注释" class="headerlink" title="CSS 注释"></a>CSS 注释</h3><p>/*    */</p>
+<h3 id="CSS颜色"><a href="#CSS颜色" class="headerlink" title="CSS颜色"></a>CSS颜色</h3><p>指定颜色是通过使用预定义的颜色名称，或 RGB、HEX、HSL、RGBA、HSLA 值。</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSS 背景色</td>
+<td>background-color</td>
+<td>background-color:DodgerBlue;</td>
+</tr>
+<tr>
+<td>CSS 文本颜色</td>
+<td>color</td>
+<td>color:Tomato;</td>
+</tr>
+<tr>
+<td>CSS 边框颜色</td>
+<td>border</td>
+<td>border:2px solid Tomato</td>
+</tr>
+<tr>
+<td>CSS 颜色值</td>
+<td>rgb(255, 99, 71)</td>
+<td>rgba(255, 99, 71, 0.5) 透明度为 50%</td>
+</tr>
+</tbody></table>
+<h3 id="CSS背景"><a href="#CSS背景" class="headerlink" title="CSS背景"></a>CSS背景</h3><p>简写顺序</p>
+<ul>
+<li>  background-color</li>
+<li>  background-image</li>
+<li>  background-repeat</li>
+<li>  background-attachment</li>
+<li>  background-position</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background.asp">background</a></td>
+<td align="left">在一条声明中设置所有背景属性的简写属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-attachment.asp">background-attachment</a></td>
+<td align="left">设置背景图像是固定的还是与页面的其余部分一起滚动。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-clip.asp">background-clip</a></td>
+<td align="left">规定背景的绘制区域。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-color.asp">background-color</a></td>
+<td align="left">设置元素的背景色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-image.asp">background-image</a></td>
+<td align="left">设置元素的背景图像。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-origin.asp">background-origin</a></td>
+<td align="left">规定在何处放置背景图像。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-position.asp">background-position</a></td>
+<td align="left">设置背景图像的开始位置。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-repeat.asp">background-repeat</a></td>
+<td align="left">设置背景图像是否及如何重复。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background-size.asp">background-size</a></td>
+<td align="left">规定背景图像的尺寸。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-边框"><a href="#CSS-边框" class="headerlink" title="CSS 边框"></a>CSS 边框</h3><p>为了缩减代码，也可以在一个属性中指定所有单独的边框属性。</p>
+<p>border 属性是以下各个边框属性的简写属性：</p>
+<ul>
+<li>  border-width</li>
+<li>  border-style（必需）</li>
+<li>  border-color</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border.asp">border</a></td>
+<td align="left">简写属性，在一条声明中设置所有边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-color.asp">border-color</a></td>
+<td align="left">简写属性，设置四条边框的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-radius.asp">border-radius</a></td>
+<td align="left">简写属性，可设置圆角的所有四个 border-*-radius 属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-style.asp">border-style</a></td>
+<td align="left">简写属性，设置四条边框的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-width.asp">border-width</a></td>
+<td align="left">简写属性，设置四条边框的宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-bottom.asp">border-bottom</a></td>
+<td align="left">简写属性，在一条声明中设置所有下边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-bottom-color.asp">border-bottom-color</a></td>
+<td align="left">设置下边框的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-bottom-style.asp">border-bottom-style</a></td>
+<td align="left">设置下边框的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-bottom-width.asp">border-bottom-width</a></td>
+<td align="left">设置下边框的宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-left.asp">border-left</a></td>
+<td align="left">简写属性，在一条声明中设置所有左边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-left-color.asp">border-left-color</a></td>
+<td align="left">设置左边框的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-left-style.asp">border-left-style</a></td>
+<td align="left">设置左边框的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-left-width.asp">border-left-width</a></td>
+<td align="left">设置左边框的宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-right.asp">border-right</a></td>
+<td align="left">简写属性，在一条声明中设置所有右边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-right-color.asp">border-right-color</a></td>
+<td align="left">设置右边框的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-right-style.asp">border-right-style</a></td>
+<td align="left">设置右边框的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-right-width.asp">border-right-width</a></td>
+<td align="left">设置右边框的宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-top.asp">border-top</a></td>
+<td align="left">简写属性，在一条声明中设置所有上边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-top-color.asp">border-top-color</a></td>
+<td align="left">设置上边框的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-top-style.asp">border-top-style</a></td>
+<td align="left">设置上边框的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-top-width.asp">border-top-width</a></td>
+<td align="left">设置上边框的宽度。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-外边距"><a href="#CSS-外边距" class="headerlink" title="CSS 外边距"></a>CSS 外边距</h3><p>margin 属性是以下各外边距属性的简写属性：</p>
+<ul>
+<li>  margin-top</li>
+<li>  margin-right</li>
+<li>  margin-bottom</li>
+<li>  margin-left</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_margin.asp">margin</a></td>
+<td align="left">用于在一条声明中设置外边距属性的简写属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_margin-bottom.asp">margin-bottom</a></td>
+<td align="left">设置元素的下外边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_margin-left.asp">margin-left</a></td>
+<td align="left">设置元素的左外边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_margin-right.asp">margin-right</a></td>
+<td align="left">设置元素的右外边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_margin-top.asp">margin-top</a></td>
+<td align="left">设置元素的上外边距。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-内边距"><a href="#CSS-内边距" class="headerlink" title="CSS 内边距"></a>CSS 内边距</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_padding.asp">padding</a></td>
+<td align="left">用于在一条声明中设置所有内边距属性的简写属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_padding-bottom.asp">padding-bottom</a></td>
+<td align="left">设置元素的下内边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_padding-left.asp">padding-left</a></td>
+<td align="left">设置元素的左内边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_padding-right.asp">padding-right</a></td>
+<td align="left">设置元素的右内边距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_padding-top.asp">padding-top</a></td>
+<td align="left">设置元素的上内边距。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-尺寸"><a href="#CSS-尺寸" class="headerlink" title="CSS 尺寸"></a>CSS 尺寸</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_height.asp">height</a></td>
+<td align="left">设置元素的高度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_max-height.asp">max-height</a></td>
+<td align="left">设置元素的最大高度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_max-width.asp">max-width</a></td>
+<td align="left">设置元素的最大宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_min-height.asp">min-height</a></td>
+<td align="left">设置元素的最小高度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_min-width.asp">min-width</a></td>
+<td align="left">设置元素的最小宽度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_width.asp">width</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="CSS-框模型"><a href="#CSS-框模型" class="headerlink" title="CSS 框模型"></a>CSS 框模型</h3><p>所有 HTML 元素都可以视为方框。在 CSS 中，在谈论设计和布局时，会使用术语“盒模型”或“框模型”。</p>
+<p>CSS 框模型实质上是一个包围每个 HTML 元素的框。它包括：外边距、边框、内边距以及实际的内容。下图展示了框模型：</p>
+<p><img src="CSS%E5%9F%BA%E7%A1%80.assets/boxmodel.gif" alt="CSS 框模型"></p>
+<p>对不同部分的说明：</p>
+<ul>
+<li>  <strong>内容</strong> - 框的内容，其中显示文本和图像。</li>
+<li>  <strong>内边距</strong> - 清除内容周围的区域。内边距是透明的。</li>
+<li>  <strong>边框</strong> - 围绕内边距和内容的边框。</li>
+<li>  <strong>外边距</strong> - 清除边界外的区域。外边距是透明的。</li>
+</ul>
+<p>框模型允许我们在元素周围添加边框，并定义元素之间的空间。</p>
+<p>元素框的最内部分是实际的内容，直接包围内容的是内边距。内边距呈现了元素的背景。内边距的边缘是边框。边框以外是外边距，外边距默认是透明的，因此不会遮挡其后的任何元素。</p>
+<p><strong>背景应用于由内容和内边距、边框组成的区域</strong>。</p>
+<p>内边距、边框和外边距都是可选的，默认值是零。</p>
+<p>元素的总宽度应该这样计算：</p>
+<p><strong>元素总宽度 = 宽度 + 左内边距 + 右内边距 + 左边框 + 右边框 + 左外边距 + 右外边距</strong></p>
+<p>元素的总高度应该这样计算：</p>
+<p><strong>元素总高度 = 高度 + 上内边距 + 下内边距 + 上边框 + 下边框 + 上外边距 + 下外边距</strong></p>
+<h3 id="CSS-轮廓"><a href="#CSS-轮廓" class="headerlink" title="CSS 轮廓"></a>CSS 轮廓</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_outline.asp">outline</a></td>
+<td align="left">简写属性，在一条声明中设置 outline-width、outline-style 以及 outline-color。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_outline-color.asp">outline-color</a></td>
+<td align="left">设置轮廓的颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_outline-offset.asp">outline-offset</a></td>
+<td align="left">指定轮廓与元素的边缘或边框之间的空间。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_outline-style.asp">outline-style</a></td>
+<td align="left">设置轮廓的样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_outline-width.asp">outline-width</a></td>
+<td align="left">设置轮廓的宽度。</td>
+</tr>
+</tbody></table>
+<p>outline-style 属性指定轮廓的样式，并可设置如下值：</p>
+<ul>
+<li><p>  dotted - 定义点状的轮廓。</p>
+</li>
+<li><p>  dashed - 定义虚线的轮廓。</p>
+</li>
+<li><p>  solid - 定义实线的轮廓。</p>
+</li>
+<li><p>  double - 定义双线的轮廓。</p>
+</li>
+<li><p>  groove - 定义 3D 凹槽轮廓。</p>
+</li>
+<li><p>  ridge - 定义 3D 凸槽轮廓。</p>
+</li>
+<li><p>  inset - 定义 3D 凹边轮廓。</p>
+</li>
+<li><p>  outset - 定义 3D 凸边轮廓。</p>
+</li>
+<li><p>  none - 定义无轮廓。</p>
+</li>
+<li><p>  hidden - 定义隐藏的轮廓。</p>
+</li>
+</ul>
+<p>outline-width 属性指定轮廓的宽度，并可设置如下值之一：</p>
+<ul>
+<li>  thin（通常为 1px）</li>
+<li>  medium（通常为 3px）</li>
+<li>  thick （通常为 5px）</li>
+<li>  特定尺寸（以 px、pt、cm、em 计）</li>
+</ul>
+<p>outline 属性是用于设置以下各个轮廓属性的简写属性：</p>
+<ul>
+<li>  outline-width</li>
+<li>  outline-style（必需）</li>
+<li>  outline-color</li>
+</ul>
+<h3 id="CSS-文本"><a href="#CSS-文本" class="headerlink" title="CSS 文本"></a>CSS 文本</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_color.asp">color</a></td>
+<td align="left">设置文本颜色。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_direction.asp">direction</a></td>
+<td align="left">指定文本的方向 / 书写方向。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_letter-spacing.asp">letter-spacing</a></td>
+<td align="left">设置字符间距。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_dim_line-height.asp">line-height</a></td>
+<td align="left">设置行高。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_text-align.asp">text-align</a></td>
+<td align="left">指定文本的水平对齐方式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_text-decoration.asp">text-decoration</a></td>
+<td align="left">指定添加到文本的装饰效果。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_text-indent.asp">text-indent</a></td>
+<td align="left">指定文本块中首行的缩进。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text-shadow.asp">text-shadow</a></td>
+<td align="left">指定添加到文本的阴影效果。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_text-transform.asp">text-transform</a></td>
+<td align="left">控制文本的大小写。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text-overflow.asp">text-overflow</a></td>
+<td align="left">指定应如何向用户示意未显示的溢出内容。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_unicode-bidi.asp">unicode-bidi</a></td>
+<td align="left">与 direction 属性一起使用，设置或返回是否应重写文本来支持同一文档中的多种语言。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_vertical-align.asp">vertical-align</a></td>
+<td align="left">指定文本的垂直对齐方式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_white-space.asp">white-space</a></td>
+<td align="left">指定如何处理元素内的空白。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_text_word-spacing.asp">word-spacing</a></td>
+<td align="left">设置单词间距。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-字体"><a href="#CSS-字体" class="headerlink" title="CSS 字体"></a>CSS 字体</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font_font.asp">font</a></td>
+<td align="left">简写属性。在一条声明中设置所有字体属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font_font-family.asp">font-family</a></td>
+<td align="left">规定文本的字体系列（字体族）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font_font-size.asp">font-size</a></td>
+<td align="left">规定文本的字体大小。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font_font-style.asp">font-style</a></td>
+<td align="left">规定文本的字体样式。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font_font-variant.asp">font-variant</a></td>
+<td align="left">规定是否以小型大写字母的字体显示文本。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_font-weight.asp">font-weight</a></td>
+<td align="left">规定字体的粗细。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS链接"><a href="#CSS链接" class="headerlink" title="CSS链接"></a>CSS链接</h3><p>四种链接状态分别是：</p>
+<ul>
+<li>  <code>a:link</code> - 正常的，未访问的链接</li>
+<li>  <code>a:visited</code> - 用户访问过的链接</li>
+<li>  <code>a:hover</code> - 用户将鼠标悬停在链接上时</li>
+<li>  <code>a:active</code> - 链接被点击时</li>
+</ul>
+<h3 id="CSS-列表"><a href="#CSS-列表" class="headerlink" title="CSS 列表"></a>CSS 列表</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_list-style.asp">list-style</a></td>
+<td align="left">简写属性。在一条声明中设置列表的所有属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_list-style-image.asp">list-style-image</a></td>
+<td align="left">指定图像作为列表项标记。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_list-style-position.asp">list-style-position</a></td>
+<td align="left">规定列表项标记（项目符号）的位置。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_list-style-type.asp">list-style-type</a></td>
+<td align="left">规定列表项标记的类型。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-表格"><a href="#CSS-表格" class="headerlink" title="CSS 表格"></a>CSS 表格</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border.asp">border</a></td>
+<td align="left">简写属性。在一条声明中设置所有边框属性。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-collapse.asp">border-collapse</a></td>
+<td align="left">规定是否应折叠表格边框。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_border-spacing.asp">border-spacing</a></td>
+<td align="left">规定相邻单元格之间的边框的距离。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_tab_caption-side.asp">caption-side</a></td>
+<td align="left">规定表格标题的位置。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_tab_empty-cells.asp">empty-cells</a></td>
+<td align="left">规定是否在表格中的空白单元格上显示边框和背景。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_tab_table-layout.asp">table-layout</a></td>
+<td align="left">设置用于表格的布局算法。</td>
+</tr>
+</tbody></table>
+<h2 id="CSS特性"><a href="#CSS特性" class="headerlink" title="CSS特性"></a>CSS特性</h2><h3 id="CSS-布局"><a href="#CSS-布局" class="headerlink" title="CSS 布局"></a>CSS 布局</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_class_display.asp">display</a></td>
+<td align="left">指定应如何显示元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_class_visibility.asp">visibility</a></td>
+<td align="left">指定元素是否应该可见。</td>
+</tr>
+</tbody></table>
+<p><strong>块级元素</strong>（block element）</p>
+<p>块级元素总是从新行开始，并占据可用的全部宽度（尽可能向左和向右伸展）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span> - <span class="tag">&lt;<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>行内元素</strong>（inline element）</p>
+<p>内联元素不从新行开始，仅占用所需的宽度。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CSS-定位"><a href="#CSS-定位" class="headerlink" title="CSS 定位"></a>CSS 定位</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_bottom.asp">bottom</a></td>
+<td align="left">设置定位框的底部外边距边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_clip.asp">clip</a></td>
+<td align="left">剪裁绝对定位的元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_left.asp">left</a></td>
+<td align="left">设置定位框的左侧外边距边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_class_position.asp">position</a></td>
+<td align="left">规定元素的定位类型。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_right.asp">right</a></td>
+<td align="left">设置定位框的右侧外边距边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_top.asp">top</a></td>
+<td align="left">设置定位框的顶部外边距边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_z-index.asp">z-index</a></td>
+<td align="left">设置元素的堆叠顺序。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-Overflow"><a href="#CSS-Overflow" class="headerlink" title="CSS Overflow"></a>CSS Overflow</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/pr_pos_overflow.asp">overflow</a></td>
+<td align="left">规定如果内容溢出元素框会发生什么情况。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css3_pr_overflow-x.asp">overflow-x</a></td>
+<td align="left">规定在元素的内容区域溢出时如何处理内容的左/右边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css3_pr_overflow-y.asp">overflow-y</a></td>
+<td align="left">指定在元素的内容区域溢出时如何处理内容的上/下边缘。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-浮动"><a href="#CSS-浮动" class="headerlink" title="CSS 浮动"></a>CSS 浮动</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_box-sizing.asp">box-sizing</a></td>
+<td align="left">定义元素的宽度和高度的计算方式：它们是否应包含内边距和边框。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_class_clear.asp">clear</a></td>
+<td align="left">指定哪些元素可以在被清除的元素旁边以及在哪一侧浮动。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_class_float.asp">float</a></td>
+<td align="left">指定元素应如何浮动。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_pos_overflow.asp">overflow</a></td>
+<td align="left">指定如果内容溢出元素框会发生什么情况。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_overflow-x.asp">overflow-x</a></td>
+<td align="left">指定当溢出元素的内容区域时，如何处理内容的左/右边缘。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_overflow-y.asp">overflow-y</a></td>
+<td align="left">指定当溢出元素的内容区域时，如何处理内容的上/下边缘。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-组合选择器"><a href="#CSS-组合选择器" class="headerlink" title="CSS 组合选择器"></a>CSS 组合选择器</h3><table>
+<thead>
+<tr>
+<th align="left">选择器</th>
+<th align="left">示例</th>
+<th align="left">示例描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_element.asp"><em>element</em> <em>element</em></a></td>
+<td align="left">div p</td>
+<td align="left">选择 <div> 元素内的所有 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_gt.asp"><em>element</em>&gt;<em>element</em></a></td>
+<td align="left">div &gt; p</td>
+<td align="left">选择其父元素是 <div> 元素的所有 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_plus.asp"><em>element</em>+<em>element</em></a></td>
+<td align="left">div + p</td>
+<td align="left">选择所有紧随 <div> 元素之后的 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_gen_sibling.asp"><em>element1</em>~<em>element2</em></a></td>
+<td align="left">p ~ ul</td>
+<td align="left">选择前面有 <p> 元素的每个 <ul> 元素。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-伪类"><a href="#CSS-伪类" class="headerlink" title="CSS 伪类"></a>CSS 伪类</h3><table>
+<thead>
+<tr>
+<th align="left">选择器</th>
+<th align="left">例子</th>
+<th align="left">例子描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_active.asp">:active</a></td>
+<td align="left">a:active</td>
+<td align="left">选择活动的链接。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_checked.asp">:checked</a></td>
+<td align="left">input:checked</td>
+<td align="left">选择每个被选中的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_disabled.asp">:disabled</a></td>
+<td align="left">input:disabled</td>
+<td align="left">选择每个被禁用的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_empty.asp">:empty</a></td>
+<td align="left">p:empty</td>
+<td align="left">选择没有子元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_enabled.asp">:enabled</a></td>
+<td align="left">input:enabled</td>
+<td align="left">选择每个已启用的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-child.asp">:first-child</a></td>
+<td align="left">p:first-child</td>
+<td align="left">选择作为其父的首个子元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-of-type.asp">:first-of-type</a></td>
+<td align="left">p:first-of-type</td>
+<td align="left">选择作为其父的首个 <p> 元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_focus.asp">:focus</a></td>
+<td align="left">input:focus</td>
+<td align="left">选择获得焦点的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_hover.asp">:hover</a></td>
+<td align="left">a:hover</td>
+<td align="left">选择鼠标悬停其上的链接。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_in-range.asp">:in-range</a></td>
+<td align="left">input:in-range</td>
+<td align="left">选择具有指定范围内的值的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_invalid.asp">:invalid</a></td>
+<td align="left">input:invalid</td>
+<td align="left">选择所有具有无效值的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_lang.asp">:lang(<em>language</em>)</a></td>
+<td align="left">p:lang(it)</td>
+<td align="left">选择每个 lang 属性值以 “it” 开头的 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_last-child.asp">:last-child</a></td>
+<td align="left">p:last-child</td>
+<td align="left">选择作为其父的最后一个子元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_last-of-type.asp">:last-of-type</a></td>
+<td align="left">p:last-of-type</td>
+<td align="left">选择作为其父的最后一个 <p> 元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_link.asp">:link</a></td>
+<td align="left">a:link</td>
+<td align="left">选择所有未被访问的链接。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_not.asp">:not(<em>selector</em>)</a></td>
+<td align="left">:not(p)</td>
+<td align="left">选择每个非 <p> 元素的元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-child.asp">:nth-child(<em>n</em>)</a></td>
+<td align="left">p:nth-child(2)</td>
+<td align="left">选择作为其父的第二个子元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-last-child.asp">:nth-last-child(<em>n</em>)</a></td>
+<td align="left">p:nth-last-child(2)</td>
+<td align="left">选择作为父的第二个子元素的每个<p>元素，从最后一个子元素计数。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-last-of-type.asp">:nth-last-of-type(<em>n</em>)</a></td>
+<td align="left">p:nth-last-of-type(2)</td>
+<td align="left">选择作为父的第二个<p>元素的每个<p>元素，从最后一个子元素计数</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-of-type.asp">:nth-of-type(<em>n</em>)</a></td>
+<td align="left">p:nth-of-type(2)</td>
+<td align="left">选择作为其父的第二个 <p> 元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_only-of-type.asp">:only-of-type</a></td>
+<td align="left">p:only-of-type</td>
+<td align="left">选择作为其父的唯一 <p> 元素的每个 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_only-child.asp">:only-child</a></td>
+<td align="left">p:only-child</td>
+<td align="left">选择作为其父的唯一子元素的 <p> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_optional.asp">:optional</a></td>
+<td align="left">input:optional</td>
+<td align="left">选择不带 “required” 属性的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_out-of-range.asp">:out-of-range</a></td>
+<td align="left">input:out-of-range</td>
+<td align="left">选择值在指定范围之外的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_read-only.asp">:read-only</a></td>
+<td align="left">input:read-only</td>
+<td align="left">选择指定了 “readonly” 属性的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_read-write.asp">:read-write</a></td>
+<td align="left">input:read-write</td>
+<td align="left">选择不带 “readonly” 属性的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_required.asp">:required</a></td>
+<td align="left">input:required</td>
+<td align="left">选择指定了 “required” 属性的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_root.asp">:root</a></td>
+<td align="left">root</td>
+<td align="left">选择元素的根元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_target.asp">:target</a></td>
+<td align="left">#news:target</td>
+<td align="left">选择当前活动的 #news 元素（单击包含该锚名称的 URL）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_valid.asp">:valid</a></td>
+<td align="left">input:valid</td>
+<td align="left">选择所有具有有效值的 <input> 元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_visited.asp">:visited</a></td>
+<td align="left">a:visited</td>
+<td align="left">选择所有已访问的链接。</td>
+</tr>
+</tbody></table>
+<h3 id="CSS-伪元素"><a href="#CSS-伪元素" class="headerlink" title="CSS 伪元素"></a>CSS 伪元素</h3><table>
+<thead>
+<tr>
+<th align="left">选择器</th>
+<th align="left">例子</th>
+<th align="left">例子描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_after.asp">::after</a></td>
+<td align="left">p::after</td>
+<td align="left">在每个 <p> 元素之后插入内容。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_before.asp">::before</a></td>
+<td align="left">p::before</td>
+<td align="left">在每个 <p> 元素之前插入内容。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-letter.asp">::first-letter</a></td>
+<td align="left">p::first-letter</td>
+<td align="left">选择每个 <p> 元素的首字母。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-line.asp">::first-line</a></td>
+<td align="left">p::first-line</td>
+<td align="left">选择每个 <p> 元素的首行。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_selection.asp">::selection</a></td>
+<td align="left">p::selection</td>
+<td align="left">选择用户选择的元素部分。</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/23/SSM-SpringBoot-MybatisPlus/" rel="prev" title="SSM+SpringBoot+MybatisPlus">
+                  <i class="fa fa-chevron-left"></i> SSM+SpringBoot+MybatisPlus
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" rel="next" title="面向对象高级编程">
+                  面向对象高级编程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

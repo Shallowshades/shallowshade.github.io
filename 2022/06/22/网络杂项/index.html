@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Get和Post一般的区别（1）post更安全（不会作为url的一部分，不会被缓存、保存在服务器日志、以及浏览器浏览记录中）（2）post发送的数据更大（get有url长度限制）（3）post能发送更多的数据类型（get只能发送ASCII字符）（4）post比get慢（5）post用于修改和写入数据，get一般用于搜索排序和筛选之类的操作（淘宝，支付宝的搜索查询都是get提交），目的是资源的获取，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络">
+<meta property="og:url" content="https://shallowshades.github.io.git/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/index.html">
+<meta property="og:site_name" content="未名的博客">
+<meta property="og:description" content="Get和Post一般的区别（1）post更安全（不会作为url的一部分，不会被缓存、保存在服务器日志、以及浏览器浏览记录中）（2）post发送的数据更大（get有url长度限制）（3）post能发送更多的数据类型（get只能发送ASCII字符）（4）post比get慢（5）post用于修改和写入数据，get一般用于搜索排序和筛选之类的操作（淘宝，支付宝的搜索查询都是get提交），目的是资源的获取，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-22T03:41:05.000Z">
+<meta property="article:modified_time" content="2022-07-14T11:44:38.304Z">
+<meta property="article:author" content="未名">
+<meta property="article:tag" content="博客 算法 思想">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shallowshades.github.io.git/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/","path":"2022/06/22/网络杂项/","title":"网络"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络 | 未名的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">未名的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">过去链接未来</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Get%E5%92%8CPost%E4%B8%80%E8%88%AC%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">Get和Post一般的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AATCP%E8%BF%9E%E6%8E%A5%E5%8F%AF%E4%BB%A5%E5%8F%91%E9%80%81%E5%A4%9A%E5%B0%91%E4%B8%AAHTTP%E8%AF%B7%E6%B1%82%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">一个TCP连接可以发送多少个HTTP请求？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">未名</p>
+  <div class="site-description" itemprop="description">大学快结束了，大学究竟是什么</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学快结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-22 11:41:05" itemprop="dateCreated datePublished" datetime="2022-06-22T11:41:05+08:00">2022-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-14 19:44:38" itemprop="dateModified" datetime="2022-07-14T19:44:38+08:00">2022-07-14</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Get和Post一般的区别"><a href="#Get和Post一般的区别" class="headerlink" title="Get和Post一般的区别"></a>Get和Post一般的区别</h2><p>（1）post更安全（不会作为url的一部分，不会被缓存、保存在服务器日志、以及浏览器浏览记录中）<br>（2）post发送的数据更大（get有url长度限制）<br>（3）post能发送更多的数据类型（get只能发送ASCII字符）<br>（4）post比get慢<br>（5）post用于修改和写入数据，get一般用于搜索排序和筛选之类的操作（淘宝，支付宝的搜索查询都是get提交），目的是资源的获取，读取数据<br>虽然在开发中经常用get或者post请求，但是由于我们资历经验的欠缺，或许就重来没有深究过什么场合用get请求，什么场合用post请求，我相信不止我一个人当看到第4,5条的时候，就会明白为什么面试官对我们的回答不满意，也明白了自己对get或post用法理解的欠缺，那么get比post更快，究竟快多少呢？表现在那些方面？</p>
+<p>为什么get比post更快</p>
+<p><strong>1.post请求包含更多的请求头</strong><br>因为post需要在请求的body部分包含数据，所以会多了几个数据描述部分的首部字段（如：content-type）,这其实是微乎其微的。</p>
+<p><strong>2.最重要的一条，post在真正接收数据之前会先将请求头发送给服务器进行确认，然后才真正发送数据</strong><br>post请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送post请求头（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回100 Continue响应<br>（5）浏览器发送数据<br>（6）服务器返回200 OK响应<br>get请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送get请求头和数据（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回200 OK响应<br>也就是说，目测get的总耗是post的2/3左右，这个口说无凭，网上已经有网友进行过测试。</p>
+<p><strong>3.get会将数据缓存起来，而post不会</strong><br>可以做个简短的测试，使用ajax采用get方式请求静态数据（比如html页面，图片）的时候，如果两次传输的数据相同，第二次以后消耗的时间将会在10ms以内（chrome测试），而post每次消耗的时间都差不多。经测试，chrome和firefox下如果检测到get请求的是静态资源，则会缓存，如果是数据，则不会缓存，但是IE什么都会缓存起来，当然，应该没有人用post去获取静态数据吧，反正我是没见过。</p>
+<h2 id="一个TCP连接可以发送多少个HTTP请求？"><a href="#一个TCP连接可以发送多少个HTTP请求？" class="headerlink" title="一个TCP连接可以发送多少个HTTP请求？"></a>一个TCP连接可以发送多少个HTTP请求？</h2><p>TCP与HTTP的渊源<br>TCP协议对应于传输层，HTTP协议对应于应用层。WEB项目中，HTTP协议是建立在TCP的基础上的。</p>
+<p>最初浏览器从服务器加载一个网页，会发起一个HTTP请求，这时需要先建立一个TCP连接。当本次数据请求完毕之后，会立刻断开TCP连接。</p>
+<p>但随着时间的推理，HTML网页内容越来越复杂，不仅有内容，还有JS、CSS和图片资源，每个资源的请求都建立一次TCP连接，效率就会很低。</p>
+<p>这时，Keep-Alive就被提出用来了，专门用于解决效率低的问题。</p>
+<p>本文关于TCP连接能够发送多少个HTTP请求，本质上就是围绕着解决通信的低效问题的。</p>
+<p><strong>问题一：浏览器建立TCP连接之后，完成一次HTTP请求，是否会断开？</strong><br>HTTP协议Header中的Connection属性决定了连接是否持久，不同HTTP协议版本有所不同。</p>
+<p>HTTP/1.0中Connection默认为close，即每次请求都会重新建立和断开TCP连接。缺点：建立和断开TCP连接，代价过大。</p>
+<p>HTTP/1.1中Connection默认为keep-alive，即连接可以复用，不用每次都重新建立和断开TCP连接。超时之后没有连接则主动断开。可以通过声明Connection为close进行关闭。</p>
+<p>优点：TCP连接可被重复利用，减少建立连接的损耗，SSL的开销也可以避免。刷新页面时也可以复用，从而不再建立SSL连接等。</p>
+<p>结论：默认情况下（HTTP/1.1）建立TCP连接不会断开，只有在请求报头中声明Connection: close才会请求完成之后关闭连接。不断开的最终目的是减少建立连接所导致的性能损耗。</p>
+<p><strong>问题二：一个TCP连接可以对应几个HTTP请求？</strong><br>如果Connection为close，则一个TCP连接只对应一个HTTP请求。</p>
+<p>如果Connection为Keep-alive，则一个TCP连接可对应一个到多个HTTP请求。</p>
+<p><strong>问题三：一个TCP连接中，可以同时发送多个HTTP请求吗？</strong><br>HTTP/1.1中单个TCP连接在同一时刻只能处理一个请求。HTTP/1.1在RFC 2616中规定了Pipelining来解决这个问题，但浏览器默认是关闭的。</p>
+<p>RFC 2616中规定：一个支持持久连接的客户端可以在一个连接中发送多个请求（不需要等待任意请求的响应）。收到请求的服务器必须按照请求收到的顺序发送响应。</p>
+<p>Pipelining本身存在一些问题，比如代理服务器不能正确处理HTTP Pipelining、Head-of-line Blocking连接头阻塞（首个请求耗时过长，阻塞其他请求）。所以，浏览器默认关闭该功能。</p>
+<p>HTTP/2.0提供了多路复用技术Multiplexing，一个TCP可以并发多个HTTP请求（理论无上限，但是一般浏览器会有TCP并发数的限制）。</p>
+<p>HTTP/1.1中为了提升性能，通常会采用连接复用和同时建立多个TCP连接的方式提升性能。</p>
+<p>结论：HTTP/1.1中存在Pipelining技术支持一个连接发送多个请求，但存在弊端，浏览器默认关闭。HTTP/2.0中通过多路复用技术支持一个TCP连接中并发请求HTTP。</p>
+<p><strong>问题四：浏览器对同一Host建立TCP连接的数量有没限制？</strong><br>不同浏览器限制不同，比如Chrome最多允许同一个Host可建立6个TCP连接。</p>
+<p>如果服务器只支持HTTP/1.1，浏览器会采用在同一个Host下建立多个TCP连接来进行效率提升。如果是基于HTTPS传输，在SSL握手之后，还会尝试协商是否可以采用HTTP/2.0的Multiplexing功能。</p>
+<p><strong>问题五：keep-alive使用场景及优缺点</strong><br>开启keep-alive对内存要求高，关闭keep-alive对CPU要求高；如果内存和CPU都足够，开启和关闭keep-alive对性能影响不大；如果考虑服务器压力，如果是静态页面，大量的调用js或者图片的话，建议开启keep-alive；如果是动态网页，建议关闭keep-alive。</p>
+<p>注意事项：如果需要使用keep-alive功能，服务器端如果使用nginx中keepalive_timeout值要大于0。</p>
+<p>小结<br>通过上面的整体分析，我们不仅了解了TCP与HTTP之间的关系，还明确了现代浏览器基于不同的HTTP协议所作出的网络层面优化。而HTTP2/0的多路复用机制还是一些高性能框架的基础，比如gRPC的实现。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/22/C++%E6%9D%82%E9%A1%B9/" rel="prev" title="C++杂项">
+                  <i class="fa fa-chevron-left"></i> C++杂项
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/22/%E6%8E%92%E5%BA%8F/" rel="next" title="排序">
+                  排序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">未名</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
+  <script src="/js/third-party/rating.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
