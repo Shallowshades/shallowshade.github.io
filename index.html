@@ -86,7 +86,7 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">48</span></a></li>
         <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
@@ -138,7 +138,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -711,118 +711,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/12/13/go/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="大学结束了，大学究竟是什么">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/13/go/" class="post-title-link" itemprop="url">Go</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-13T00:00:00+08:00">2022-12-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-14 15:38:28" itemprop="dateModified" datetime="2022-12-14T15:38:28+08:00">2022-12-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sodu vim /etc/profile </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将下面添加到profile中</span></span><br><span class="line">export GOROOT=&quot;/usr/local/go&quot;</span><br><span class="line">export GOPATH=$HOME/go</span><br><span class="line">export GOBIN=$GOROOT/bin</span><br><span class="line">export PATH=$PATH:$GOBIN</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 检测</span></span><br><span class="line">go version</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改代理</span></span><br><span class="line">go env -w GOPROXY=https://goproxy.cn,direct</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启Modules管理模式</span></span><br><span class="line">go env -w GO111MODULE=on</span><br></pre></td></tr></table></figure>
-
-<h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>go mod init</td>
-<td>生成 go.mod 文件</td>
-</tr>
-<tr>
-<td>go mod download</td>
-<td>下载 go.mod 文件中指明的所有依赖</td>
-</tr>
-<tr>
-<td>go mod tidy</td>
-<td>整理现有的依赖</td>
-</tr>
-<tr>
-<td>go mod graph</td>
-<td>查看现有的依赖结构</td>
-</tr>
-<tr>
-<td>go mod edit</td>
-<td>编辑 go.mod 文件</td>
-</tr>
-<tr>
-<td>go mod vendor</td>
-<td>导出项目所有的依赖到vendor目录</td>
-</tr>
-<tr>
-<td>go mod verify</td>
-<td>校验一个模块是否被篡改过</td>
-</tr>
-<tr>
-<td>go mod why</td>
-<td>查看为什么需要依赖某模块</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/12/13/ginchat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -889,6 +777,262 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/12/13/go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/13/go/" class="post-title-link" itemprop="url">Go</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-13T00:00:00+08:00">2022-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-28 19:58:14" itemprop="dateModified" datetime="2022-12-28T19:58:14+08:00">2022-12-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sodu vim /etc/profile </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将下面添加到profile中</span></span><br><span class="line">export GOROOT=&quot;/usr/local/go&quot;</span><br><span class="line">export GOPATH=$HOME/go</span><br><span class="line">export GOBIN=$GOROOT/bin</span><br><span class="line">export PATH=$PATH:$GOBIN</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 检测</span></span><br><span class="line">go version</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改代理</span></span><br><span class="line">go env -w GOPROXY=https://goproxy.cn,direct</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启Modules管理模式</span></span><br><span class="line">go env -w GO111MODULE=on</span><br></pre></td></tr></table></figure>
+
+<h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>go mod init</td>
+<td>生成 go.mod 文件</td>
+</tr>
+<tr>
+<td>go mod download</td>
+<td>下载 go.mod 文件中指明的所有依赖</td>
+</tr>
+<tr>
+<td>go mod tidy</td>
+<td>整理现有的依赖</td>
+</tr>
+<tr>
+<td>go mod graph</td>
+<td>查看现有的依赖结构</td>
+</tr>
+<tr>
+<td>go mod edit</td>
+<td>编辑 go.mod 文件</td>
+</tr>
+<tr>
+<td>go mod vendor</td>
+<td>导出项目所有的依赖到vendor目录</td>
+</tr>
+<tr>
+<td>go mod verify</td>
+<td>校验一个模块是否被篡改过</td>
+</tr>
+<tr>
+<td>go mod why</td>
+<td>查看为什么需要依赖某模块</td>
+</tr>
+<tr>
+<td>go mod -m [-json] all</td>
+<td>显示详细的依赖关系</td>
+</tr>
+</tbody></table>
+<p>导入本地包方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在go.mod文件中添加</span></span><br><span class="line">require <span class="keyword">package</span> v0<span class="number">.0</span><span class="number">.0</span>		<span class="comment">//导入的包名	版本号</span></span><br><span class="line">replace <span class="keyword">package</span> =&gt; path		<span class="comment">//路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><p><img src="D:\blog\hexo\source_posts\go.assets\defer.png" alt="defer执行时机"></p>
+<p><code>defer注册要延迟执行的函数时该函数所有的参数都需要确定其值</code></p>
+<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><table>
+<thead>
+<tr>
+<th>内置函数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>close</td>
+<td>主要用来关闭channel</td>
+</tr>
+<tr>
+<td>len</td>
+<td>用来求长度，比如string、array、slice、map、channel</td>
+</tr>
+<tr>
+<td>new</td>
+<td>用来分配内存，主要用来分配值类型，比如int、struct。返回的是指针</td>
+</tr>
+<tr>
+<td>make</td>
+<td>用来分配内存，主要用来分配引用类型，比如chan、map、slice</td>
+</tr>
+<tr>
+<td>append</td>
+<td>用来追加元素到数组、slice中</td>
+</tr>
+<tr>
+<td>panic和recover</td>
+<td>用来做错误处理</td>
+</tr>
+</tbody></table>
+<h2 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h2><p><code>是一种抽象的类型,是一种合约</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> usb <span class="keyword">interface</span> &#123;</span><br><span class="line">	read()</span><br><span class="line">	write()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> computer <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">read</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;read...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">write</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;write...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//interface</span></span><br><span class="line">    <span class="keyword">var</span> u usb</span><br><span class="line"></span><br><span class="line">    u = &amp;computer&#123;name: <span class="string">&quot;lenveno&quot;</span>&#125;</span><br><span class="line">    u.read()</span><br><span class="line">    u.write()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>必须实现接口声明的所有的函数的类型才可以通过接口调用，否则编译报错</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> OpenClose <span class="keyword">interface</span> &#123;</span><br><span class="line">	open()</span><br><span class="line">	<span class="built_in">close</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Door <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Door)</span> <span class="title">open</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;open the door...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//必须实现接口的所有函数声明</span></span><br><span class="line">	<span class="keyword">var</span> oc OpenClose</span><br><span class="line">	oc = &amp;Door&#123;&#125; <span class="comment">//未实现close	compile error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>值接收者和指针接收者</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> usb <span class="keyword">interface</span> &#123;</span><br><span class="line">	read()</span><br><span class="line">	write()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> computer <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">read</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;read...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">write</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;write...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mobile <span class="keyword">struct</span> &#123;</span><br><span class="line">	model <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *mobile)</span> <span class="title">read</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;m.model: %v\t&quot;</span>, m.model)</span><br><span class="line">	fmt.Println(<span class="string">&quot;read...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *mobile)</span> <span class="title">write</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;m.model: %v\t&quot;</span>, m.model)</span><br><span class="line">	fmt.Println(<span class="string">&quot;write...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pet <span class="keyword">interface</span> &#123;</span><br><span class="line">	eat(<span class="keyword">string</span>) <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> dog <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *dog)</span> <span class="title">eat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;[dog]%s is eating %s\n&quot;</span>, d.name, name)</span><br><span class="line">	d.name = <span class="string">&quot;white&quot;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;eat well&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> u usb</span><br><span class="line"></span><br><span class="line">    <span class="comment">//computer 采用值接受，可以接受值或者指针</span></span><br><span class="line">    u = &amp;computer&#123;name: <span class="string">&quot;lenveno&quot;</span>&#125;</span><br><span class="line">    u.read()</span><br><span class="line">    u.write()</span><br><span class="line"></span><br><span class="line">    <span class="comment">//mobile 采用指针接受，只能接受指针</span></span><br><span class="line">    u = &amp;mobile&#123;model: <span class="string">&quot;5G&quot;</span>&#125;</span><br><span class="line">    u.read()</span><br><span class="line">    u.write()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> p Pet</span><br><span class="line">    p = &amp;dog&#123;<span class="string">&quot;black&quot;</span>&#125; </span><br><span class="line"></span><br><span class="line">    p.eat(<span class="string">&quot;chicken&quot;</span>) <span class="comment">//不使用指针接受的情况，即使接口接受的是指针，函数也无法修改其内部值</span></span><br><span class="line">    fmt.Println(p)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>一个类型可以实现多个接口</code></p>
+<p><code>多个类型可以实现同一个接口</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> usb <span class="keyword">interface</span> &#123;</span><br><span class="line">	read()</span><br><span class="line">	write()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> player <span class="keyword">interface</span> &#123;</span><br><span class="line">	playMusic()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> video <span class="keyword">interface</span> &#123;</span><br><span class="line">	playVideo()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> computer <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">read</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;read...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">write</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;write...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">playMusic</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;play music...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c computer)</span> <span class="title">playVideo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;c.name: %v\t&quot;</span>, c.name)</span><br><span class="line">	fmt.Println(<span class="string">&quot;play video...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pet <span class="keyword">interface</span> &#123;</span><br><span class="line">	eat(<span class="keyword">string</span>) <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> dog <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> cat <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *dog)</span> <span class="title">eat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;[dog]%s is eating %s\n&quot;</span>, d.name, name)</span><br><span class="line">	d.name = <span class="string">&quot;white&quot;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;eat well&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *cat)</span> <span class="title">eat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;[cat]%s is eating %s\n&quot;</span>, c.name, name)</span><br><span class="line">	c.name = <span class="string">&quot;white&quot;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;eat well&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//一个类型可以实现多个接口</span></span><br><span class="line">    <span class="keyword">var</span> p player</span><br><span class="line">    <span class="keyword">var</span> v video</span><br><span class="line"></span><br><span class="line">    c := &amp;computer&#123;<span class="string">&quot;XiaoMi&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    p = c</span><br><span class="line">    p.playMusic()</span><br><span class="line"></span><br><span class="line">    v = c</span><br><span class="line">    v.playVideo()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//一个接口可以被多个类型实现</span></span><br><span class="line">    <span class="keyword">var</span> pet Pet</span><br><span class="line"></span><br><span class="line">    dog := &amp;dog&#123;<span class="string">&quot;black&quot;</span>&#125;</span><br><span class="line">    cat := &amp;cat&#123;<span class="string">&quot;kitty&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    pet = dog</span><br><span class="line">    pet.eat(<span class="string">&quot;bone&quot;</span>)</span><br><span class="line"></span><br><span class="line">    pet = cat</span><br><span class="line">    pet.eat(<span class="string">&quot;fish&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>接口可以嵌套</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Flyer <span class="keyword">interface</span> &#123;</span><br><span class="line">	fly()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Swimmer <span class="keyword">interface</span> &#123;</span><br><span class="line">	swim()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FlyFish <span class="keyword">interface</span> &#123;</span><br><span class="line">	Flyer</span><br><span class="line">	Swimmer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Fish <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f Fish)</span> <span class="title">fly</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;fly...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f Fish)</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;swim...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> ff FlyFish</span><br><span class="line">	ff = &amp;Fish&#123;&#125;</span><br><span class="line">	ff.fly()</span><br><span class="line">	ff.swim()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
+<p>在main或其他函数中开协程，主程序结束了，协程还继续执行吗?</p>
+</blockquote>
+<p>main函数中的协程，如果main结束了，协程也会结束，mian函数结束意味着程序结束了吧</p>
+<p> 其他函数里的协程，函数结束了，只要main没结束，协程就会执行。</p>
+<h2 id="sync"><a href="#sync" class="headerlink" title="sync"></a>sync</h2><h3 id="sync-Map"><a href="#sync-Map" class="headerlink" title="sync.Map"></a>sync.Map</h3><p>map不是并发安全的，sync.Map并发安全</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Store</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m sync.Map</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//存</span></span><br><span class="line">	m.Store(<span class="string">&quot;Cloud&quot;</span>, <span class="string">&quot;Zack&quot;</span>)</span><br><span class="line">	<span class="comment">//取</span></span><br><span class="line">	value, ok := m.Load(<span class="string">&quot;Cloud&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;value: %v, ok: %v\n&quot;</span>, value, ok)</span><br><span class="line"></span><br><span class="line">	value, ok = m.Load(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;value: %v, ok: %v\n&quot;</span>, value, ok)</span><br><span class="line">	<span class="comment">//删</span></span><br><span class="line">	m.Delete(<span class="string">&quot;Cloud&quot;</span>)</span><br><span class="line"></span><br><span class="line">	value, ok = m.Load(<span class="string">&quot;Cloud&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;value: %v, ok: %v\n&quot;</span>, value, ok)</span><br><span class="line"></span><br><span class="line">	m.Store(<span class="string">&quot;Cloud&quot;</span>, <span class="string">&quot;1&quot;</span>)</span><br><span class="line">	m.Store(<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;2&quot;</span>)</span><br><span class="line">	m.Store(<span class="string">&quot;Tifa&quot;</span>, <span class="string">&quot;3&quot;</span>)</span><br><span class="line">	m.Store(<span class="string">&quot;Barret&quot;</span>, <span class="string">&quot;4&quot;</span>)</span><br><span class="line">	<span class="comment">//遍历</span></span><br><span class="line">	m.Range(<span class="function"><span class="keyword">func</span><span class="params">(key, value any)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;k: &quot;</span>, key, <span class="string">&quot;v :&quot;</span>, value)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//load and delete 加载一个值，存在则删除</span></span><br><span class="line">	value, ok = m.LoadAndDelete(<span class="string">&quot;Cloud&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;value: %v, ok: %v\n&quot;</span>, value, ok)</span><br><span class="line"></span><br><span class="line">	m.Range(<span class="function"><span class="keyword">func</span><span class="params">(key, value any)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;k: &quot;</span>, key, <span class="string">&quot;v :&quot;</span>, value)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// load or store 如果存在就load，不存在就store</span></span><br><span class="line">	actual, loaded := m.LoadOrStore(<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;5&quot;</span>)</span><br><span class="line">	fmt.Println(<span class="string">&quot;actual : &quot;</span>, actual, <span class="string">&quot; loaded : &quot;</span>, loaded)</span><br><span class="line"></span><br><span class="line">	value, ok = m.Load(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;value: %v, ok: %v\n&quot;</span>, value, ok)</span><br><span class="line"></span><br><span class="line">	actual, loaded = m.LoadOrStore(<span class="string">&quot;Zack&quot;</span>, <span class="string">&quot;7&quot;</span>)</span><br><span class="line">	fmt.Println(<span class="string">&quot;actual : &quot;</span>, actual, <span class="string">&quot; loaded : &quot;</span>, loaded)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><p>内存既可以分配到堆中，也可以分配到栈中。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>内存管理主要包括两个动作：分配与释放。逃逸分析就是服务于内存分配的，而内存的释放由GC负责。</p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>在Go语言中，<strong>栈的内存是由编译器自动进行分配和释放的</strong>，栈区往往存储着函数参数、局部变量和调用函数帧，<strong>它们随着函数的创建而分配，随着函数的退出而销毁</strong>。</p>
+<p>Go应用程序运行时，每个 goroutine 都维护着一个自己的栈区，这个栈区只能自己使用不能被其他 goroutine 使用。栈是调用栈（call stack）的简称。<strong>一个栈通常又包含了许多栈帧（stack frame），它描述的是函数之间的调用关系</strong></p>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p><strong>与栈不同的是，堆区的内存一般由编译器和工程师自己共同进行管理分配，交给 Runtime GC 来释放。在堆上分配时，必须找到一块足够大的内存来存放新的变量数据。后续释放时，垃圾回收器扫描堆空间寻找不再被使用的对象。</strong></p>
+<p><strong>用GO语言开发过程中，要考虑的内存管理只是针对堆内存而言的。</strong></p>
+<p>程序在运行期间可以主动从堆上申请内存，这些内存通过Go的内存分配器分配，并由垃圾收集器回收。</p>
+<h3 id="堆和栈的对比"><a href="#堆和栈的对比" class="headerlink" title="堆和栈的对比"></a>堆和栈的对比</h3><p><strong>加锁</strong></p>
+<ul>
+<li>  <strong>栈不需要加锁</strong>：每个goroutine都独享自己的栈空间，这就意味着栈上的内存操作是不需要加锁的。</li>
+<li>  <strong>堆有时需要加锁</strong>：堆上的内存，有时需要加锁防止多线程冲突</li>
+</ul>
+<blockquote>
+<p>  为什么堆上的内存有时需要加锁？而不是一直需要加锁呢？</p>
+</blockquote>
+<p>因为Go的内存分配策略学习了TCMalloc的线程缓存思想，他为每个处理器分配了一个mcache，注意：从mcache分配内存也是无锁的。</p>
+<p>TCmalloc全称Thread-Caching Malloc，即线程缓存的malloc，实现了高效的多线程内存管理，用于替代系统的内存分配相关的函数（malloc、free，new，new[]等）。用于优化C++写的多线程应用。用途：让MySQL在高并发下内存占用更加稳定。</p>
+<p><strong>性能</strong></p>
+<ul>
+<li>  <strong>栈内存管理 性能好</strong>：栈上的内存，它的分配与释放非常高效的。简单地说，它只需要两个CPU指令：一个是分配入栈，另外一个是栈内释放。只需要借助于栈相关寄存器即可完成。</li>
+<li>  <strong>堆内存管理 性能差</strong>：对于程序堆上的内存回收，还需要有标记清除阶段，例如Go采用的三色标记法。</li>
+</ul>
+<h3 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h3><ul>
+<li>  <strong>栈缓存性能更好</strong></li>
+<li>  <strong>堆缓存性能较差</strong></li>
+</ul>
+<p>原因是：栈内存能更好地利用CPU的缓存策略，因为栈空间相较于堆来说是更连续的。</p>
+<h2 id="变量逃逸分析"><a href="#变量逃逸分析" class="headerlink" title="变量逃逸分析"></a>变量逃逸分析</h2><p><strong>相比于把内存分配到堆中，分配到栈中优势更明显。</strong></p>
+<p><strong>Go编译器会尽可能将变量分配到到栈上。</strong></p>
+<p><strong>但是，在函数返回后无法证明变量未被引用，则该变量将被分配到堆上，该变量不随函数栈的回收而回收。以此避免悬挂指针（dangling pointer）的问题。</strong></p>
+<p>另外，如果局部变量占用内存非常大，也会将其分配在堆上。</p>
+<blockquote>
+<p>  Go是如何确定内存是分配到栈上还是堆上的呢？</p>
+</blockquote>
+<p>答案：<code>逃逸分析</code>。</p>
+<p><strong>编译器通过逃逸分析技术去选择堆或者栈，逃逸分析的基本思想如下：检查变量的生命周期是否是完全可知的，如果通过检查，则在栈上分配。否则，就是所谓的逃逸，必须在堆上进行分配。</strong></p>
+<h3 id="逃逸原则"><a href="#逃逸原则" class="headerlink" title="逃逸原则"></a>逃逸原则</h3><p>Go语言虽然没有明确说明逃逸分析原则，但是有以下几点准则，是可以参考的。</p>
+<ul>
+<li>  Go的逃逸分析是在编译期完成的：编译期无法确定的参数类型<strong>必定</strong>放到堆中；</li>
+<li>  如果变量在函数外部存在引用，则<strong>必定</strong>放在堆中；</li>
+<li>  如果变量占用内存较大时，则<strong>优先</strong>放到堆中；</li>
+<li>  如果变量在函数外部没有引用，则<strong>优先</strong>放到栈中；</li>
+</ul>
+<h3 id="逃逸分析命令"><a href="#逃逸分析命令" class="headerlink" title="逃逸分析命令"></a>逃逸分析命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -gcflags <span class="string">&#x27;-m -m -l&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-参数是interface类型"><a href="#1-参数是interface类型" class="headerlink" title="1.参数是interface类型"></a>1.参数是interface类型</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := <span class="number">666</span></span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原因分析</strong></p>
+<p>因为Println(a …interface{})的参数是<code>interface&#123;&#125;</code>类型，编译期无法确定其具体的参数类型，所以内存分配到堆中。</p>
+<h3 id="2-变量在函数外部有引用"><a href="#2-变量在函数外部有引用" class="headerlink" title="2. 变量在函数外部有引用"></a>2. 变量在函数外部有引用</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span> *<span class="title">int</span></span> &#123;</span><br><span class="line">	a := <span class="number">10</span></span><br><span class="line">	<span class="keyword">return</span> &amp;a</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	_ = test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原因分析</strong></p>
+<p>变量a在函数外部存在引用。</p>
+<p><strong>当函数执行完毕，对应的栈帧就被销毁，但是引用已经被返回到函数之外。如果这时外部通过引用地址取值，虽然地址还在，但是这块内存已经被释放回收了，这就是非法内存。</strong></p>
+<p>为了避免上述非法内存的情况，在这种情况下变量的内存分配必须分配到堆上。</p>
+<h3 id="3-变量内存占用较大"><a href="#3-变量内存占用较大" class="headerlink" title="3. 变量内存占用较大"></a>3. 变量内存占用较大</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">10000</span>, <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++ &#123;</span><br><span class="line">   		a[i] = i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原因分析</strong></p>
+<p>定义了一个容量为10000的int类型切片，发生了逃逸，内存分配到了堆上（heap）。</p>
+<p>将切片的容量和长度修改为1，再次查看逃逸分析的结果，没有发生逃逸，内存默认分类到了栈上。</p>
+<p>所以，当变量占用内存较大时，会发生逃逸分析，将内存分配到堆上。</p>
+<h3 id="4-变量大小不确定时"><a href="#4-变量大小不确定时" class="headerlink" title="4. 变量大小不确定时"></a>4. 变量大小不确定时</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    l := <span class="number">1</span></span><br><span class="line">    a := <span class="built_in">make</span>([]<span class="keyword">int</span>, l, l)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; l; i++ &#123;</span><br><span class="line">    	a[i] = i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原因分析</strong></p>
+<p>发生了逃逸，分配到了heap堆中。</p>
+<p><strong>虽然在代码段中给变量 l 赋值了1，但是编译期间只能识别到初始化int类型切片时，传入的长度和容量是变量l，编译期并不能确定变量l的值，所以发生了逃逸，会把内存分配到堆中。</strong></p>
+<blockquote>
+<p>尽量写出分配在栈上的代码。因为堆上的变量变少后，可以减轻内存分配的开销，减小GC的压力，提高程序的运行速度。</p>
+</blockquote>
+<p>在不断的需求变化，业务变化中求得==平衡==</p>
+<p><strong>有些场景下我们不应该传递结构体指针，而应该直接传递结构体。</strong></p>
+<p>虽然直接传递结构体需要值拷贝，但是这是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。</p>
+<p>当然这种做法不是绝对的，要根据场景去分析：</p>
+<ul>
+<li>  <strong>如果结构体较大，传递结构体指针更合适，因为指针类型相比值类型能节省大量的内存空间</strong></li>
+<li>  <strong>如果结构体较小，传递结构体更适合，因为在栈上分配内存，可以有效减少GC压力</strong></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>要根据实际场景考虑，如何将内存尽量分配到栈中，减少GC的压力，提高性能。</p>
+<p>找到应用开发效率、程序运行效率、对机器的压力及负载的平衡点。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/09/08/git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -920,7 +1064,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-13 11:44:07" itemprop="dateModified" datetime="2022-12-13T11:44:07+08:00">2022-12-13</time>
+      <time title="修改时间：2022-12-24 00:54:43" itemprop="dateModified" datetime="2022-12-24T00:54:43+08:00">2022-12-24</time>
     </span>
 
   
@@ -935,11 +1079,14 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><h2 id="git基础设置"><a href="#git基础设置" class="headerlink" title="git基础设置"></a>git基础设置</h2><p>git config –global user.name “&lt;用户名&gt;”</p>
 <p>git config –global user.email “&lt;电子邮件&gt;” </p>
-<p>git config –global color.ui auto git以彩色显示</p>
+<p>git config –global color.ui auto 以彩色显示</p>
+<p>git config –global core.editor “vim” 将编辑器配置成vim</p>
+<p>export GIT_EDITOR=vim 在环境变量中将编辑器配置成vim</p>
 <p>git config –global alias.co checkout 为Git命令设定别名 把「checkout」缩略为「co」，然后就使用「co」来执行命令</p>
 <h2 id="git基础命令"><a href="#git基础命令" class="headerlink" title="git基础命令"></a>git基础命令</h2><p>git init 初始化一个空的或者已经存在的数据库</p>
 <p>git add <fileName> 往索引树中添加一个文件</p>
 <p>git commit -m <comment> 提交到数据库</p>
+<p>git commit –amend 修改最后一次提交的注释</p>
 <p>git log 查看日志</p>
 <p>git status 查看工作树和索引的状态</p>
 <p>git branch 查看分支</p>
@@ -954,7 +1101,7 @@
 <p>git reset &lt;同上&gt; 回退到目标状态，只能在本地操作，是真的回退</p>
 <p>git revert &lt;同上&gt; 回退到目标状态，可以在远端操作，不是真的回退，是再生成一个新的状态来代替目标状态</p>
 <h2 id="自由修改提交树"><a href="#自由修改提交树" class="headerlink" title="自由修改提交树"></a>自由修改提交树</h2><p>git cherry-pick &lt;hashCode、hashCode、… &gt; 将选择的状态挂在当前HEAD或者分支名所指向的节点下（若是当前HEAD或者分支名并非指向叶子节点，则已当前HEAD指向的节点创建新分支，按选择顺序）</p>
-<p>git rebase -i(interaction) &lt;同上，但是是范围选择&gt;  可以对选择范围内的状态进行删除、重排、合并等操作</p>
+<p>git rebase -i(interaction) &lt;同上，但是是范围选择&gt;  可以对选择范围内的状态进行删除、重排、合并、修改注释等操作</p>
 <h2 id="git远程"><a href="#git远程" class="headerlink" title="git远程"></a>git远程</h2><p>git remote  add <repoName>  <url> 添加一个远程仓库，repoName就是对这个仓库取得本地名字，后续通过该名字指定该仓库</p>
 <p>git clone <url> 克隆一个git数据库到本地</p>
 <p>git push <repoName> <branch> 将本地推到远端，但是如果在远端有本地未同步的状态时，将无法推送</p>
@@ -2029,6 +2176,104 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/net/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="未名">
+      <meta itemprop="description" content="大学结束了，大学究竟是什么">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="未名的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/22/net/" class="post-title-link" itemprop="url">net</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-22 11:41:05" itemprop="dateCreated datePublished" datetime="2022-06-22T11:41:05+08:00">2022-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-27 00:36:16" itemprop="dateModified" datetime="2022-12-27T00:36:16+08:00">2022-12-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Get和Post一般的区别"><a href="#Get和Post一般的区别" class="headerlink" title="Get和Post一般的区别"></a>Get和Post一般的区别</h2><p>（1）post更安全（不会作为url的一部分，不会被缓存、保存在服务器日志、以及浏览器浏览记录中）<br>（2）post发送的数据更大（get有url长度限制）<br>（3）post能发送更多的数据类型（get只能发送ASCII字符）<br>（4）post比get慢<br>（5）post用于修改和写入数据，get一般用于搜索排序和筛选之类的操作（淘宝，支付宝的搜索查询都是get提交），目的是资源的获取，读取数据<br>虽然在开发中经常用get或者post请求，但是由于我们资历经验的欠缺，或许就重来没有深究过什么场合用get请求，什么场合用post请求，我相信不止我一个人当看到第4,5条的时候，就会明白为什么面试官对我们的回答不满意，也明白了自己对get或post用法理解的欠缺，那么get比post更快，究竟快多少呢？表现在那些方面？</p>
+<p>为什么get比post更快</p>
+<p><strong>1.post请求包含更多的请求头</strong><br>因为post需要在请求的body部分包含数据，所以会多了几个数据描述部分的首部字段（如：content-type）,这其实是微乎其微的。</p>
+<p><strong>2.最重要的一条，post在真正接收数据之前会先将请求头发送给服务器进行确认，然后才真正发送数据</strong><br>post请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送post请求头（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回100 Continue响应<br>（5）浏览器发送数据<br>（6）服务器返回200 OK响应<br>get请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送get请求头和数据（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回200 OK响应<br>也就是说，目测get的总耗是post的2/3左右，这个口说无凭，网上已经有网友进行过测试。</p>
+<p><strong>3.get会将数据缓存起来，而post不会</strong><br>可以做个简短的测试，使用ajax采用get方式请求静态数据（比如html页面，图片）的时候，如果两次传输的数据相同，第二次以后消耗的时间将会在10ms以内（chrome测试），而post每次消耗的时间都差不多。经测试，chrome和firefox下如果检测到get请求的是静态资源，则会缓存，如果是数据，则不会缓存，但是IE什么都会缓存起来，当然，应该没有人用post去获取静态数据吧，反正我是没见过。</p>
+<h2 id="一个TCP连接可以发送多少个HTTP请求？"><a href="#一个TCP连接可以发送多少个HTTP请求？" class="headerlink" title="一个TCP连接可以发送多少个HTTP请求？"></a>一个TCP连接可以发送多少个HTTP请求？</h2><p>TCP与HTTP的渊源<br>TCP协议对应于传输层，HTTP协议对应于应用层。WEB项目中，HTTP协议是建立在TCP的基础上的。</p>
+<p>最初浏览器从服务器加载一个网页，会发起一个HTTP请求，这时需要先建立一个TCP连接。当本次数据请求完毕之后，会立刻断开TCP连接。</p>
+<p>但随着时间的推理，HTML网页内容越来越复杂，不仅有内容，还有JS、CSS和图片资源，每个资源的请求都建立一次TCP连接，效率就会很低。</p>
+<p>这时，Keep-Alive就被提出用来了，专门用于解决效率低的问题。</p>
+<p>本文关于TCP连接能够发送多少个HTTP请求，本质上就是围绕着解决通信的低效问题的。</p>
+<p><strong>问题一：浏览器建立TCP连接之后，完成一次HTTP请求，是否会断开？</strong><br>HTTP协议Header中的Connection属性决定了连接是否持久，不同HTTP协议版本有所不同。</p>
+<p>HTTP/1.0中Connection默认为close，即每次请求都会重新建立和断开TCP连接。缺点：建立和断开TCP连接，代价过大。</p>
+<p>HTTP/1.1中Connection默认为keep-alive，即连接可以复用，不用每次都重新建立和断开TCP连接。超时之后没有连接则主动断开。可以通过声明Connection为close进行关闭。</p>
+<p>优点：TCP连接可被重复利用，减少建立连接的损耗，SSL的开销也可以避免。刷新页面时也可以复用，从而不再建立SSL连接等。</p>
+<p>结论：默认情况下（HTTP/1.1）建立TCP连接不会断开，只有在请求报头中声明Connection: close才会请求完成之后关闭连接。不断开的最终目的是减少建立连接所导致的性能损耗。</p>
+<p><strong>问题二：一个TCP连接可以对应几个HTTP请求？</strong><br>如果Connection为close，则一个TCP连接只对应一个HTTP请求。</p>
+<p>如果Connection为Keep-alive，则一个TCP连接可对应一个到多个HTTP请求。</p>
+<p><strong>问题三：一个TCP连接中，可以同时发送多个HTTP请求吗？</strong><br>HTTP/1.1中单个TCP连接在同一时刻只能处理一个请求。HTTP/1.1在RFC 2616中规定了Pipelining来解决这个问题，但浏览器默认是关闭的。</p>
+<p>RFC 2616中规定：一个支持持久连接的客户端可以在一个连接中发送多个请求（不需要等待任意请求的响应）。收到请求的服务器必须按照请求收到的顺序发送响应。</p>
+<p>Pipelining本身存在一些问题，比如代理服务器不能正确处理HTTP Pipelining、Head-of-line Blocking连接头阻塞（首个请求耗时过长，阻塞其他请求）。所以，浏览器默认关闭该功能。</p>
+<p>HTTP/2.0提供了多路复用技术Multiplexing，一个TCP可以并发多个HTTP请求（理论无上限，但是一般浏览器会有TCP并发数的限制）。</p>
+<p>HTTP/1.1中为了提升性能，通常会采用连接复用和同时建立多个TCP连接的方式提升性能。</p>
+<p>结论：HTTP/1.1中存在Pipelining技术支持一个连接发送多个请求，但存在弊端，浏览器默认关闭。HTTP/2.0中通过多路复用技术支持一个TCP连接中并发请求HTTP。</p>
+<p><strong>问题四：浏览器对同一Host建立TCP连接的数量有没限制？</strong><br>不同浏览器限制不同，比如Chrome最多允许同一个Host可建立6个TCP连接。</p>
+<p>如果服务器只支持HTTP/1.1，浏览器会采用在同一个Host下建立多个TCP连接来进行效率提升。如果是基于HTTPS传输，在SSL握手之后，还会尝试协商是否可以采用HTTP/2.0的Multiplexing功能。</p>
+<p><strong>问题五：keep-alive使用场景及优缺点</strong><br>开启keep-alive对内存要求高，关闭keep-alive对CPU要求高；如果内存和CPU都足够，开启和关闭keep-alive对性能影响不大；如果考虑服务器压力，如果是静态页面，大量的调用js或者图片的话，建议开启keep-alive；如果是动态网页，建议关闭keep-alive。</p>
+<p>注意事项：如果需要使用keep-alive功能，服务器端如果使用nginx中keepalive_timeout值要大于0。</p>
+<p>小结<br>通过上面的整体分析，我们不仅了解了TCP与HTTP之间的关系，还明确了现代浏览器基于不同的HTTP协议所作出的网络层面优化。而HTTP2/0的多路复用机制还是一些高性能框架的基础，比如gRPC的实现。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2122,104 +2367,6 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">v</span>(<span class="number">10</span>, vector&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BaseSort</span><span class="params">(T A[], <span class="keyword">int</span> n, <span class="keyword">int</span> base)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//分配</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        v[A[i] / base % <span class="number">10</span>].<span class="built_in">push_back</span>(A[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//收集</span></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v[i].<span class="built_in">size</span>(); ++j) &#123;</span><br><span class="line">            A[k++] = v[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        v[i].<span class="built_in">clear</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">10</span>] = &#123; <span class="number">19</span>,<span class="number">38</span>,<span class="number">65</span>,<span class="number">97</span>,<span class="number">76</span>,<span class="number">13</span>,<span class="number">27</span>,<span class="number">49</span> ,<span class="number">43</span>,<span class="number">34</span> &#125;;</span><br><span class="line">    <span class="comment">//QuickSort&lt;int&gt;(a, 0, 9);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//B = new int[10];</span></span><br><span class="line">    <span class="comment">//MergeSort&lt;int&gt;(a, 0, 9);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1e9</span>; i *= <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="built_in">BaseSort</span>(a, <span class="number">10</span>, i);</span><br><span class="line">        <span class="built_in">print</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="外部排序"><a href="#外部排序" class="headerlink" title="外部排序"></a>外部排序</h1>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="大学结束了，大学究竟是什么">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/22/%E7%BD%91%E7%BB%9C%E6%9D%82%E9%A1%B9/" class="post-title-link" itemprop="url">网络</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-22 11:41:05" itemprop="dateCreated datePublished" datetime="2022-06-22T11:41:05+08:00">2022-06-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-07-14 19:44:38" itemprop="dateModified" datetime="2022-07-14T19:44:38+08:00">2022-07-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Get和Post一般的区别"><a href="#Get和Post一般的区别" class="headerlink" title="Get和Post一般的区别"></a>Get和Post一般的区别</h2><p>（1）post更安全（不会作为url的一部分，不会被缓存、保存在服务器日志、以及浏览器浏览记录中）<br>（2）post发送的数据更大（get有url长度限制）<br>（3）post能发送更多的数据类型（get只能发送ASCII字符）<br>（4）post比get慢<br>（5）post用于修改和写入数据，get一般用于搜索排序和筛选之类的操作（淘宝，支付宝的搜索查询都是get提交），目的是资源的获取，读取数据<br>虽然在开发中经常用get或者post请求，但是由于我们资历经验的欠缺，或许就重来没有深究过什么场合用get请求，什么场合用post请求，我相信不止我一个人当看到第4,5条的时候，就会明白为什么面试官对我们的回答不满意，也明白了自己对get或post用法理解的欠缺，那么get比post更快，究竟快多少呢？表现在那些方面？</p>
-<p>为什么get比post更快</p>
-<p><strong>1.post请求包含更多的请求头</strong><br>因为post需要在请求的body部分包含数据，所以会多了几个数据描述部分的首部字段（如：content-type）,这其实是微乎其微的。</p>
-<p><strong>2.最重要的一条，post在真正接收数据之前会先将请求头发送给服务器进行确认，然后才真正发送数据</strong><br>post请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送post请求头（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回100 Continue响应<br>（5）浏览器发送数据<br>（6）服务器返回200 OK响应<br>get请求的过程：<br>（1）浏览器请求tcp连接（第一次握手）<br>（2）服务器答应进行tcp连接（第二次握手）<br>（3）浏览器确认，并发送get请求头和数据（第三次握手，这个报文比较小，所以http会在此时进行第一次数据发送）<br>（4）服务器返回200 OK响应<br>也就是说，目测get的总耗是post的2/3左右，这个口说无凭，网上已经有网友进行过测试。</p>
-<p><strong>3.get会将数据缓存起来，而post不会</strong><br>可以做个简短的测试，使用ajax采用get方式请求静态数据（比如html页面，图片）的时候，如果两次传输的数据相同，第二次以后消耗的时间将会在10ms以内（chrome测试），而post每次消耗的时间都差不多。经测试，chrome和firefox下如果检测到get请求的是静态资源，则会缓存，如果是数据，则不会缓存，但是IE什么都会缓存起来，当然，应该没有人用post去获取静态数据吧，反正我是没见过。</p>
-<h2 id="一个TCP连接可以发送多少个HTTP请求？"><a href="#一个TCP连接可以发送多少个HTTP请求？" class="headerlink" title="一个TCP连接可以发送多少个HTTP请求？"></a>一个TCP连接可以发送多少个HTTP请求？</h2><p>TCP与HTTP的渊源<br>TCP协议对应于传输层，HTTP协议对应于应用层。WEB项目中，HTTP协议是建立在TCP的基础上的。</p>
-<p>最初浏览器从服务器加载一个网页，会发起一个HTTP请求，这时需要先建立一个TCP连接。当本次数据请求完毕之后，会立刻断开TCP连接。</p>
-<p>但随着时间的推理，HTML网页内容越来越复杂，不仅有内容，还有JS、CSS和图片资源，每个资源的请求都建立一次TCP连接，效率就会很低。</p>
-<p>这时，Keep-Alive就被提出用来了，专门用于解决效率低的问题。</p>
-<p>本文关于TCP连接能够发送多少个HTTP请求，本质上就是围绕着解决通信的低效问题的。</p>
-<p><strong>问题一：浏览器建立TCP连接之后，完成一次HTTP请求，是否会断开？</strong><br>HTTP协议Header中的Connection属性决定了连接是否持久，不同HTTP协议版本有所不同。</p>
-<p>HTTP/1.0中Connection默认为close，即每次请求都会重新建立和断开TCP连接。缺点：建立和断开TCP连接，代价过大。</p>
-<p>HTTP/1.1中Connection默认为keep-alive，即连接可以复用，不用每次都重新建立和断开TCP连接。超时之后没有连接则主动断开。可以通过声明Connection为close进行关闭。</p>
-<p>优点：TCP连接可被重复利用，减少建立连接的损耗，SSL的开销也可以避免。刷新页面时也可以复用，从而不再建立SSL连接等。</p>
-<p>结论：默认情况下（HTTP/1.1）建立TCP连接不会断开，只有在请求报头中声明Connection: close才会请求完成之后关闭连接。不断开的最终目的是减少建立连接所导致的性能损耗。</p>
-<p><strong>问题二：一个TCP连接可以对应几个HTTP请求？</strong><br>如果Connection为close，则一个TCP连接只对应一个HTTP请求。</p>
-<p>如果Connection为Keep-alive，则一个TCP连接可对应一个到多个HTTP请求。</p>
-<p><strong>问题三：一个TCP连接中，可以同时发送多个HTTP请求吗？</strong><br>HTTP/1.1中单个TCP连接在同一时刻只能处理一个请求。HTTP/1.1在RFC 2616中规定了Pipelining来解决这个问题，但浏览器默认是关闭的。</p>
-<p>RFC 2616中规定：一个支持持久连接的客户端可以在一个连接中发送多个请求（不需要等待任意请求的响应）。收到请求的服务器必须按照请求收到的顺序发送响应。</p>
-<p>Pipelining本身存在一些问题，比如代理服务器不能正确处理HTTP Pipelining、Head-of-line Blocking连接头阻塞（首个请求耗时过长，阻塞其他请求）。所以，浏览器默认关闭该功能。</p>
-<p>HTTP/2.0提供了多路复用技术Multiplexing，一个TCP可以并发多个HTTP请求（理论无上限，但是一般浏览器会有TCP并发数的限制）。</p>
-<p>HTTP/1.1中为了提升性能，通常会采用连接复用和同时建立多个TCP连接的方式提升性能。</p>
-<p>结论：HTTP/1.1中存在Pipelining技术支持一个连接发送多个请求，但存在弊端，浏览器默认关闭。HTTP/2.0中通过多路复用技术支持一个TCP连接中并发请求HTTP。</p>
-<p><strong>问题四：浏览器对同一Host建立TCP连接的数量有没限制？</strong><br>不同浏览器限制不同，比如Chrome最多允许同一个Host可建立6个TCP连接。</p>
-<p>如果服务器只支持HTTP/1.1，浏览器会采用在同一个Host下建立多个TCP连接来进行效率提升。如果是基于HTTPS传输，在SSL握手之后，还会尝试协商是否可以采用HTTP/2.0的Multiplexing功能。</p>
-<p><strong>问题五：keep-alive使用场景及优缺点</strong><br>开启keep-alive对内存要求高，关闭keep-alive对CPU要求高；如果内存和CPU都足够，开启和关闭keep-alive对性能影响不大；如果考虑服务器压力，如果是静态页面，大量的调用js或者图片的话，建议开启keep-alive；如果是动态网页，建议关闭keep-alive。</p>
-<p>注意事项：如果需要使用keep-alive功能，服务器端如果使用nginx中keepalive_timeout值要大于0。</p>
-<p>小结<br>通过上面的整体分析，我们不仅了解了TCP与HTTP之间的关系，还明确了现代浏览器基于不同的HTTP协议所作出的网络层面优化。而HTTP2/0的多路复用机制还是一些高性能框架的基础，比如gRPC的实现。</p>
-
       
     </div>
 
