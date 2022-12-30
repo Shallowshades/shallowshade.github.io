@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
 
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="重载 重写(覆盖) 隐藏 重载(overload): 定义： 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。 特点： ①同一个类中（相同作用域） ②函数名称必须相同 ③函数参数必须不同 ④函数返回类型可同可不同，不重要  重写(override):定义：也称为覆盖，是指子类重新定义父类中有相同函数名，参数列表，返回类型">
+  
+  <title>C++杂项 | 未名的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="重载 重写(覆盖) 隐藏 重载(overload): 定义： 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。 特点： ①同一个类中（相同作用域） ②函数名称必须相同 ③函数参数必须不同 ④函数返回类型可同可不同，不重要  重写(override):定义：也称为覆盖，是指子类重新定义父类中有相同函数名，参数列表，返回类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++杂项">
 <meta property="og:url" content="https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/index.html">
@@ -38,205 +25,76 @@
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/C++%E6%9D%82%E9%A1%B9.assets/f42613dfc5c54d8a8787f0a8df22f185.png">
-
-
-<link rel="canonical" href="https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/","path":"2022/06/22/C++进阶/","title":"C++杂项"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>C++杂项 | 未名的博客</title>
   
+    <link rel="alternate" href="/atom.xml" title="未名的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">未名的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shallowshades.github.io.git"></form>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">未名的博客</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">放弃真的简单吗？是不是要比走路简单</p>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C++进阶" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/06/22/C++%E8%BF%9B%E9%98%B6/" class="article-date">
+  <time datetime="2022-06-22T03:41:05.000Z" itemprop="datePublished">2022-06-22</time>
+</a>
+    
   </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">48</span></a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
-  </ul>
-</nav>
-
-
-
-
-</div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-%E9%87%8D%E5%86%99-%E8%A6%86%E7%9B%96-%E9%9A%90%E8%97%8F"><span class="nav-number">1.</span> <span class="nav-text">重载 重写(覆盖) 隐藏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98-%E6%8A%97%E5%8F%98-%E4%B8%8D%E5%8F%98"><span class="nav-number">2.</span> <span class="nav-text">协变 抗变 不变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%85%A5%E6%A0%88"><span class="nav-number">3.</span> <span class="nav-text">函数入栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C%E5%92%8CC-%E4%B8%ADstatic%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">C和C++中static的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c%E4%B8%8Ec-%E4%B8%AD%E7%9A%84extern"><span class="nav-number">5.</span> <span class="nav-text">c与c++中的extern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">C++对象构造和析构的顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">面向对象设计的六大原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super"><span class="nav-number">8.</span> <span class="nav-text">__super</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.</span> <span class="nav-text">四种强制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">10.</span> <span class="nav-text">四种智能指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86CPU-%E7%89%A9%E7%90%86CPU%E5%86%85%E6%A0%B8-%E9%80%BB%E8%BE%91%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">11.</span> <span class="nav-text">物理CPU 物理CPU内核 逻辑处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">进程和线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">13.</span> <span class="nav-text">字节对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8PC"><span class="nav-number">14.</span> <span class="nav-text">程序计数器PC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%87%BD%E6%95%B0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%92%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">15.</span> <span class="nav-text">C++函数编译原理和成员函数的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">16.</span> <span class="nav-text">函数调用约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%89%E4%BA%94%E6%B3%95%E5%88%99"><span class="nav-number">17.</span> <span class="nav-text">C++三五法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E4%B8%BA%E7%A7%81%E6%9C%89"><span class="nav-number">18.</span> <span class="nav-text">析构函数设置为私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">19.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">20.</span> <span class="nav-text">保留类型信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-forward"><span class="nav-number">21.</span> <span class="nav-text">std::forward</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8CAVL%E6%A0%91"><span class="nav-number">22.</span> <span class="nav-text">红黑树和AVL树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#emplace-back-%E5%92%8C-push-back"><span class="nav-number">23.</span> <span class="nav-text">emplace_back 和 push_back</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">未名</p>
-  <div class="site-description" itemprop="description">慕然回首，你是否看到过去的自己</div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">48</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-
-
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-
-
+    <h1 class="article-title" itemprop="name">
+      C++杂项
+    </h1>
   
 
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="慕然回首，你是否看到过去的自己">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          C++杂项
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-22 11:41:05" itemprop="dateCreated datePublished" datetime="2022-06-22T11:41:05+08:00">2022-06-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-20 23:45:08" itemprop="dateModified" datetime="2022-11-20T23:45:08+08:00">2022-11-20</time>
-    </span>
-
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-</div>
-
-        </div>
       </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
+      
         <h2 id="重载-重写-覆盖-隐藏"><a href="#重载-重写-覆盖-隐藏" class="headerlink" title="重载 重写(覆盖) 隐藏"></a>重载 重写(覆盖) 隐藏</h2><ol>
 <li><p>重载(overload):<br> 定义：<br> 同一个类中的函数具有相同名称，但参数列表不同（参数个数，参数类型），这样同名不同参数的函数之间，互为重载函数，属于编译时多态。<br> 特点：<br> ①同一个类中（相同作用域）<br> ②函数名称必须相同<br> ③函数参数必须不同<br> ④函数返回类型可同可不同，不重要</p>
 </li>
@@ -546,103 +404,146 @@
 <p><strong>如果你的应用中，查询的次数远远大于插入和删除，那么选择AVL树，如果查询和插入删除次数几乎差不多，应选择红黑树</strong>。即，有时仅为了排序（建立-遍历-删除），不查找或查找次数很少，R-B树合算一些。</p>
 <h2 id="emplace-back-和-push-back"><a href="#emplace-back-和-push-back" class="headerlink" title="emplace_back 和 push_back"></a>emplace_back 和 push_back</h2><p>emplace_back()是c++11的新特性。<br>和push_back()的区别在于<br>push_back()方法要调用构造函数和复制构造函数，这也就代表着要先构造一个临时对象，然后把临时的copy构造函数拷贝或者移动到容器最后面。<br>而emplace_back()在实现时，则是直接在容器的尾部创建这个元素，省去了拷贝或移动元素的过程。</p>
 
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="https://shallowshades.github.io.git/2022/06/22/C++%E8%BF%9B%E9%98%B6/" data-id="clca7m48g000dxog03kij4z6e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
 
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
-          </div>
-
-        
-  <div class="post-widgets">
-    <div class="wpac-rating-container">
-      <div id="wpac-rating"></div>
-    </div>
-  </div>
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2022/06/22/Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="Linux高并发服务器">
-                  <i class="fa fa-chevron-left"></i> Linux高并发服务器
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2022/07/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
-                  设计模式 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
     </footer>
-  </article>
-</div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/07/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/06/22/Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux高并发服务器</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">未名</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignMode/" rel="tag">DesignMode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/net/" rel="tag">net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+    </div>
   </div>
 
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/DesignMode/" style="font-size: 10px;">DesignMode</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 10px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/database/" style="font-size: 15px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/net/" style="font-size: 10px;">net</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a>
     </div>
-  </footer>
+  </div>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  
-  <script src="https://embed.widgetpack.com/widget.js" async></script>
-  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
-  <script src="/js/third-party/rating.js"></script>
-
-
-
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li></ul>
+    </div>
+  </div>
 
 
   
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/13/Linux/">Linux</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/Redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/ginchat/">ginchat</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/go/">Go</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/08/git/">git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 未名<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
+<script src="/js/script.js"></script>
 
+
+
+
+  </div>
 </body>
 </html>

@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
 
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"shallowshades.github.io.git","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="引用左值引用 &amp;传统C++引用现在称为左值引用，使得标识符关联到左值左值是一个表示数据的表达式(如变量名或解除引用的指针)，程序可获取其地址；最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明不能给其赋值但可以获取其地址的标识符 右值引用 &amp;&amp;C++11新增右值引用，使标识符可关联到右值右值包括字面常量(C风格字符串除外，它表示地址)，诸如表达式x+y">
+  
+  <title>右值引用和移动语义 | 未名的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引用左值引用 &amp;传统C++引用现在称为左值引用，使得标识符关联到左值左值是一个表示数据的表达式(如变量名或解除引用的指针)，程序可获取其地址；最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明不能给其赋值但可以获取其地址的标识符 右值引用 &amp;&amp;C++11新增右值引用，使标识符可关联到右值右值包括字面常量(C风格字符串除外，它表示地址)，诸如表达式x+y">
 <meta property="og:type" content="article">
 <meta property="og:title" content="右值引用和移动语义">
 <meta property="og:url" content="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/index.html">
@@ -32,205 +19,76 @@
 <meta property="article:author" content="未名">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/","path":"2022/02/05/右值引用和移动语义/","title":"右值引用和移动语义"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>右值引用和移动语义 | 未名的博客</title>
   
+    <link rel="alternate" href="/atom.xml" title="未名的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">未名的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shallowshades.github.io.git"></form>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">未名的博客</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">放弃真的简单吗？是不是要比走路简单</p>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-右值引用和移动语义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" class="article-date">
+  <time datetime="2022-02-05T15:49:52.000Z" itemprop="datePublished">2022-02-05</time>
+</a>
+    
   </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">48</span></a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
-  </ul>
-</nav>
-
-
-
-
-</div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8-amp"><span class="nav-number">1.1.</span> <span class="nav-text">左值引用 &amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8-amp-amp"><span class="nav-number">1.2.</span> <span class="nav-text">右值引用 &amp;&amp;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">右值引用测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">移动语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">移动语义概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">移动语义的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">拷贝构造函数和移动构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E7%A4%BA%E4%BE%8B-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">移动语义示例 移动构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.2.</span> <span class="nav-text">示例总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">赋值函数和移动赋值函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.4.1.</span> <span class="nav-text">强制移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%A7%BB%E5%8A%A8%E7%A4%BA%E4%BE%8B-%E7%A7%BB%E5%8A%A8%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.2.</span> <span class="nav-text">强制移动示例 移动赋值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.4.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">未名</p>
-  <div class="site-description" itemprop="description">慕然回首，你是否看到过去的自己</div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">48</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-
-
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-
-
+    <h1 class="article-title" itemprop="name">
+      右值引用和移动语义
+    </h1>
   
 
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="未名">
-      <meta itemprop="description" content="慕然回首，你是否看到过去的自己">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="未名的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          右值引用和移动语义
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-05 23:49:52" itemprop="dateCreated datePublished" datetime="2022-02-05T23:49:52+08:00">2022-02-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-06 22:45:54" itemprop="dateModified" datetime="2022-02-06T22:45:54+08:00">2022-02-06</time>
-    </span>
-
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-</div>
-
-        </div>
       </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
+      
         <h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="左值引用-amp"><a href="#左值引用-amp" class="headerlink" title="左值引用 &amp;"></a>左值引用 &amp;</h2><p>传统C++引用现在称为左值引用，使得标识符关联到左值<br>左值是一个表示数据的表达式(如<strong>变量名</strong>或<strong>解除引用的指针</strong>)，<strong>程序可获取其地址</strong>；<br>最初，左值可以出现在赋值语句的左边，但const修饰符的出现使得可以声明<strong>不能给其赋值但可以获取其地址</strong>的标识符</p>
 <h2 id="右值引用-amp-amp"><a href="#右值引用-amp-amp" class="headerlink" title="右值引用 &amp;&amp;"></a>右值引用 &amp;&amp;</h2><p>C++11新增右值引用，使标识符可关联到右值<br>右值包括<strong>字面常量</strong>(C风格字符串除外，它表示地址)，诸如<strong>表达式x+y以及函数的返回值(返回的不是左值引用</strong>，程序不可以获取其地址<br>右值出现在表达式的右边</p>
 <p><strong>将右值关联到右值引用导致该右值被储存到特定位置，且可以获取该位置的地址</strong><br>通过将数据与特定的地址关联，使得可以通过右值引用来访问该数据</p>
@@ -283,103 +141,146 @@
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>std::move()并非一定会导致移动操作<br>如果没有定义移动赋值运算符，编译器将使用复制赋值运算符<br>如果都没有定义，该操作不会被允许(自定义类型)</p>
 <p><strong>目的：能够使用利用右值引用实现移动语义的库代码，Such as：STL</strong></p>
 
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="https://shallowshades.github.io.git/2022/02/05/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" data-id="clca7m48t001ixog0gw7a6pwv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
 
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
-          </div>
-
-        
-  <div class="post-widgets">
-    <div class="wpac-rating-container">
-      <div id="wpac-rating"></div>
-    </div>
-  </div>
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2022/02/04/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B4/" rel="prev" title="泛型编程4-string">
-                  <i class="fa fa-chevron-left"></i> 泛型编程4-string
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2022/02/07/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B5-vector/" rel="next" title="泛型编程5-vector">
-                  泛型编程5-vector <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
     </footer>
-  </article>
-</div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/07/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B5-vector/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          泛型编程5-vector
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/04/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">泛型编程4-string</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">未名</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignMode/" rel="tag">DesignMode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/net/" rel="tag">net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+    </div>
   </div>
 
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/DesignMode/" style="font-size: 10px;">DesignMode</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 10px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/database/" style="font-size: 15px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/net/" style="font-size: 10px;">net</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a>
     </div>
-  </footer>
+  </div>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  
-  <script src="https://embed.widgetpack.com/widget.js" async></script>
-  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":null,"color":"#fc6423"}</script>
-  <script src="/js/third-party/rating.js"></script>
-
-
-
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li></ul>
+    </div>
+  </div>
 
 
   
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/13/Linux/">Linux</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/Redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/ginchat/">ginchat</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/13/go/">Go</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/08/git/">git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 未名<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
+<script src="/js/script.js"></script>
 
+
+
+
+  </div>
 </body>
 </html>
